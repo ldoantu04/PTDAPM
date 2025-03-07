@@ -9,13 +9,13 @@ function Login() {
         <input
           type="text"
           placeholder="Tài khoản"
-          className="w-full p-2 mb-3 border-b-1 border-gray-400 focus:border-green-500 outline-none transition-colors"
+          className="w-full p-2 mb-3 border-b-2 border-gray-400 focus:border-green-500 outline-none transition-colors"
         />
 
         <input
           type="password"
           placeholder="Mật khẩu"
-          className="w-full p-2 mb-3 border-b-1 border-gray-400 focus:border-green-500 outline-none transition-colors"
+          className="w-full p-2 mb-3 border-b-2 border-gray-400 focus:border-green-500 outline-none transition-colors"
         />
 
         <button className="w-[800px] bg-red-500 text-white py-2 mt-4 hover:bg-red-600 transition-all ease-out duration-300">
