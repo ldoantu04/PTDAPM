@@ -2,23 +2,24 @@ import React, { useState } from 'react'
 import NavBar from '../layouts/NavBar'
 import Footer from '../layouts/Footer'
 import ImageSlider from '../layouts/ImageSlider';
+import PartnerImageSlider from '../layouts/PartnerImageSlider';
 
 function Main() {
   const [activeTab, setActiveTab] = useState('tab1');
 
   return (
     <div className='w-full relative'>
-        <NavBar />
+        <NavBar className="fixed top-0" />
 
         <ImageSlider />
 
         {/* Intro Card */}
-        <div className='w-[1200px] h-auto mx-auto rounded-xl relative -mt-12 bg-white shadow-lg p-6 pb-10'>
+        <div className='w-[1300px] h-auto mx-auto rounded-xl relative -mt-12 bg-white shadow-lg p-10 pb-10'>
           {/* Button chọn nội dung */}
           <div className='flex justify-center gap-15 mb-4'>
             <button
               className={`text-[#192E58] text-lg font-semibold px-8 py-3 rounded-xl transition-all duration-500 flex items-center justify-center gap-3 ${
-                activeTab === 'tab1' ? 'bg-gray-200' : 'bg-white'
+                activeTab === 'tab1' ? 'bg-gray-100' : 'bg-white'
               }`}
               onClick={() => setActiveTab('tab1')}
             >
@@ -26,7 +27,7 @@ function Main() {
             </button>
             <button
               className={`text-[#192E58] text-lg font-semibold px-8 py-3 rounded-xl transition-all duration-500 flex items-center justify-center gap-3 ${
-                activeTab === 'tab2' ? 'bg-gray-200' : 'bg-white'
+                activeTab === 'tab2' ? 'bg-gray-100' : 'bg-white'
               }`}
               onClick={() => setActiveTab('tab2')}
             >
@@ -34,7 +35,7 @@ function Main() {
             </button>
             <button
               className={`text-[#192E58] text-lg font-semibold px-8 py-3 rounded-xl transition-all duration-500 flex items-center justify-center gap-3 ${
-                activeTab === 'tab3' ? 'bg-gray-200' : 'bg-white'
+                activeTab === 'tab3' ? 'bg-gray-100' : 'bg-white'
               }`}
               onClick={() => setActiveTab('tab3')}
             >
@@ -50,7 +51,7 @@ function Main() {
           </div>
         </div>
 
-        
+        <PartnerImageSlider />
 
         <Footer />
     </div>

@@ -51,7 +51,7 @@ function ImageSlider() {
 
       {/* Nút Previous */}
       <button
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 px-3 text-white hover:opacity-70 transition-all duration-300 ease-out"
+        className="absolute left-2 top-1/2 px-3 text-white hover:opacity-70 transition-all duration-300 ease-out"
         onClick={prevImage}
       >
         <SlArrowLeft size={40} />
@@ -59,7 +59,7 @@ function ImageSlider() {
 
       {/* Nút Next */}
       <button
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 px-3 text-white hover:opacity-70 transition-all duration-300 ease-out"
+        className="absolute right-2 top-1/2 px-3 text-white hover:opacity-70 transition-all duration-300 ease-out"
         onClick={nextImage}
       >
         <SlArrowRight size={40} />
