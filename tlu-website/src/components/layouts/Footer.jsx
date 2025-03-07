@@ -1,10 +1,10 @@
 import React from "react";
-import { FaFacebookF, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
+import { FaFacebookF, FaYoutube } from "react-icons/fa";
 
 function Footer() {
   return (
     <footer className="bg-[#122A58] text-white py-10 px-4">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="mx-50 gap-8">
         {/* Thông tin bên trái */}
         <div>
           <div className="flex items-center gap-3">
@@ -45,22 +45,19 @@ function Footer() {
           </div>
         </div>
 
-        <div>
-        </div>
-
-        {/* Dòng bản quyền */}
-        <div className="mt-8 border-t border-gray-600 pt-4 text-sm opacity-40">
-            Copyright © 2025 Thuy Loi University - Information Technology Faculty.  All rights reserved.
-        </div>
-
-        {/* Biểu tượng mạng xã hội */}
-        <div className="flex flex-col justify-between items-center md:items-end">
-          <div className="flex space-x-4 text-2xl opacity-50">
-            <a href="https://www.facebook.com/cse.tlu.edu.vn" className="hover:text-gray-400"><FaFacebookF /></a>
-            <a href="#" className="hover:text-gray-400"><FaInstagram /></a>
-            <a href="#" className="hover:text-gray-400"><FaYoutube /></a>
-            <a href="#" className="hover:text-gray-400"><FaTiktok /></a>
+        <div className="w-full mt-15 border-t border-gray-600 pt-5 flex justify-between items-center">
+          {/* Dòng bản quyền */}
+          <div className="text-sm opacity-40">
+              Copyright © 2025 Thuy Loi University - Information Technology Faculty.  All rights reserved.
           </div>
+
+          {/* Biểu tượng mạng xã hội */}
+          <div className="flex flex-col">
+            <div className="flex space-x-4 text-2xl opacity-50">
+              <a href="https://www.facebook.com/cse.tlu.edu.vn" className="hover:text-gray-400" target="_blank" rel="noopener noreferrer"><FaFacebookF /></a>
+              <a href="https://www.youtube.com/@daihocthuyloi" className="hover:text-gray-400" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
+            </div>
+          </div>          
         </div>
 
       </div>
