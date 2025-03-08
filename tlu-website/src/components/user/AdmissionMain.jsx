@@ -1,7 +1,7 @@
 import React from 'react'
 import NavBar from '../layouts/NavBar'
 import Footer from '../layouts/Footer'
-import HighlightHeader from '../layouts/HIghlightHeader';
+import HighlightHeader from '../layouts/HighlightHeader';
 import ArticleOther from '../layouts/ArticleOther';
 
 function AdmissionMain() {
