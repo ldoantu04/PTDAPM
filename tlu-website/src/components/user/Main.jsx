@@ -3,7 +3,7 @@ import NavBar from '../layouts/NavBar'
 import Footer from '../layouts/Footer'
 import ImageSlider from '../layouts/ImageSlider';
 import PartnerImageSlider from '../layouts/PartnerImageSlider';
-import HighlightHeader from '../layouts/HIghlightHeader';
+import HighlightHeader from '../layouts/HighlightHeader';
 import ArticleMainPage from '../layouts/ArticleMainPage';
 
 function Main() {
