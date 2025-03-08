@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Main from "./components/user/Main";
 import Login from "./components/user/Login";
 import FacultyOverview from "./components/user/FacultyOverview";
+import TeachStaff from "./components/user/TeachStaff";
 import AdmissionMain from "./components/user/AdmissionMain";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/gioi-thieu/tong-quan-ve-khoa" element={<FacultyOverview />} />
+        <Route path="/dao-tao/doi-ngu-giang-vien" element={<TeachStaff />} />
         <Route path="/tuyen-sinh" element={<AdmissionMain />} />
       </Routes>
     </Router>
