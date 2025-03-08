@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Main from "./components/user/Main";
 import Login from "./components/user/Login";
 import FacultyOverview from "./components/user/FacultyOverview";
+import AdmissionMain from "./components/user/AdmissionMain";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/gioi-thieu/tong-quan-ve-khoa" element={<FacultyOverview />} />
+        <Route path="/tuyen-sinh" element={<AdmissionMain />} />
       </Routes>
     </Router>
   );
