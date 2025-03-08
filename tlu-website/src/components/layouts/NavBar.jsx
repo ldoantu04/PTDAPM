@@ -28,7 +28,7 @@ function NavBar() {
             <div className="text-black absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out">
               <Link to="/gioi-thieu/tong-quan-ve-khoa" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Tổng quan về khoa</Link>
               <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Cơ cấu tổ chức</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Đội ngũ nhân sự</a>
+              <a href="/dao-tao/doi-ngu-giang-vien" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Đội ngũ nhân sự</a>
             </div>
           </div>
 

@@ -10,7 +10,7 @@ function TeachStaff() {
 
       <div className="container mx-auto px-4 mt-[200px] my-10 flex flex-col md:flex-row gap-8">
         <div className="md:w-2/3 md:ml-[120px]">
-          {/* giảng viên */}
+          {/* Giảng viên */}
                 <HighlightHeader title="ĐỘI NGŨ GIẢNG VIÊN"/>
                 <div className="mb-8 p-4 bg-gray-50 rounded-lg shadow" style={{
                 backgroundImage: "url('/assets/lecturer_list/background.jpg')",
@@ -22,7 +22,7 @@ function TeachStaff() {
                   <img 
                     src="/assets/lecturer_list/avatar.jpg" 
                     alt="Lecturer" 
-                    className="w-full h-full object-cover hover:scale-125 transition ease-in-out"
+                    className="w-full h-full object-cover hover:scale-125 hover:opacity-85 transition ease-in-out"
                   />
                   </div>
                     <div className="md:w-2/3">
@@ -51,7 +51,7 @@ function TeachStaff() {
                   <img 
                     src="/assets/lecturer_list/avatar.jpg" 
                     alt="Lecturer" 
-                    className="w-full h-full object-cover hover:scale-125 transition ease-in-out"
+                    className="w-full h-full object-cover hover:scale-125 hover:opacity-85 transition ease-in-out"
                   />
                   </div>
                     <div className="md:w-2/3">
@@ -80,7 +80,7 @@ function TeachStaff() {
                   <img 
                     src="/assets/lecturer_list/avatar.jpg" 
                     alt="Lecturer" 
-                    className="w-full h-full object-cover hover:scale-125 transition ease-in-out"
+                    className="w-full h-full object-cover hover:scale-125 hover:opacity-85 transition ease-in-out"
                   />
                   </div>
                     <div className="md:w-2/3">
@@ -109,7 +109,7 @@ function TeachStaff() {
                   <img 
                     src="/assets/lecturer_list/avatar.jpg" 
                     alt="Lecturer" 
-                    className="w-full h-full object-cover hover:scale-125 transition ease-in-out"
+                    className="w-full h-full object-cover hover:scale-125 hover:opacity-85 transition ease-in-out"
                   />
                   </div>
                     <div className="md:w-2/3">
@@ -138,7 +138,7 @@ function TeachStaff() {
                   <img 
                     src="/assets/lecturer_list/avatar.jpg" 
                     alt="Lecturer" 
-                    className="w-full h-full object-cover hover:scale-125 transition ease-in-out"
+                    className="w-full h-full object-cover hover:scale-125 hover:opacity-85 transition ease-in-out"
                   />
                   </div>
                     <div className="md:w-2/3">
@@ -167,7 +167,7 @@ function TeachStaff() {
                   <img 
                     src="/assets/lecturer_list/avatar.jpg" 
                     alt="Lecturer" 
-                    className="w-full h-full object-cover hover:scale-125 transition ease-in-out"
+                    className="w-full h-full object-cover hover:scale-125 hover:opacity-85 transition ease-in-out"
                   />
                   </div>
                     <div className="md:w-2/3">
