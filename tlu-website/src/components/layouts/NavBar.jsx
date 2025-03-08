@@ -33,11 +33,13 @@ function NavBar() {
           </div>
 
           <div className="relative group hover:text-red-700 transition-all duration-300 ease-out">
-            <button className="pl-4 py-2 font-semibold">TUYỂN SINH</button>
+            <a href="/tuyen-sinh" className="pl-4 py-2 font-semibold block">
+              TUYỂN SINH
+            </a>
             <div className="text-black absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out">
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Tuyển sinh Đại học</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Tuyển sinh Thạc sĩ</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Tuyển sinh Tiến sĩ</a>
+              <a href="/tuyen-sinh/dai-hoc" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Tuyển sinh Đại học</a>
+              <a href="/tuyen-sinh/thac-si" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Tuyển sinh Thạc sĩ</a>
+              <a href="/tuyen-sinh/tien-si" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Tuyển sinh Tiến sĩ</a>
             </div>
           </div>
 
