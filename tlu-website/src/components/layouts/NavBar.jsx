@@ -47,8 +47,8 @@ function NavBar() {
             <button className="pl-4 py-2 font-semibold">ĐÀO TẠO</button>
             <div className="text-black absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out">
               <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Đào tạo Đại học</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Đào tạo Thạc sĩ</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Đào tạo Tiến sĩ</a>
+              <Link to="/dao-tao/doi-ngu-giang-vien" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Đào tạo Thạc sĩ</Link>
+              <Link to="/dao-tao/doi-ngu-giang-vien" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Đào tạo Tiến sĩ</Link>
             </div>
           </div>
 
