@@ -3,6 +3,8 @@ import NavBar from '../layouts/NavBar'
 import Footer from '../layouts/Footer'
 import ImageSlider from '../layouts/ImageSlider';
 import PartnerImageSlider from '../layouts/PartnerImageSlider';
+import HighlightHeader from '../layouts/HIghlightHeader';
+import Article from '../layouts/Article';
 
 function Main() {
   const [activeTab, setActiveTab] = useState('tab1');
@@ -51,7 +53,28 @@ function Main() {
           </div>
         </div>
 
-        <PartnerImageSlider />
+        <div className='w-[1300px] mx-auto mb-10'>
+          <HighlightHeader title="THÔNG BÁO" />
+          <div className='flex flex-row space-x-10'>
+            <Article />
+            <Article />
+            <Article />
+          </div>
+        </div>
+
+        <div className='w-[1300px] mx-auto mb-10'>
+          <HighlightHeader title="TIN TỨC" />
+          <div className='flex flex-row space-x-10'>
+            <Article />
+            <Article />
+            <Article />
+          </div>
+        </div>
+
+        <div className='w-[1300px] mx-auto mb-10'>
+          <HighlightHeader title="ĐỐI TÁC" />
+          <PartnerImageSlider />
+        </div>
 
         <Footer />
     </div>

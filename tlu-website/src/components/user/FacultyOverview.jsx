@@ -69,11 +69,9 @@ function FacultyOverview() {
                         <p className='font-bold text-4xl'>Về đội ngũ</p>
                     </div>
                     <div>
-                        <p>
-                        Khoa có 06 giảng viên là Phó giáo sư, 36 giảng viên có học vị Tiến sĩ (TS), 27 giảng viên có trình độ Thạc sĩ, trong đó có nhiều giảng viên đang học nghiên cứu sinh. Phần lớn các Tiến sỹ của Khoa đều tu nghiệp tại nước ngoài có nền khoa học tiên tiến về CNTT.
-
-Kính mời các quý vị truy cập và khám phá trang web của Khoa chúng tôi, tìm hiểu các chương trình đào tạo đại học và sau đại học, các thành tựu và hoạt động nghiên cứu của Khoa CNTT, trường Đại học Thủy lợi.
-                        </p>
+                        <p>Khoa có 06 giảng viên là Phó giáo sư, 36 giảng viên có học vị Tiến sĩ (TS), 27 giảng viên có trình độ Thạc sĩ, trong đó có nhiều giảng viên đang học nghiên cứu sinh. Phần lớn các Tiến sỹ của Khoa đều tu nghiệp tại nước ngoài có nền khoa học tiên tiến về CNTT.</p>
+                        <br></br>
+                        <p>Kính mời các quý vị truy cập và khám phá trang web của Khoa chúng tôi, tìm hiểu các chương trình đào tạo đại học và sau đại học, các thành tựu và hoạt động nghiên cứu của Khoa CNTT, trường Đại học Thủy lợi.</p>
                     </div>
                 </div>
 
