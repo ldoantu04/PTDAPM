@@ -36,7 +36,7 @@ function CooperationInfo() {
             </div>
 
             <div className="pr-10">
-            <h2 className="text-3xl font-bold">Chi tiết về công ty</h2>
+            <h2 className="text-3xl font-bold text-[#192E58]">Chi tiết về công ty</h2>
               <div
                     className="mb-[30px]"
                     style={{
@@ -56,8 +56,14 @@ function CooperationInfo() {
                       <div className="w-2/3 my-7">
                         <p className="font-bold text-[24px] text-black">Công Ty Cổ Phần Gem Hà Nội</p>
                         <p className="font-normal text-[16px] text-[#E82323] mt-4">Tầng 3, Tòa nhà The Nine, số 9 Phạm Văn Đồng, Mai Dịch, Cầu Giấy, Hà Nội</p>
-                        <p className="font-normal text-[14px] text-black mt-4">https://gem-corp.tech/</p>
-                        <p className="font-normal text-[14px] text-black mt-5">https://www.facebook.com/tuyendungGEM</p>
+                        <div className="flex items-center gap-2 font-normal text-[14px] text-black mt-4">
+                          <img src="/assets/partner_image_slider/icon_web.png" alt="" />
+                          <a href="">https://gem-corp.tech/</a>
+                        </div>
+                        <div className="flex items-center gap-2 font-normal text-[14px] text-black mt-4">
+                          <img src="/assets/partner_image_slider/icon_fb.png" alt="" />
+                          <a href="">https://www.facebook.com/tuyendungGEM</a>
+                        </div>
                       </div>
                     </div>
                   </div>
