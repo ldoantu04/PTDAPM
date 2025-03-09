@@ -19,7 +19,6 @@ import ResearchPublication from "./components/user/research/ResearchPublication"
 import ScientificResearchTopic from "./components/user/research/ScientificResearchTopic";
 import ResearchGroups from "./components/user/research/ResearchGroups";
 import ApplicationDeployment from "./components/user/research/ApplicationDeployment";
-import InformationTechnology from "./components/user/training/university/InformationTechnology";
 
 function App() {
   return (
