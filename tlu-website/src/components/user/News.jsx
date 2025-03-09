@@ -1,22 +1,23 @@
 import React from "react";
-import NavBar from "../../layouts/NavBar";
-import Footer from "../../layouts/Footer";
-import HighlightHeader from "../../layouts/HighlightHeader";
-import ArticleOther from "../../layouts/ArticleOther";
-import Sidebar from "../../layouts/Sidebar";
-import SmallNavBar from "../../layouts/SmallNavBar"
+import NavBar from "../layouts/NavBar";
+import Footer from "../layouts/Footer";
+import HighlightHeader from "../layouts/HighlightHeader";
+import ArticleOther from "../layouts/ArticleOther";
+import Sidebar from "../layouts/Sidebar";
+import SmallNavBar from "../layouts/SmallNavBar"
 
-function AdmissionMain() {
-  const majors = [
-    "Tuyển sinh Đại học",
-    "Tuyển sinh Thạc sĩ",
-    "Tuyển sinh Tiến sĩ",
+function News() {
+  const sidebarData = [
+    "Tin tức chung",
+    "Tin đào tạo",
+    "Tin KHCN & HTQT",
+    "Tin công tác sinh viên",
   ];
 
   const sampleData = {
     navigationLinks: [
       { label: "Trang chủ", href: "/" },
-      { label: "Tuyển sinh", href: "" },
+      { label: "Tin tức", href: "" },
     ],
   };
   
@@ -30,11 +31,11 @@ function AdmissionMain() {
 
             <div className="flex gap-x-30">
               <div >
-                <Sidebar title="Tuyển sinh" items={majors} />
+                <Sidebar title="Tin tức" items={sidebarData} />
               </div>
 
               <div className="pr-10">
-                <HighlightHeader title="TUYỂN SINH" />
+                <HighlightHeader title="TIN TỨC" />
                 <div className="flex flex-col gap-y-5">
                   <ArticleOther link="/tuyen-sinh/chi-tiet-bai-viet" />
                   <ArticleOther link="/tuyen-sinh/chi-tiet-bai-viet" />
@@ -54,4 +55,4 @@ function AdmissionMain() {
   );
 }
 
-export default AdmissionMain;
+export default News;

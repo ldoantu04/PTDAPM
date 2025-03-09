@@ -14,7 +14,7 @@ function NavBar() {
   };
 
   return (
-    <div className="w-full flex items-center justify-between px-30 py-4 bg-white shadow-lg fixed top-0 z-10">
+    <div className="w-full flex items-center justify-between px-60 py-4 bg-white shadow-lg fixed top-0 z-10">
       {/* Logo */}
       <div>
         <a href="/">
@@ -38,7 +38,6 @@ function NavBar() {
             <button className="pl-4 py-2 text-sm font-semibold">GIỚI THIỆU</button>
             <div className="text-[#192F59] absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-1000 ease-out">
               <Link to="/gioi-thieu/tong-quan-ve-khoa" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tổng quan về khoa</Link>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Cơ cấu tổ chức</a>
               <a href="/gioi-thieu/doi-ngu-nhan-su" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Đội ngũ nhân sự</a>
             </div>
           </div>
@@ -66,9 +65,9 @@ function NavBar() {
           <div className="relative group hover:text-red-700 transition-all duration-300 ease-out">
             <button className="pl-4 py-2 text-sm font-semibold">DOANH NGHIỆP</button>
             <div className="text-[#192F59] absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-1000 ease-out">
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Các đối tác</a>
+              <a href="/doanh-nghiep/danh-sach-doi-tac" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Danh sách đối tác</a>
               <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Chương trình hợp tác</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Học bổng</a>
+              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Học bổng doanh nghiệp</a>
             </div>
           </div>
 
@@ -101,7 +100,9 @@ function NavBar() {
           </div>
 
           <div className="relative group hover:text-red-700 transition-all duration-300 ease-out">
-            <button className="pl-4 py-2 text-sm font-semibold">TIN TỨC</button>
+            <a href="/tin-tuc" className="pl-4 py-2 text-sm font-semibold block">
+                TIN TỨC
+            </a>
           </div>
         </div>
       </div>
