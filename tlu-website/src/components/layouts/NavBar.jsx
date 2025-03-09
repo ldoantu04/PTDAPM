@@ -47,7 +47,7 @@ function NavBar() {
               TUYỂN SINH
             </a>
             <div className="text-[#192F59] absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-1000 ease-out">
-              <a href="" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Đại học</a>
+              <a href="/dao-tao/dao-tao-dai-hoc/ngang-cong-nghe-thong-tin" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Đại học</a>
               <a href="" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Thạc sĩ</a>
               <a href="" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Tiến sĩ</a>
             </div>
@@ -56,9 +56,9 @@ function NavBar() {
           <div className="relative group hover:text-red-700 transition-all duration-300 ease-out">
             <button className="pl-4 py-2 text-sm font-semibold">ĐÀO TẠO</button>
             <div className="text-[#192F59] absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-1000 ease-out">
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Đào tạo Đại học</a>
-              <Link to="/dao-tao/doi-ngu-giang-vien" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Đào tạo Thạc sĩ</Link>
-              <Link to="/dao-tao/doi-ngu-giang-vien" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Đào tạo Tiến sĩ</Link>
+              <Link to="/dao-tao/dao-tao-dai-hoc/nganh-cong-nghe-thong-tin" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Đào tạo Đại học</Link>
+              <Link to="" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Đào tạo Thạc sĩ</Link>
+              <Link to="" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Đào tạo Tiến sĩ</Link>
             </div>
           </div>
 
@@ -165,9 +165,9 @@ function NavBar() {
             </button>
             {openSubMenu === 'dao-tao' && (
               <div className="flex flex-col pl-4">
-                <a href="#" className="py-2">Đào tạo Đại học</a>
-                <Link to="/dao-tao/doi-ngu-giang-vien" className="py-2">Đào tạo Thạc sĩ</Link>
-                <Link to="/dao-tao/doi-ngu-giang-vien" className="py-2">Đào tạo Tiến sĩ</Link>
+                <Link to="/dao-tao/dao-tao-dai-hoc/nganh-cong-nghe-thong-tin" className="py-2">Đào tạo Đại học</Link>
+                <Link to="" className="py-2">Đào tạo Thạc sĩ</Link>
+                <Link to="" className="py-2">Đào tạo Tiến sĩ</Link>
               </div>
             )}
 

@@ -14,10 +14,12 @@ import ScholarshipInfo from "./components/user/business/ScholarshipInfo";
 import Announcements from "./components/user/Announcements";
 import StudentRecruitment from "./components/user/recruitment/StudentRecruitment";
 import LecturerRecruitment from "./components/user/recruitment/LecturerRecruitment";
+import InformationTechnology from "./components/user/training/university/InformationTechnology";
 import ResearchPublication from "./components/user/research/ResearchPublication";
 import ScientificResearchTopic from "./components/user/research/ScientificResearchTopic";
 import ResearchGroups from "./components/user/research/ResearchGroups";
 import ApplicationDeployment from "./components/user/research/ApplicationDeployment";
+import InformationTechnology from "./components/user/training/university/InformationTechnology";
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
 
         <Route path="/tuyen-dung/tuyen-dung-sinh-vien" element={<StudentRecruitment />} />
         <Route path="/tuyen-dung/tuyen-dung-giang-vien" element={<LecturerRecruitment />} />
+
+        <Route path="/dao-tao/dao-tao-dai-hoc/nganh-cong-nghe-thong-tin" element={<InformationTechnology />} />
 
         <Route path="/nghien-cuu/cong-bo-khoa-hoc" element={<ResearchPublication />} />
         <Route path="/nghien-cuu/de-tai-nckh" element={<ScientificResearchTopic />} />
