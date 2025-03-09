@@ -83,21 +83,21 @@ function Main() {
           </div>
         </div>
 
-        <div className='w-[1300px] mx-auto mb-10'>
+        <div className='w-[1300px] mx-auto mb-10 mt-10'>
           <HighlightHeader title="THÔNG BÁO" />
           <div className='flex flex-row space-x-10'>
-            <ArticleMainPage />
-            <ArticleMainPage />
-            <ArticleMainPage />
+            <ArticleMainPage title="Anh nói hơi bị nhiều so với một người không có bảo hiểm y tế đấy" time="01/01/2025 | 09:25:01AM" />
+            <ArticleMainPage title="Anh nói hơi bị nhiều so với một người không có bảo hiểm y tế đấy" time="01/01/2025 | 09:25:01AM" />
+            <ArticleMainPage title="Anh nói hơi bị nhiều so với một người không có bảo hiểm y tế đấy" time="01/01/2025 | 09:25:01AM" />
           </div>
         </div>
 
         <div className='w-[1300px] mx-auto mb-10'>
           <HighlightHeader title="TIN TỨC" />
           <div className='flex flex-row space-x-10'>
-            <ArticleMainPage />
-            <ArticleMainPage />
-            <ArticleMainPage />
+            <ArticleMainPage title="Anh nói hơi bị nhiều so với một người không có bảo hiểm y tế đấy" time="01/01/2025 | 09:25:01AM" />
+            <ArticleMainPage title="Anh nói hơi bị nhiều so với một người không có bảo hiểm y tế đấy" time="01/01/2025 | 09:25:01AM" />
+            <ArticleMainPage title="Anh nói hơi bị nhiều so với một người không có bảo hiểm y tế đấy" time="01/01/2025 | 09:25:01AM" />
           </div>
         </div>
 

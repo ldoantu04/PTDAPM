@@ -5,6 +5,9 @@ import FacultyOverview from "./components/user/FacultyOverview";
 import TeachStaff from "./components/user/TeachStaff";
 import AdmissionMain from "./components/user/admission/AdmissionMain";
 import AdmissionPost from "./components/user/admission/AdmissionPost"
+import News from "./components/user/News";
+import BusinessList from "./components/user/business/BusinessList";
+import CooperationInfo from "./components/user/business/CooperationInfo"
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
         <Route path="/gioi-thieu/doi-ngu-nhan-su" element={<TeachStaff />} />
         <Route path="/tuyen-sinh" element={<AdmissionMain />} />
         <Route path="/tuyen-sinh/chi-tiet-bai-viet" element={<AdmissionPost />} />
+        <Route path="/tin-tuc" element={<News />} />
+        <Route path="/doanh-nghiep/danh-sach-doi-tac" element={<BusinessList />} />
+        <Route path="/doanh-nghiep/danh-sach-doi-tac/chi-tiet-doi-tac" element={<CooperationInfo />} />
       </Routes>
     </Router>
   );
