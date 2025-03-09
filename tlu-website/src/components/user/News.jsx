@@ -37,12 +37,12 @@ function News() {
               <div className="pr-10">
                 <HighlightHeader title="TIN TỨC" />
                 <div className="flex flex-col gap-y-5">
-                  <ArticleOther link="/tuyen-sinh/chi-tiet-bai-viet" />
-                  <ArticleOther link="/tuyen-sinh/chi-tiet-bai-viet" />
-                  <ArticleOther link="/tuyen-sinh/chi-tiet-bai-viet" />
-                  <ArticleOther link="/tuyen-sinh/chi-tiet-bai-viet" />
-                  <ArticleOther link="/tuyen-sinh/chi-tiet-bai-viet" />
-                  <ArticleOther link="/tuyen-sinh/chi-tiet-bai-viet" />
+                  <ArticleOther link="" />
+                  <ArticleOther link="" />
+                  <ArticleOther link="" />
+                  <ArticleOther link="" />
+                  <ArticleOther link="" />
+                  <ArticleOther link="" />
                 </div>
               </div>
 

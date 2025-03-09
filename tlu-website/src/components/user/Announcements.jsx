@@ -1,23 +1,22 @@
 import React from "react";
-import NavBar from "../../layouts/NavBar";
-import Footer from "../../layouts/Footer";
-import HighlightHeader from "../../layouts/HighlightHeader";
-import ArticleOther from "../../layouts/ArticleOther";
-import Sidebar from "../../layouts/Sidebar";
-import SmallNavBar from "../../layouts/SmallNavBar"
+import NavBar from "../layouts/NavBar";
+import Footer from "../layouts/Footer";
+import HighlightHeader from "../layouts/HighlightHeader";
+import ArticleOther from "../layouts/ArticleOther";
+import Sidebar from "../layouts/Sidebar";
+import SmallNavBar from "../layouts/SmallNavBar"
 
-function CooperateProgram() {
-    const sidebarData = [
-        "Danh sách đối tác",
-        "Chương trình hợp tác",
-        "Học bổng doanh nghiệp",
-      ];
+function Announcements() {
+  const sidebarData = [
+    "Thông báo chung",
+    "Thông báo Đại học",
+    "Thông báo Sau Đại học",
+  ];
 
   const sampleData = {
     navigationLinks: [
       { label: "Trang chủ", href: "/" },
-      { label: "Doanh nghiệp", href: "" },
-      { label: "Chương trình hợp tác", href: "" },
+      { label: "Thông báo", href: "" },
     ],
   };
   
@@ -31,11 +30,11 @@ function CooperateProgram() {
 
             <div className="flex gap-x-30">
               <div >
-                <Sidebar title="Doanh nghiệp" items={sidebarData} />
+                <Sidebar title="Thông báo" items={sidebarData} />
               </div>
 
               <div className="pr-10">
-                <HighlightHeader title="CHƯƠNG TRÌNH HỢP TÁC" />
+                <HighlightHeader title="THÔNG BÁO" />
                 <div className="flex flex-col gap-y-5">
                   <ArticleOther link="" />
                   <ArticleOther link="" />
@@ -55,4 +54,4 @@ function CooperateProgram() {
   );
 }
 
-export default CooperateProgram;
+export default Announcements;
