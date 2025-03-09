@@ -82,10 +82,10 @@ function NavBar() {
           <div className="relative group hover:text-red-700 transition-all duration-300 ease-out">
             <button className="pl-4 py-2 text-sm font-semibold">NGHIÊN CỨU</button>
             <div className="text-[#192F59] absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-1000 ease-out">
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Công bố khoa học</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Đề tài NCKH</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Các nhóm nghiên cứu</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Triển khai ứng dụng</a>
+              <a href="/nghien-cuu/cong-bo-khoa-hoc" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Công bố khoa học</a>
+              <a href="/nghien-cuu/de-tai-nckh" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Đề tài NCKH</a>
+              <a href="/nghien-cuu/cac-nhom-nghien-cuu" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Các nhóm nghiên cứu</a>
+              <a href="/nghien-cuu/trien-khai-ung-dung" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Triển khai ứng dụng</a>
               <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Sinh viên NCKH</a>
             </div>
           </div>
@@ -206,10 +206,10 @@ function NavBar() {
             </button>
             {openSubMenu === 'nghien-cuu' && (
               <div className="flex flex-col pl-4">
-                <a href="#" className="py-2">Công bố khoa học</a>
-                <a href="#" className="py-2">Đề tài NCKH</a>
-                <a href="#" className="py-2">Các nhóm nghiên cứu</a>
-                <a href="#" className="py-2">Triển khai ứng dụng</a>
+                <a href="/nghien-cuu/cong-bo-khoa-hoc" className="py-2">Công bố khoa học</a>
+                <a href="/nghien-cuu/de-tai-nckh" className="py-2">Đề tài NCKH</a>
+                <a href="/nghien-cuu/cac-nhom-nghien-cuu" className="py-2">Các nhóm nghiên cứu</a>
+                <a href="/nghien-cuu/trien-khai-ung-dung" className="py-2">Triển khai ứng dụng</a>
                 <a href="#" className="py-2">Sinh viên NCKH</a>
               </div>
             )}
