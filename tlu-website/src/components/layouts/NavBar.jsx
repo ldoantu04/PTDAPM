@@ -14,7 +14,7 @@ function NavBar() {
   };
 
   return (
-    <div className="w-full flex items-center justify-between px-4 py-4 bg-white shadow-md fixed top-0 z-10">
+    <div className="w-full flex items-center justify-between px-30 py-4 bg-white shadow-lg fixed top-0 z-10">
       {/* Logo */}
       <div>
         <a href="/">
