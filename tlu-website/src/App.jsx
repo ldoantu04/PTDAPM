@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/gioi-thieu/tong-quan-ve-khoa" element={<FacultyOverview />} />
-        <Route path="/dao-tao/doi-ngu-giang-vien" element={<TeachStaff />} />
+        <Route path="/gioi-thieu/doi-ngu-nhan-su" element={<TeachStaff />} />
         <Route path="/tuyen-sinh" element={<AdmissionMain />} />
       </Routes>
     </Router>

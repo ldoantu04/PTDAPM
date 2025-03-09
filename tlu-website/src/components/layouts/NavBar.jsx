@@ -14,11 +14,11 @@ function NavBar() {
       {/* Phần chứa Đăng nhập + Menu */}
       <div className="flex flex-col items-end">
         {/* Đăng nhập */}
-        <div className="mb-3 flex items-center gap-1 hover:text-red-500 transition-all duration-300 ease-out">
-            <img src="/assets/login_user_image.png" alt="" />
-            <Link to="/login" className="underline text-sm">
-                Đăng nhập
-            </Link>
+        <div className="mb-3 flex items-center gap-2 hover:text-red-500 transition-all duration-500 ease-out">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="9" r="3"/><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M17.97 20c-.16-2.892-1.045-5-5.97-5s-5.81 2.108-5.97 5"/></g></svg>
+          <Link to="/login" className="underline text-sm">
+              Đăng nhập
+          </Link>
         </div>
 
         {/* Menu */}
@@ -28,7 +28,7 @@ function NavBar() {
             <div className="text-black absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out">
               <Link to="/gioi-thieu/tong-quan-ve-khoa" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Tổng quan về khoa</Link>
               <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Cơ cấu tổ chức</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Đội ngũ nhân sự</a>
+              <a href="/gioi-thieu/doi-ngu-nhan-su" className="block px-5 py-3 hover:bg-gray-200 rounded-md font-semibold">Đội ngũ nhân sự</a>
             </div>
           </div>
 
