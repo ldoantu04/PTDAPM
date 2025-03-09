@@ -47,7 +47,7 @@ function NavBar() {
               TUYỂN SINH
             </a>
             <div className="text-[#192F59] absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-1000 ease-out">
-              <a href="/dao-tao/dao-tao-dai-hoc/ngang-cong-nghe-thong-tin" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Đại học</a>
+              <a href="/dao-tao/dao-tao-dai-hoc/nganh-cong-nghe-thong-tin" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Đại học</a>
               <a href="" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Thạc sĩ</a>
               <a href="" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Tiến sĩ</a>
             </div>
