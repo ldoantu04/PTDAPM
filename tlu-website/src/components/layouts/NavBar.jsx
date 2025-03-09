@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 function NavBar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openSubMenu, setOpenSubMenu] = useState(null);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleSubMenu = (menu) => {
+    setOpenSubMenu(openSubMenu === menu ? null : menu);
+  };
+
   return (
-    <div className="w-full flex items-center justify-between px-50 py-4 bg-white shadow-md fixed top-0 z-10">
+    <div className="w-full flex items-center justify-between px-4 py-4 bg-white shadow-md fixed top-0 z-10">
       {/* Logo */}
       <div>
         <a href="/">
@@ -11,8 +22,8 @@ function NavBar() {
         </a>
       </div>
 
-      {/* Phần chứa Đăng nhập + Menu */}
-      <div className="flex flex-col items-end">
+      {/* Large screen menu */}
+      <div className="hidden md:flex flex-col items-end">
         {/* Đăng nhập */}
         <div className="mb-3 flex items-center gap-2 hover:text-red-500 transition-all duration-500 ease-out">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="9" r="3"/><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M17.97 20c-.16-2.892-1.045-5-5.97-5s-5.81 2.108-5.97 5"/></g></svg>
@@ -92,9 +103,137 @@ function NavBar() {
           <div className="relative group hover:text-red-700 transition-all duration-300 ease-out">
             <button className="pl-4 py-2 font-semibold">TIN TỨC</button>
           </div>
-
         </div>
       </div>
+
+      {/* Small screen menu */}
+      <div className="md:hidden flex items-center">
+        <button onClick={toggleMenu} className="text-black focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+      </div>
+
+      {isMenuOpen && (
+        <div className="absolute top-16 left-0 w-full bg-white shadow-md z-20">
+          <div className="flex flex-col p-4">
+            {/* Đăng nhập */}
+            <div className="mb-3 flex items-center gap-2 hover:text-red-500 transition-all duration-500 ease-out">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="9" r="3"/><circle cx="12" cy="12" r="10"/><path strokeLinecap="round" d="M17.97 20c-.16-2.892-1.045-5-5.97-5s-5.81 2.108-5.97 5"/></g></svg>
+              <Link to="/login" className="underline text-sm">
+                Đăng nhập
+              </Link>
+            </div>
+            {/* Menu items */}
+            <button onClick={() => toggleSubMenu('gioi-thieu')} className="flex justify-between items-center py-2 font-semibold">
+              GIỚI THIỆU
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {openSubMenu === 'gioi-thieu' && (
+              <div className="flex flex-col pl-4">
+                <Link to="/gioi-thieu/tong-quan-ve-khoa" className="py-2">Tổng quan về khoa</Link>
+                <a href="#" className="py-2">Cơ cấu tổ chức</a>
+                <a href="/gioi-thieu/doi-ngu-nhan-su" className="py-2">Đội ngũ nhân sự</a>
+              </div>
+            )}
+
+            <button onClick={() => toggleSubMenu('tuyen-sinh')} className="flex justify-between items-center py-2 font-semibold">
+              TUYỂN SINH
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {openSubMenu === 'tuyen-sinh' && (
+              <div className="flex flex-col pl-4">
+                <a href="/tuyen-sinh/dai-hoc" className="py-2">Tuyển sinh Đại học</a>
+                <a href="/tuyen-sinh/thac-si" className="py-2">Tuyển sinh Thạc sĩ</a>
+                <a href="/tuyen-sinh/tien-si" className="py-2">Tuyển sinh Tiến sĩ</a>
+              </div>
+            )}
+
+            <button onClick={() => toggleSubMenu('dao-tao')} className="flex justify-between items-center py-2 font-semibold">
+              ĐÀO TẠO
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {openSubMenu === 'dao-tao' && (
+              <div className="flex flex-col pl-4">
+                <a href="#" className="py-2">Đào tạo Đại học</a>
+                <Link to="/dao-tao/doi-ngu-giang-vien" className="py-2">Đào tạo Thạc sĩ</Link>
+                <Link to="/dao-tao/doi-ngu-giang-vien" className="py-2">Đào tạo Tiến sĩ</Link>
+              </div>
+            )}
+
+            <button onClick={() => toggleSubMenu('doanh-nghiep')} className="flex justify-between items-center py-2 font-semibold">
+              DOANH NGHIỆP
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {openSubMenu === 'doanh-nghiep' && (
+              <div className="flex flex-col pl-4">
+                <a href="#" className="py-2">Các đối tác</a>
+                <a href="#" className="py-2">Chương trình hợp tác</a>
+                <a href="#" className="py-2">Học bổng</a>
+              </div>
+            )}
+
+            <button onClick={() => toggleSubMenu('tuyen-dung')} className="flex justify-between items-center py-2 font-semibold">
+              TUYỂN DỤNG
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {openSubMenu === 'tuyen-dung' && (
+              <div className="flex flex-col pl-4">
+                <a href="#" className="py-2">Tuyển dụng sinh viên</a>
+                <a href="#" className="py-2">Tuyển sinh nhân sự</a>
+              </div>
+            )}
+
+            <button onClick={() => toggleSubMenu('nghien-cuu')} className="flex justify-between items-center py-2 font-semibold">
+              NGHIÊN CỨU
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {openSubMenu === 'nghien-cuu' && (
+              <div className="flex flex-col pl-4">
+                <a href="#" className="py-2">Công bố khoa học</a>
+                <a href="#" className="py-2">Đề tài NCKH</a>
+                <a href="#" className="py-2">Các nhóm nghiên cứu</a>
+                <a href="#" className="py-2">Triển khai ứng dụng</a>
+                <a href="#" className="py-2">Sinh viên NCKH</a>
+              </div>
+            )}
+
+            <button onClick={() => toggleSubMenu('thong-bao')} className="flex justify-between items-center py-2 font-semibold">
+              THÔNG BÁO
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {openSubMenu === 'thong-bao' && (
+              <div className="flex flex-col pl-4">
+                <a href="#" className="py-2">Thông báo chung</a>
+                <a href="#" className="py-2">Thông báo Đại học</a>
+                <a href="#" className="py-2">Thông báo Sau đại học</a>
+              </div>
+            )}
+
+            <button onClick={() => toggleSubMenu('tin-tuc')} className="flex justify-between items-center py-2 font-semibold">
+              TIN TỨC
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
