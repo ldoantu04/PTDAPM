@@ -35,6 +35,8 @@ function TeachStaff() {
                       backgroundImage: "url('/assets/lecturer_list/background.jpg')",
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
+                      backgroundColor: "rgba(255, 255, 255, 0.6)",
+                      backgroundBlendMode: "lighten",
                     }}
                   >
                     <div className="flex flex-col md:flex-row gap-4">
@@ -74,6 +76,8 @@ function TeachStaff() {
                       backgroundImage: "url('/assets/lecturer_list/background.jpg')",
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
+                      backgroundColor: "rgba(255, 255, 255, 0.6)",
+                      backgroundBlendMode: "lighten",
                     }}
                   >
                     <div className="flex flex-row gap-3">

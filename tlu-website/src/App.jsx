@@ -14,6 +14,7 @@ import ScholarshipInfo from "./components/user/business/ScholarshipInfo";
 import Announcements from "./components/user/Announcements";
 import StudentRecruitment from "./components/user/recruitment/StudentRecruitment";
 import LecturerRecruitment from "./components/user/recruitment/LecturerRecruitment";
+import InformationTechnology from "./components/user/training/university/InformationTechnology";
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
 
         <Route path="/tuyen-dung/tuyen-dung-sinh-vien" element={<StudentRecruitment />} />
         <Route path="/tuyen-dung/tuyen-dung-giang-vien" element={<LecturerRecruitment />} />
+
+        <Route path="/dao-tao/dao-tao-dai-hoc/nganh-cong-nghe-thong-tin" element={<InformationTechnology />} />
       </Routes>
     </Router>
   );
