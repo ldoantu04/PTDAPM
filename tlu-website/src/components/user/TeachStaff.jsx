@@ -18,11 +18,12 @@ function TeachStaff() {
       <NavBar />
 
       <div className='mt-[120px]'>
-        <SmallNavBar navigationLinks={sampleData.navigationLinks} />
-
+        <div className='mx-50'>
+          <SmallNavBar navigationLinks={sampleData.navigationLinks} />
+        </div>
         <div>
           <div className=''>
-            <div className="container mx-auto my-10 flex flex-col md:flex-row gap-50">
+            <div className="container mb-10 flex flex-col md:flex-row gap-50 pl-25 pr-10">
               {/* Đội ngũ nhân sự */}
               <div className="md:w-2/3 md:ml-[120px]">
                 <HighlightHeader title="ĐỘI NGŨ NHÂN SỰ" />
@@ -68,7 +69,7 @@ function TeachStaff() {
                 {[...Array(4)].map((_, index) => (
                   <div
                     key={index}
-                    className="mb-[30px] p-4 bg-gray-50 rounded-lg shadow"
+                    className="mb-[30px] bg-gray-50 rounded-lg shadow"
                     style={{
                       backgroundImage: "url('/assets/lecturer_list/background.jpg')",
                       backgroundSize: 'cover',
