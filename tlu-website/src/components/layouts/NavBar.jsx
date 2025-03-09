@@ -47,9 +47,9 @@ function NavBar() {
               TUYỂN SINH
             </a>
             <div className="text-[#192F59] absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-1000 ease-out">
-              <a href="/tuyen-sinh/dai-hoc" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Đại học</a>
-              <a href="/tuyen-sinh/thac-si" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Thạc sĩ</a>
-              <a href="/tuyen-sinh/tien-si" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Tiến sĩ</a>
+              <a href="" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Đại học</a>
+              <a href="" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Thạc sĩ</a>
+              <a href="" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh Tiến sĩ</a>
             </div>
           </div>
 
@@ -66,16 +66,16 @@ function NavBar() {
             <button className="pl-4 py-2 text-sm font-semibold">DOANH NGHIỆP</button>
             <div className="text-[#192F59] absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-1000 ease-out">
               <a href="/doanh-nghiep/danh-sach-doi-tac" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Danh sách đối tác</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Chương trình hợp tác</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Học bổng doanh nghiệp</a>
+              <a href="/doanh-nghiep/chuong-trinh-hop-tac" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Chương trình hợp tác</a>
+              <a href="/doanh-nghiep/hoc-bong-doanh-nghiep" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Học bổng doanh nghiệp</a>
             </div>
           </div>
 
           <div className="relative group hover:text-red-700 transition-all duration-300 ease-out">
             <button className="pl-4 py-2 text-sm font-semibold">TUYỂN DỤNG</button>
             <div className="text-[#192F59] absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-1000 ease-out">
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển dụng sinh viên</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh nhân sự</a>
+              <a href="/tuyen-dung/tuyen-dung-sinh-vien" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển dụng sinh viên</a>
+              <a href="/tuyen-dung/tuyen-dung-giang-vien" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Tuyển sinh nhân sự</a>
             </div>
           </div>
 
@@ -91,18 +91,20 @@ function NavBar() {
           </div>
 
           <div className="relative group hover:text-red-700 transition-all duration-300 ease-out">
-            <button className="pl-4 py-2 text-sm font-semibold">THÔNG BÁO</button>
+            <a href="/tin-tuc" className="pl-4 py-2 text-sm font-semibold block">
+                TIN TỨC
+            </a>
+          </div>
+
+          <div className="relative group hover:text-red-700 transition-all duration-300 ease-out">
+          <a href="/thong-bao" className="pl-4 py-2 text-sm font-semibold block">
+                THÔNG BÁO
+            </a>
             <div className="text-[#192F59] absolute left-0 mt-1 w-48 bg-white shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-1000 ease-out">
               <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Thông báo chung</a>
               <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Thông báo Đại học</a>
               <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Thông báo Sau đại học</a>
             </div>
-          </div>
-
-          <div className="relative group hover:text-red-700 transition-all duration-300 ease-out">
-            <a href="/tin-tuc" className="pl-4 py-2 text-sm font-semibold block">
-                TIN TỨC
-            </a>
           </div>
         </div>
       </div>
@@ -149,9 +151,9 @@ function NavBar() {
             </button>
             {openSubMenu === 'tuyen-sinh' && (
               <div className="flex flex-col pl-4">
-                <a href="/tuyen-sinh/dai-hoc" className="py-2">Tuyển sinh Đại học</a>
-                <a href="/tuyen-sinh/thac-si" className="py-2">Tuyển sinh Thạc sĩ</a>
-                <a href="/tuyen-sinh/tien-si" className="py-2">Tuyển sinh Tiến sĩ</a>
+                <a href="" className="py-2">Tuyển sinh Đại học</a>
+                <a href="" className="py-2">Tuyển sinh Thạc sĩ</a>
+                <a href="" className="py-2">Tuyển sinh Tiến sĩ</a>
               </div>
             )}
 
@@ -212,6 +214,13 @@ function NavBar() {
               </div>
             )}
 
+            <button onClick={() => toggleSubMenu('tin-tuc')} className="flex justify-between items-center py-2 font-semibold">
+              TIN TỨC
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
             <button onClick={() => toggleSubMenu('thong-bao')} className="flex justify-between items-center py-2 font-semibold">
               THÔNG BÁO
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -225,13 +234,6 @@ function NavBar() {
                 <a href="#" className="py-2">Thông báo Sau đại học</a>
               </div>
             )}
-
-            <button onClick={() => toggleSubMenu('tin-tuc')} className="flex justify-between items-center py-2 font-semibold">
-              TIN TỨC
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
           </div>
         </div>
       )}
