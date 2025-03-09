@@ -1,22 +1,15 @@
-import { useState } from "react";
-
-const Sidebar = ({ items }) => {
-  const [selected, setSelected] = useState(items[0]);
-
+const Sidebar = ({ title, items }) => {
   return (
-    <div className="w-64 bg-white shadow-md p-4">
-    <h2 className="text-2xl font-bold mb-6 border-b-[5px] border-[#E82323]">Tuyển sinh</h2>
-      <ul className="mt-2">
+    <div className="w-[400px] bg-white p-4">
+      <h2 className="text-2xl text-[#192E58] font-bold mb-6 pb-2 border-b-[2px] border-[#E82323]">{ title }</h2>
+      <ul className="mt-2 space-y-3">
         {items.map((item, index) => (
           <li
-          key={index}
-          onClick={() => setSelected(item)}
-          className={`cursor-pointer px-4 py-2 flex items-center gap-2 ${
-            selected === item ? "text-red-600 font-bold" : "text-gray-700"
-          } hover:bg-gray-100`}
-        >
-          <img className={`${selected === item ? "text-red-600" : "text-gray-400"}`} src="/assets/side_bar/icon_navigater.png" alt="" />
-          {item}
+            key={index}
+            className="border-b-2 border-[#D9D9D9] cursor-pointer py-2 flex items-center gap-2 text-gray-700 hover:text-[#E82323]"
+          >
+            <img className="text-gray-400" src="/assets/side_bar/icon_navigater.png" alt="" />
+            {item}
           </li>
         ))}
       </ul>

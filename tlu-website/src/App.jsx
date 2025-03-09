@@ -3,7 +3,8 @@ import Main from "./components/user/Main";
 import Login from "./components/user/Login";
 import FacultyOverview from "./components/user/FacultyOverview";
 import TeachStaff from "./components/user/TeachStaff";
-import AdmissionMain from "./components/user/AdmissionMain";
+import AdmissionMain from "./components/user/admission/AdmissionMain";
+import AdmissionPost from "./components/user/admission/AdmissionPost"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/gioi-thieu/tong-quan-ve-khoa" element={<FacultyOverview />} />
         <Route path="/gioi-thieu/doi-ngu-nhan-su" element={<TeachStaff />} />
         <Route path="/tuyen-sinh" element={<AdmissionMain />} />
+        <Route path="/tuyen-sinh/chi-tiet-bai-viet" element={<AdmissionPost />} />
       </Routes>
     </Router>
   );
