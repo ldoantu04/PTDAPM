@@ -19,9 +19,9 @@ function Main() {
         {/* Intro Card */}
         <div className='w-[1300px] h-auto mx-auto rounded-xl relative -mt-12 bg-white shadow-lg p-10 pb-10'>
           {/* Button chọn nội dung */}
-          <div className='flex justify-center gap-15 mb-4'>
+          <div className='flex justify-center gap-15 mb-4 '>
             <button
-              className={`text-[#192E58] text-lg font-semibold px-8 py-3 rounded-xl transition-all duration-500 flex items-center justify-center gap-3 ${
+              className={`text-[#192E58] text-lg font-semibold px-8 py-3 rounded-xl transition-all duration-500 ease-out flex items-center justify-center gap-3 ${
                 activeTab === 'tab1' ? 'bg-gray-100' : 'bg-white'
               }`}
               onClick={() => setActiveTab('tab1')}
@@ -29,7 +29,7 @@ function Main() {
               <img src="/assets/intro_card/icon-2.png" alt="" /> Môi trường giáo dục
             </button>
             <button
-              className={`text-[#192E58] text-lg font-semibold px-8 py-3 rounded-xl transition-all duration-500 flex items-center justify-center gap-3 ${
+              className={`text-[#192E58] text-lg font-semibold px-8 py-3 rounded-xl transition-all duration-500 ease-out flex items-center justify-center gap-3 ${
                 activeTab === 'tab2' ? 'bg-gray-100' : 'bg-white'
               }`}
               onClick={() => setActiveTab('tab2')}
@@ -37,7 +37,7 @@ function Main() {
               <img src="/assets/intro_card/icon-1.png" alt="" /> Chương trình đào tạo
             </button>
             <button
-              className={`text-[#192E58] text-lg font-semibold px-8 py-3 rounded-xl transition-all duration-500 flex items-center justify-center gap-3 ${
+              className={`text-[#192E58] text-lg font-semibold px-8 py-3 rounded-xl transition-all duration-500 ease-out flex items-center justify-center gap-3 ${
                 activeTab === 'tab3' ? 'bg-gray-100' : 'bg-white'
               }`}
               onClick={() => setActiveTab('tab3')}
@@ -84,7 +84,7 @@ function Main() {
           </div>
         </div>
 
-        <div className='w-[1300px] mx-auto mb-24 mt-28'>
+        <div className='w-[1300px] mx-auto mb-20 mt-20'>
           <HighlightHeader title="THÔNG BÁO" />
           <SeeAll link="/thong-bao" />
           <div className='flex flex-row space-x-10'>
@@ -94,7 +94,7 @@ function Main() {
           </div>
         </div>
 
-        <div className='w-[1300px] mx-auto mb-24'>
+        <div className='w-[1300px] mx-auto mb-20'>
           <HighlightHeader title="TIN TỨC" />
           <SeeAll link="/tin-tuc" />
           <div className='flex flex-row space-x-10'>
@@ -104,7 +104,7 @@ function Main() {
           </div>
         </div>
 
-        <div className='w-[1300px] mx-auto mb-24'>
+        <div className='w-[1300px] mx-auto mb-20'>
           <HighlightHeader title="ĐỐI TÁC" />
           <SeeAll link="/doanh-nghiep/danh-sach-doi-tac" />
           <PartnerImageSlider />

@@ -12,7 +12,7 @@ const images = [
 ];
 
 const visibleImages = 5;
-const imageWidth = 120;
+const imageWidth = 50;
 
 function PartnerImageSlider() {
   const [displayImages, setDisplayImages] = useState([...images.slice(0, visibleImages + 1)]);
