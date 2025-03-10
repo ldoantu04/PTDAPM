@@ -8,9 +8,9 @@ import SmallNavBar from "../layouts/SmallNavBar"
 
 function Announcements() {
   const sidebarData = [
-    "Thông báo chung",
-    "Thông báo Đại học",
-    "Thông báo Sau Đại học",
+    { label: "Thông báo chung", link: "" },
+    { label: "Thông báo Đại học", link: "" },
+    { label: "Thông báo Sau Đại học", link: "" },
   ];
 
   const sampleData = {

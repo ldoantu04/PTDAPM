@@ -86,7 +86,7 @@ function NavBar() {
               <a href="/nghien-cuu/de-tai-nckh" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Đề tài NCKH</a>
               <a href="/nghien-cuu/cac-nhom-nghien-cuu" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Các nhóm nghiên cứu</a>
               <a href="/nghien-cuu/trien-khai-ung-dung" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Triển khai ứng dụng</a>
-              <a href="#" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Sinh viên NCKH</a>
+              <a href="/nghien-cuu/sinh-vien-nckh" className="block px-5 py-3 hover:bg-gray-200 rounded-md text-xs font-semibold">Sinh viên NCKH</a>
             </div>
           </div>
 
@@ -138,7 +138,6 @@ function NavBar() {
             {openSubMenu === 'gioi-thieu' && (
               <div className="flex flex-col pl-4">
                 <Link to="/gioi-thieu/tong-quan-ve-khoa" className="py-2">Tổng quan về khoa</Link>
-                <a href="#" className="py-2">Cơ cấu tổ chức</a>
                 <a href="/gioi-thieu/doi-ngu-nhan-su" className="py-2">Đội ngũ nhân sự</a>
               </div>
             )}
@@ -179,9 +178,9 @@ function NavBar() {
             </button>
             {openSubMenu === 'doanh-nghiep' && (
               <div className="flex flex-col pl-4">
-                <a href="#" className="py-2">Các đối tác</a>
-                <a href="#" className="py-2">Chương trình hợp tác</a>
-                <a href="#" className="py-2">Học bổng</a>
+                <a href="/doanh-nghiep/danh-sach-doi-tac" className="py-2">Danh sách đối tác</a>
+                <a href="/doanh-nghiep/chuong-trinh-hop-tac" className="py-2">Chương trình hợp tác</a>
+                <a href="/doanh-nghiep/hoc-bong-doanh-nghiep" className="py-2">Học bổng doanh nghiệp</a>
               </div>
             )}
 
@@ -193,8 +192,8 @@ function NavBar() {
             </button>
             {openSubMenu === 'tuyen-dung' && (
               <div className="flex flex-col pl-4">
-                <a href="#" className="py-2">Tuyển dụng sinh viên</a>
-                <a href="#" className="py-2">Tuyển sinh nhân sự</a>
+                <a href="/tuyen-dung/tuyen-dung-sinh-vien" className="py-2">Tuyển dụng sinh viên</a>
+                <a href="/tuyen-dung/tuyen-dung-giang-vien" className="py-2">Tuyển sinh nhân sự</a>
               </div>
             )}
 
@@ -210,7 +209,7 @@ function NavBar() {
                 <a href="/nghien-cuu/de-tai-nckh" className="py-2">Đề tài NCKH</a>
                 <a href="/nghien-cuu/cac-nhom-nghien-cuu" className="py-2">Các nhóm nghiên cứu</a>
                 <a href="/nghien-cuu/trien-khai-ung-dung" className="py-2">Triển khai ứng dụng</a>
-                <a href="#" className="py-2">Sinh viên NCKH</a>
+                <a href="/nghien-cuu/sinh-vien-nckh" className="py-2">Sinh viên NCKH</a>
               </div>
             )}
 

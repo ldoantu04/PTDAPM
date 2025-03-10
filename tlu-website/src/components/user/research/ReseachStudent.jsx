@@ -6,18 +6,20 @@ import ArticleOther from "../../layouts/ArticleOther";
 import Sidebar from "../../layouts/Sidebar";
 import SmallNavBar from "../../layouts/SmallNavBar"
 
-function CooperateProgram() {
-    const sidebarData = [
-      { label: "Danh sách đối tác", link: "/doanh-nghiep/danh-sach-doi-tac" },
-      { label: "Chương trình hợp tác", link: "/doanh-nghiep/chuong-trinh-hop-tac", marker: true },
-      { label: "Học bổng doanh nghiệp", link: "/doanh-nghiep/hoc-bong-doanh-nghiep" },
-    ];
+function ReseachStudent() {
+  const sidebarData = [
+    { label: "Công bố khoa học", link: "/nghien-cuu/cong-bo-khoa-hoc" },
+    { label: "Đề tài NCKH", link: "/nghien-cuu/de-tai-nckh" },
+    { label: "Các nhóm nghiên cứu", link: "/nghien-cuu/cac-nhom-nghien-cuu" },
+    { label: "Triển khai ứng dụng", link: "/nghien-cuu/trien-khai-ung-dung" },
+    { label: "Sinh viên NCKH", link: "/nghien-cuu/sinh-vien-nckh", marker: true },
+  ];
 
   const sampleData = {
     navigationLinks: [
       { label: "Trang chủ", href: "/" },
-      { label: "Doanh nghiệp", href: "" },
-      { label: "Chương trình hợp tác", href: "" },
+      { label: "Nghiên cứu", href: "" },
+      { label: "Sinh viên NCKH", href: "" },
     ],
   };
   
@@ -31,11 +33,11 @@ function CooperateProgram() {
 
             <div className="flex gap-x-30">
               <div >
-                <Sidebar title="Doanh nghiệp" items={sidebarData} />
+                <Sidebar title="Nghiên cứu" items={sidebarData} />
               </div>
 
               <div className="pr-10">
-                <HighlightHeader title="CHƯƠNG TRÌNH HỢP TÁC" />
+                <HighlightHeader title="SINH VIÊN NCKH" />
                 <div className="flex flex-col gap-y-5">
                   <ArticleOther link="" />
                   <ArticleOther link="" />
@@ -55,4 +57,4 @@ function CooperateProgram() {
   );
 }
 
-export default CooperateProgram;
+export default ReseachStudent;
