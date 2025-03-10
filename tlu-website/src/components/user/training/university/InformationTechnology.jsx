@@ -33,7 +33,7 @@ function InformationTechnology() {
           <SmallNavBar navigationLinks={sampleData.navigationLinks} />
           <div className='grid grid-cols-12 gap-6'>
             <div className='col-span-4'>
-              <Sidebar title='Chương trình Đại học' items={sidebarData1} />
+              <Sidebar title='Đào tạo Đại học' items={sidebarData1} />
               <Sidebar title='Đào tạo Sau đại học' items={sidebarData2} />
             </div>
             <div className='col-span-6'>
@@ -57,9 +57,9 @@ function InformationTechnology() {
               <p className='text-[#C10629] font-bold'>Chi tiết xem tại đây 👈</p>
             </div>
               <div className='col-span-2 text-right text-[#192E58]'>
-              <p class="border-b pb-2 mb-2"><strong>Mã ngành:</strong> <span class="font-bold text-[#C10629]">7480201</span></p>
-                <p className='my-5'><strong>Thời gian học:</strong> <span class="font-semibold">4 năm</span></p>
-                <p><strong>Tổ hợp môn thi:</strong> A00, A01</p>
+              <p class="border-b-3 pb-2 mb-2"><strong>Mã ngành:</strong> <span class="font-bold text-2xl text-[#C10629]">7480201</span></p>
+                <p className='my-5'><strong>Thời gian học: 4 năm</strong></p>
+                <p><strong>Tổ hợp môn thi: A00, A01</strong></p>
               </div>
           </div>
         </div>
