@@ -7,10 +7,10 @@ import Sidebar from "../../layouts/Sidebar";
 import SmallNavBar from "../../layouts/SmallNavBar"
 
 function AdmissionMain() {
-  const majors = [
-    "Tuyển sinh Đại học",
-    "Tuyển sinh Thạc sĩ",
-    "Tuyển sinh Tiến sĩ",
+  const menuItems = [
+    { label: "Tuyển sinh Đại học", link: "" },
+    { label: "Tuyển sinh Thạc sĩ", link: "" },
+    { label: "Tuyển sinh Tiến sĩ", link: "" },
   ];
 
   const sampleData = {
@@ -30,7 +30,7 @@ function AdmissionMain() {
 
             <div className="flex gap-x-30">
               <div >
-                <Sidebar title="Tuyển sinh" items={majors} />
+                <Sidebar title="Tuyển sinh" items={menuItems} />
               </div>
 
               <div className="pr-10">

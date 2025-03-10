@@ -26,7 +26,9 @@ function TeachStaff() {
             <div className="container my-10 flex flex-col md:flex-row gap-50 pl-25 pr-10">
               {/* Đội ngũ nhân sự */}
               <div className="md:w-2/3 md:ml-[120px]">
-                <HighlightHeader title="ĐỘI NGŨ NHÂN SỰ" />
+                <div className='mb-10'>
+                  <HighlightHeader title="ĐỘI NGŨ NHÂN SỰ" />
+                </div>
                 {[...Array(5)].map((_, index) => (
                   <div
                     key={index}

@@ -8,9 +8,9 @@ import SmallNavBar from "../../layouts/SmallNavBar";
 
 function BusinessScholarship() {
   const sidebarData = [
-    "Danh sách đối tác",
-    "Chương trình hợp tác",
-    "Học bổng doanh nghiệp",
+    { label: "Danh sách đối tác", link: "/doanh-nghiep/danh-sach-doi-tac" },
+    { label: "Chương trình hợp tác", link: "/doanh-nghiep/chuong-trinh-hop-tac" },
+    { label: "Học bổng doanh nghiệp", link: "/doanh-nghiep/hoc-bong-doanh-nghiep", marker: true },
   ];
 
   const sampleData = {

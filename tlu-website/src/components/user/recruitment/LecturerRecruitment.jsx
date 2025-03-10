@@ -1,22 +1,20 @@
 import React from "react";
 import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
-import HighlightHeader from "../../layouts/HighlightHeader";
-import ArticleMainPage from "../../layouts/ArticleMainPage";
 import Sidebar from "../../layouts/Sidebar";
 import SmallNavBar from "../../layouts/SmallNavBar";
 
 function LecturerRecruitment() {
   const sidebarData = [
-    "Tuyển dụng sinh viên",
-    "Tuyển dụng giảng viên",
+    { label: "Tuyển dụng sinh viên", link: "/tuyen-dung/tuyen-dung-sinh-vien" },
+    { label: "Tuyển dụng giảng viên", link: "/tuyen-dung/tuyen-dung-giang-vien", marker: true },
   ];
 
   const sampleData = {
     navigationLinks: [
       { label: "Trang chủ", href: "/" },
       { label: "Tuyển dụng", href: "" },
-      { label: "Tuyển dụng sinh viên", href: "" },
+      { label: "Tuyển dụng giảng viên", href: "" },
     ],
   };
 

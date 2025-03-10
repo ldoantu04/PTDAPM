@@ -8,10 +8,10 @@ import SmallNavBar from "../layouts/SmallNavBar"
 
 function News() {
   const sidebarData = [
-    "Tin tức chung",
-    "Tin đào tạo",
-    "Tin KHCN & HTQT",
-    "Tin công tác sinh viên",
+    { label: "Tin tức chung", link: "" },
+    { label: "Tin đào tạo", link: "" },
+    { label: "Tin KHCN & HTQT", link: "" },
+    { label: "Tin công tác sinh viên", link: "" },
   ];
 
   const sampleData = {
