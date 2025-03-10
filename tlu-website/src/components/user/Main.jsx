@@ -84,7 +84,7 @@ function Main() {
           </div>
         </div>
 
-        <div className='w-[1300px] mx-auto mb-10 mt-10'>
+        <div className='w-[1300px] mx-auto mb-24 mt-28'>
           <HighlightHeader title="THÔNG BÁO" />
           <SeeAll link="/thong-bao" />
           <div className='flex flex-row space-x-10'>
@@ -94,7 +94,7 @@ function Main() {
           </div>
         </div>
 
-        <div className='w-[1300px] mx-auto mb-10'>
+        <div className='w-[1300px] mx-auto mb-24'>
           <HighlightHeader title="TIN TỨC" />
           <SeeAll link="/tin-tuc" />
           <div className='flex flex-row space-x-10'>
@@ -104,7 +104,7 @@ function Main() {
           </div>
         </div>
 
-        <div className='w-[1300px] mx-auto mb-20'>
+        <div className='w-[1300px] mx-auto mb-24'>
           <HighlightHeader title="ĐỐI TÁC" />
           <SeeAll link="/doanh-nghiep/danh-sach-doi-tac" />
           <PartnerImageSlider />
