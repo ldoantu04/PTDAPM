@@ -37,12 +37,12 @@ function BusinessList() {
             <div className="pr-10">
               <HighlightHeader title="DANH SÁCH ĐỐI TÁC" />
               <div className="grid grid-cols-3 gap-5">
-                <ArticleMainPage title="Công ty cổ phần ABCXYZ" link="/doanh-nghiep/danh-sach-doi-tac/chi-tiet-doi-tac" />
-                <ArticleMainPage title="Công ty cổ phần ABCXYZ" link="/doanh-nghiep/danh-sach-doi-tac/chi-tiet-doi-tac" />
-                <ArticleMainPage title="Công ty cổ phần ABCXYZ" link="/doanh-nghiep/danh-sach-doi-tac/chi-tiet-doi-tac" />
-                <ArticleMainPage title="Công ty cổ phần ABCXYZ" link="/doanh-nghiep/danh-sach-doi-tac/chi-tiet-doi-tac" />
-                <ArticleMainPage title="Công ty cổ phần ABCXYZ" link="/doanh-nghiep/danh-sach-doi-tac/chi-tiet-doi-tac" />
-                <ArticleMainPage title="Công ty cổ phần ABCXYZ" link="/doanh-nghiep/danh-sach-doi-tac/chi-tiet-doi-tac" />
+                <ArticleMainPage title="Công ty cổ phần ABCXYZ" link="" />
+                <ArticleMainPage title="Công ty cổ phần ABCXYZ" link="" />
+                <ArticleMainPage title="Công ty cổ phần ABCXYZ" link="" />
+                <ArticleMainPage title="Công ty cổ phần ABCXYZ" link="" />
+                <ArticleMainPage title="Công ty cổ phần ABCXYZ" link="" />
+                <ArticleMainPage title="Công ty cổ phần ABCXYZ" link="" />
               </div>
             </div>
           </div>
