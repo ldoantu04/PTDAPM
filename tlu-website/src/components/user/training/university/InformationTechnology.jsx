@@ -6,15 +6,15 @@ import Sidebar from '../../../layouts/Sidebar';
 
 function InformationTechnology() {
   const sidebarData1 = [
-    "Ngành Công nghệ thông tin",
-    "Ngành Kỹ thuật phần mềm",
-    "Ngành Hệ thống thông tin",
-    "Ngành trí tuệ nhân tạo",
-    "Ngành An ninh mạng",
+    { label: "Ngành Công nghệ thông tin", link: "", marker: true },
+    { label: "Ngành Kỹ thuật phần mềm", link: "" },
+    { label: "Ngành Hệ thống thông tin", link: "" },
+    { label: "Ngành Trí tuệ nhân tạo", link: "" },
+    { label: "Ngành An ninh mạng", link: "" },
   ];
   const sidebarData2 = [
-    "Chương trình Thạc sĩ",
-    "Chương trình Tiến sĩ",
+    { label: "Chương trình Thạc sĩ", link: "" },
+    { label: "Chương trình Tiến sĩ", link: "" },
   ];
 
   const sampleData = {

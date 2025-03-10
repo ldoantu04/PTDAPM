@@ -19,6 +19,7 @@ import ResearchPublication from "./components/user/research/ResearchPublication"
 import ScientificResearchTopic from "./components/user/research/ScientificResearchTopic";
 import ResearchGroups from "./components/user/research/ResearchGroups";
 import ApplicationDeployment from "./components/user/research/ApplicationDeployment";
+import ReseachStudent from "./components/user/research/ReseachStudent";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="/nghien-cuu/de-tai-nckh" element={<ScientificResearchTopic />} />
         <Route path="/nghien-cuu/cac-nhom-nghien-cuu" element={<ResearchGroups />} />
         <Route path="/nghien-cuu/trien-khai-ung-dung" element={<ApplicationDeployment />} />
+        <Route path="/nghien-cuu/sinh-vien-nckh" element={<ReseachStudent />} />
       </Routes>
     </Router>
   );

@@ -8,8 +8,8 @@ import SmallNavBar from "../../layouts/SmallNavBar";
 
 function StudentRecruitment() {
   const sidebarData = [
-    "Tuyển dụng sinh viên",
-    "Tuyển dụng giảng viên",
+    { label: "Tuyển dụng sinh viên", link: "/tuyen-dung/tuyen-dung-sinh-vien", marker: true },
+    { label: "Tuyển dụng giảng viên", link: "/tuyen-dung/tuyen-dung-giang-vien" },
   ];
 
   const sampleData = {
