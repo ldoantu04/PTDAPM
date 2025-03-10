@@ -46,7 +46,7 @@ function TeachStaff() {
                         <img 
                           src="/assets/lecturer_list/avatar.jpg" 
                           alt="Lecturer" 
-                          className="w-full h-full object-cover hover:scale-125 hover:opacity-85 transition ease-in-out"
+                          className="w-full h-full object-cover hover:scale-115 hover:opacity-70 transition-all duration-500 ease-in-out"
                         />
                       </div>
                       <div className="md:w-2/3">

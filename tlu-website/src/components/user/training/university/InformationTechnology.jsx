@@ -33,7 +33,7 @@ function InformationTechnology() {
           <SmallNavBar navigationLinks={sampleData.navigationLinks} />
           <div className='grid grid-cols-12 gap-6'>
             <div className='col-span-4'>
-              <Sidebar title='Chương trình Đại học' items={sidebarData1} />
+              <Sidebar title='Đào tạo Đại học' items={sidebarData1} />
               <Sidebar title='Đào tạo Sau đại học' items={sidebarData2} />
             </div>
             <div className='col-span-6'>
