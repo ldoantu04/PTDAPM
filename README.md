@@ -10,6 +10,7 @@ Chạy các lệnh sau để cài đặt module:
 * npm install react-icons
 * npm install react-router-dom
 * npm install tailwindcss @tailwindcss/vite
+* npm install antd --save
 
 Chạy dự án:
 * npm run dev (Cổng mặc định: http://localhost:5173/)
