@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext"; // Import AuthContext
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState(null);
+  const [isAvatarOpen, setIsAvatarOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -13,6 +16,11 @@ function NavBar() {
     setOpenSubMenu(openSubMenu === menu ? null : menu);
   };
 
+  const handleLogout = () => {
+    logout(); // Xóa thông tin đăng nhập
+    navigate("/");
+  };
+  console.log("User in NavBar:", user);
   return (
     <div className="w-full flex items-center justify-between px-60 py-4 bg-white shadow-lg fixed top-0 z-10">
       {/* Logo */}
@@ -25,13 +33,63 @@ function NavBar() {
       {/* Large screen menu */}
       <div className="hidden md:flex flex-col items-end">
         {/* Đăng nhập */}
-        <div className="mb-3 flex items-center gap-2 hover:text-red-500 transition-all duration-500 ease-out">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="9" r="3"/><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M17.97 20c-.16-2.892-1.045-5-5.97-5s-5.81 2.108-5.97 5"/></g></svg>
-          <Link to="/login" className="underline text-sm">
-              Đăng nhập
-          </Link>
-        </div>
+        { !user ? (
+            <div className="mb-3 flex items-center gap-2 hover:text-red-500 transition-all duration-300 ease-out">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="3"/><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M17.97 20c-.16-2.892-1.045-5-5.97-5s-5.81 2.108-5.97 5"/></g></svg>
+              <Link to="/login" className="underline text-sm">
+                  Đăng nhập
+              </Link>
+            </div>
+          ) : user.role === 'trolykhoa' ? (
+            <div className="relative mb-3 z-50 transition-all duration-300 ease-out">
+              <div className="flex items-center gap-2 transition-all duration-300 ease-out">
+                <img src="/assets/loginh_user_image_2.png" alt="" />
+                <button onClick={() => setIsAvatarOpen(!isAvatarOpen)} className="text-xs flex items-center gap-x-1 transition-all duration-300 ease-out">
+                  Xin chào, Trợ lý khoa
+                  <svg className={`ml-1 font-bold transition-all ease-out duration-300 ${isAvatarOpen ? "rotate-90" : ""}`} xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 5l6 7l-6 7"/></svg>
+                </button>
+              </div>
+
+              <div className={`absolute left-0 mt-2 w-60 px-5 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-300 ease-out ${isAvatarOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+                <a href="" className="flex flex-row items-center text-[#192E58] hover:text-[#1677FF] text-left transition-all duration-500 ease-out gap-x-2 font-bold text-xs py-4"> 
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M22 10.5V12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2h1.5"/><path d="m16.652 3.455l.649-.649A2.753 2.753 0 0 1 21.194 6.7l-.65.649m-3.892-3.893s.081 1.379 1.298 2.595c1.216 1.217 2.595 1.298 2.595 1.298m-3.893-3.893L10.687 9.42c-.404.404-.606.606-.78.829q-.308.395-.524.848c-.121.255-.211.526-.392 1.068L8.412 13.9m12.133-6.552l-5.965 5.965c-.404.404-.606.606-.829.78a4.6 4.6 0 0 1-.848.524c-.255.121-.526.211-1.068.392l-1.735.579m0 0l-1.123.374a.742.742 0 0 1-.939-.94l.374-1.122m1.688 1.688L8.412 13.9"/></g></svg>
+                  Quản lý bài viết 
+                </a>
+
+                <div className="border-t-2 border-gray-200"></div>
+
+                <a href="/" className="flex flex-row items-center text-[#192E58] hover:text-[#1677FF] text-left transition-all duration-300 ease-out gap-x-2 font-bold text-xs py-4" onClick={handleLogout}> 
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" stroke="currentColor" stroke-width="0.5" d="M14.945 1.25c-1.367 0-2.47 0-3.337.117c-.9.12-1.658.38-2.26.981c-.524.525-.79 1.17-.929 1.928c-.135.737-.161 1.638-.167 2.72a.75.75 0 0 0 1.5.008c.006-1.093.034-1.868.142-2.457c.105-.566.272-.895.515-1.138c.277-.277.666-.457 1.4-.556c.755-.101 1.756-.103 3.191-.103h1c1.436 0 2.437.002 3.192.103c.734.099 1.122.28 1.4.556c.276.277.456.665.555 1.4c.102.754.103 1.756.103 3.191v8c0 1.435-.001 2.436-.103 3.192c-.099.734-.279 1.122-.556 1.399s-.665.457-1.399.556c-.755.101-1.756.103-3.192.103h-1c-1.435 0-2.436-.002-3.192-.103c-.733-.099-1.122-.28-1.399-.556c-.243-.244-.41-.572-.515-1.138c-.108-.589-.136-1.364-.142-2.457a.75.75 0 1 0-1.5.008c.006 1.082.032 1.983.167 2.72c.14.758.405 1.403.93 1.928c.601.602 1.36.86 2.26.982c.866.116 1.969.116 3.336.116h1.11c1.368 0 2.47 0 3.337-.116c.9-.122 1.658-.38 2.26-.982s.86-1.36.982-2.26c.116-.867.116-1.97.116-3.337v-8.11c0-1.367 0-2.47-.116-3.337c-.121-.9-.38-1.658-.982-2.26s-1.36-.86-2.26-.981c-.867-.117-1.97-.117-3.337-.117z"/><path fill="currentColor" stroke="currentColor" stroke-width="0.5" d="M15 11.25a.75.75 0 0 1 0 1.5H4.027l1.961 1.68a.75.75 0 1 1-.976 1.14l-3.5-3a.75.75 0 0 1 0-1.14l3.5-3a.75.75 0 1 1 .976 1.14l-1.96 1.68z"/></svg>
+                  Đăng xuất 
+                </a>
+              </div>
+            </div>
+          ) : user.role === 'admin' ? (
+            <div className="relative mb-3 z-50 transition-all duration-300 ease-out">
+              <div className="flex items-center gap-2 transition-all duration-300 ease-out">
+                <img src="/assets/loginh_user_image_2.png" alt="" />
+                <button onClick={() => setIsAvatarOpen(!isAvatarOpen)} className="text-xs flex items-center gap-x-1 transition-all duration-300 ease-out">
+                  Xin chào, Admin
+                  <svg className={`ml-1 font-bold transition-all ease-out duration-300 ${isAvatarOpen ? "rotate-90" : ""}`} xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 5l6 7l-6 7"/></svg>
+                </button>
+              </div>
+
+              <div className={`absolute left-0 mt-2 w-60 px-5 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-300 ease-out ${isAvatarOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+                <a href="" className="flex flex-row items-center text-[#192E58] hover:text-[#1677FF] text-left transition-all duration-300 ease-out gap-x-2 font-bold text-xs py-4"> 
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M22 10.5V12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2h1.5"/><path d="m16.652 3.455l.649-.649A2.753 2.753 0 0 1 21.194 6.7l-.65.649m-3.892-3.893s.081 1.379 1.298 2.595c1.216 1.217 2.595 1.298 2.595 1.298m-3.893-3.893L10.687 9.42c-.404.404-.606.606-.78.829q-.308.395-.524.848c-.121.255-.211.526-.392 1.068L8.412 13.9m12.133-6.552l-5.965 5.965c-.404.404-.606.606-.829.78a4.6 4.6 0 0 1-.848.524c-.255.121-.526.211-1.068.392l-1.735.579m0 0l-1.123.374a.742.742 0 0 1-.939-.94l.374-1.122m1.688 1.688L8.412 13.9"/></g></svg>
+                  Chế độ quản lý
+                </a>
+
+                <div className="border-t-2 border-gray-200"></div>
+
+                <a href="/" className="flex flex-row items-center text-[#192E58] hover:text-[#1677FF] text-left transition-all duration-300 ease-out gap-x-2 font-bold text-xs py-4" onClick={handleLogout}> 
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" stroke="currentColor" stroke-width="0.5" d="M14.945 1.25c-1.367 0-2.47 0-3.337.117c-.9.12-1.658.38-2.26.981c-.524.525-.79 1.17-.929 1.928c-.135.737-.161 1.638-.167 2.72a.75.75 0 0 0 1.5.008c.006-1.093.034-1.868.142-2.457c.105-.566.272-.895.515-1.138c.277-.277.666-.457 1.4-.556c.755-.101 1.756-.103 3.191-.103h1c1.436 0 2.437.002 3.192.103c.734.099 1.122.28 1.4.556c.276.277.456.665.555 1.4c.102.754.103 1.756.103 3.191v8c0 1.435-.001 2.436-.103 3.192c-.099.734-.279 1.122-.556 1.399s-.665.457-1.399.556c-.755.101-1.756.103-3.192.103h-1c-1.435 0-2.436-.002-3.192-.103c-.733-.099-1.122-.28-1.399-.556c-.243-.244-.41-.572-.515-1.138c-.108-.589-.136-1.364-.142-2.457a.75.75 0 1 0-1.5.008c.006 1.082.032 1.983.167 2.72c.14.758.405 1.403.93 1.928c.601.602 1.36.86 2.26.982c.866.116 1.969.116 3.336.116h1.11c1.368 0 2.47 0 3.337-.116c.9-.122 1.658-.38 2.26-.982s.86-1.36.982-2.26c.116-.867.116-1.97.116-3.337v-8.11c0-1.367 0-2.47-.116-3.337c-.121-.9-.38-1.658-.982-2.26s-1.36-.86-2.26-.981c-.867-.117-1.97-.117-3.337-.117z"/><path fill="currentColor" stroke="currentColor" stroke-width="0.5" d="M15 11.25a.75.75 0 0 1 0 1.5H4.027l1.961 1.68a.75.75 0 1 1-.976 1.14l-3.5-3a.75.75 0 0 1 0-1.14l3.5-3a.75.75 0 1 1 .976 1.14l-1.96 1.68z"/></svg>
+                  Đăng xuất 
+                </a>
+              </div>
+            </div>
+          ) : null
+        }
 
         {/* Menu */}
         <div className="flex space-x-2">
@@ -123,7 +181,7 @@ function NavBar() {
         <div className="absolute top-16 left-0 w-full bg-white shadow-md z-20">
           <div className="flex flex-col p-4">
             {/* Đăng nhập */}
-            <div className="mb-3 flex items-center gap-2 hover:text-red-500 transition-all duration-500 ease-out">
+            <div className="mb-3 flex items-center gap-2 hover:text-red-500 transition-all duration-300 ease-out">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="9" r="3"/><circle cx="12" cy="12" r="10"/><path strokeLinecap="round" d="M17.97 20c-.16-2.892-1.045-5-5.97-5s-5.81 2.108-5.97 5"/></g></svg>
               <Link to="/login" className="underline text-sm">
                 Đăng nhập
