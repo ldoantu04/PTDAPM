@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-function NavBar() {
+function NavBarAssistant() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState(null);
+  const [isAvatarOpen, setIsAvatarOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -15,23 +16,49 @@ function NavBar() {
 
   return (
     <div className="w-full flex items-center justify-between px-60 py-4 bg-white shadow-lg fixed top-0 z-10">
-      {/* Logo */}
-      <div>
-        <a href="/">
-          <img src="/assets/logo_khoa.jpg" alt="Logo" className="h-12" />
-        </a>
-      </div>
-
-      {/* Large screen menu */}
-      <div className="hidden md:flex flex-col items-end">
-        {/* Đăng nhập */}
-        <div className="mb-3 flex items-center gap-2 hover:text-red-500 transition-all duration-500 ease-out">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="9" r="3"/><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M17.97 20c-.16-2.892-1.045-5-5.97-5s-5.81 2.108-5.97 5"/></g></svg>
-          <Link to="/login" className="underline text-sm">
-              Đăng nhập
-          </Link>
+        {/* Logo */}
+        <div>
+            <a href="/">
+                <img src="/assets/logo_khoa.jpg" alt="Logo" className="h-12" />
+            </a>
         </div>
+
+    {/* Large screen menu */}
+    <div className="hidden md:flex flex-col items-end">
+        {/* Xin chào, Trợ lý khoa */}
+        <div className="relative mb-3 z-50 transition-all duration-500 ease-out">
+            <div className="flex items-center gap-2 transition-all duration-500 ease-out">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="9" r="3"/><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M17.97 20c-.16-2.892-1.045-5-5.97-5s-5.81 2.108-5.97 5"/></g></svg>
+                <button
+                    onClick={() => setIsAvatarOpen(!isAvatarOpen)}
+                    className="text-xs transition-all duration-500 ease-out"
+                >
+                Xin chào, Trợ lý khoa
+                </button>
+            </div>
+
+            <div
+                className={`absolute left-0 mt-2 w-60 px-5 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-500 ease-out
+                ${isAvatarOpen ? "opacity-100" : "opacity-0 pointer-events-none"}
+                `}
+            >
+                <img src="/assets/" alt="" />
+                <a
+                    href=""
+                    className="font-bold text-xs text-[#192E58] block w-full py-4 text-left hover:text-[#1677FF] transition-all duration-500 ease-out"
+                >
+                Quản lý bài viết
+                </a>
+            <div className="border-t-2 border-gray-200"></div>
+                <a
+                    href="/"
+                    className="font-bold text-xs text-[#192E58] block w-full py-4 text-left hover:text-[#1677FF] transition-all duration-500 ease-out"
+                >
+                Đăng xuất
+                </a>
+            </div>
+        </div>
+
 
         {/* Menu */}
         <div className="flex space-x-2">
@@ -241,4 +268,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default NavBarAssistant;

@@ -24,7 +24,7 @@ function PartnerImageSlider() {
 
       setTimeout(() => {
         setDisplayImages((prevImages) => {
-          const nextIndex = (images.indexOf(prevImages[prevImages.length - 1]) + 1) % images.length;
+          const nextIndex = (images.indexOf(prevImages[prevImages.length - 1]) + 1) % images.length; // Lấy ra index của ảnh tiếp
           return [...prevImages.slice(1), images[nextIndex]]; // Loại ảnh đầu, thêm ảnh mới vào cuối
         });
 
