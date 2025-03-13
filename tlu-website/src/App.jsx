@@ -20,7 +20,6 @@ import ScientificResearchTopic from "./components/user/research/ScientificResear
 import ResearchGroups from "./components/user/research/ResearchGroups";
 import ApplicationDeployment from "./components/user/research/ApplicationDeployment";
 import ReseachStudent from "./components/user/research/ReseachStudent";
-import AssistantMain from "./components/assistant/AssistantMain";
 
 function App() {
   return (
@@ -55,8 +54,7 @@ function App() {
         <Route path="/nghien-cuu/cac-nhom-nghien-cuu" element={<ResearchGroups />} />
         <Route path="/nghien-cuu/trien-khai-ung-dung" element={<ApplicationDeployment />} />
         <Route path="/nghien-cuu/sinh-vien-nckh" element={<ReseachStudent />} />
-
-        <Route path="/tro-ly-khoa" element={<AssistantMain />} />
+        
       </Routes>
     </Router>
   );

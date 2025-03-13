@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../context/AuthContext"; // Import AuthContext
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth(); // Lấy hàm login từ AuthContext
 
   const handleLogin = () => {
     if (username === 'admin' && password === '1') {
+      login('admin');
       navigate('/'); // Điều hướng đến trang Dashboard hoặc trang chính
     } else if (username === 'trolykhoa' && password === '1') {
-      navigate('/tro-ly-khoa'); // Điều hướng đến trang Dashboard hoặc trang chính
+      login('trolykhoa');
+      navigate('/'); // Điều hướng đến trang Dashboard hoặc trang chính
     } else {
       setError('Tài khoản hoặc mật khẩu không hợp lệ!');
     }
