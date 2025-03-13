@@ -57,9 +57,9 @@ function InformationTechnology() {
               <p className='text-[#C10629] font-bold'>Chi tiết xem tại đây 👈</p>
             </div>
               <div className='col-span-2 text-right text-[#192E58]'>
-              <p class="border-b-3 pb-2 mb-2"><strong>Mã ngành:</strong> <span class="font-bold text-2xl text-[#C10629]">7480201</span></p>
-                <p className='my-5'><strong>Thời gian học: 4 năm</strong></p>
-                <p><strong>Tổ hợp môn thi: A00, A01</strong></p>
+              <p class="font-bold border-b pb-2 mb-2 text-[14px]">Mã ngành: <span class="font-bold text-[#C10629]">7480201</span></p>
+                <p className='font-bold my-5 text-[14px]'>Thời gian học: <span class="font-extrabold">4 năm</span></p>
+                <p className='font-bold text-[14px]'>Tổ hợp môn thi: A00, A01</p>
               </div>
           </div>
         </div>

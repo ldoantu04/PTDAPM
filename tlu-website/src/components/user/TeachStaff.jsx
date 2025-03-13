@@ -68,36 +68,38 @@ function TeachStaff() {
               </div>
               
               {/* Chuyên gia hàng đầu */}
-              <div className="md:w-1/3 border-2 border-gray-300 rounded-lg p-[30px]">
-                <h2 className="text-2xl font-bold mb-6 border-b-[5px] border-[#E82323]">Chuyên gia hàng đầu</h2>
-                {[...Array(4)].map((_, index) => (
-                  <div
-                    key={index}
-                    className="mb-[30px] bg-gray-50 rounded-lg shadow"
-                    style={{
-                      backgroundImage: "url('/assets/lecturer_list/background.jpg')",
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                      backgroundColor: "rgba(255, 255, 255, 0.6)",
-                      backgroundBlendMode: "lighten",
-                    }}
-                  >
-                    <div className="flex flex-row gap-3">
-                      <div className="w-1/4 overflow-hidden">
-                        <img 
-                          src="/assets/lecturer_list/avatar.jpg" 
-                          alt="Expert" 
-                          className="w-full h-auto object-cover hover:scale-110 transition ease-in-out" 
-                        />
-                      </div>
-                      <div className="w-3/4">
-                        <p className="font-bold text-[16px] text-black hover:text-[#35c56c] transition-colors mt-1">Name</p>
-                        <p className="font-normal text-[14px] text-[#A3A3A3] mt-1">Trưởng khoa</p>
-                        <p className="font-normal text-[14px] text-black mt-1">Bộ môn công nghệ phần mềm</p>
+              <div className='md:w-1/3'>
+                <div className="border-2 border-gray-300 rounded-lg p-[30px]">
+                  <h2 className="text-2xl font-bold mb-6 border-b-[5px] border-[#E82323]">Chuyên gia hàng đầu</h2>
+                  {[...Array(4)].map((_, index) => (
+                    <div
+                      key={index}
+                      className="mb-[30px] bg-gray-50 rounded-lg shadow"
+                      style={{
+                        backgroundImage: "url('/assets/lecturer_list/background.jpg')",
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundColor: "rgba(255, 255, 255, 0.6)",
+                        backgroundBlendMode: "lighten",
+                      }}
+                    >
+                      <div className="flex flex-row gap-3">
+                        <div className="w-1/4 overflow-hidden">
+                          <img 
+                            src="/assets/lecturer_list/avatar.jpg" 
+                            alt="Expert" 
+                            className="w-full h-auto object-cover hover:scale-110 transition ease-in-out" 
+                          />
+                        </div>
+                        <div className="w-3/4">
+                          <p className="font-bold text-[16px] text-black hover:text-[#35c56c] transition-colors mt-1">Name</p>
+                          <p className="font-normal text-[14px] text-[#A3A3A3] mt-1">Trưởng khoa</p>
+                          <p className="font-normal text-[14px] text-black mt-1">Bộ môn công nghệ phần mềm</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
 
