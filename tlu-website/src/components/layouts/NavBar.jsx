@@ -44,7 +44,7 @@ function NavBar() {
             <div className="relative mb-3 z-50 transition-all duration-300 ease-out">
               <div className="flex items-center gap-2 transition-all duration-300 ease-out">
                 <img src="/assets/loginh_user_image_2.png" alt="" />
-                <button onClick={() => setIsAvatarOpen(!isAvatarOpen)} className="text-xs flex items-center gap-x-1 transition-all duration-300 ease-out">
+                <button onClick={() => setIsAvatarOpen(!isAvatarOpen)} className="text-xs flex items-center gap-x-1 transition-all duration-300 ease-out py-2">
                   Xin chào, Trợ lý khoa
                   <svg className={`ml-1 font-bold transition-all ease-out duration-300 ${isAvatarOpen ? "rotate-90" : ""}`} xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 5l6 7l-6 7"/></svg>
                 </button>
@@ -68,7 +68,7 @@ function NavBar() {
             <div className="relative mb-3 z-50 transition-all duration-300 ease-out">
               <div className="flex items-center gap-2 transition-all duration-300 ease-out">
                 <img src="/assets/loginh_user_image_2.png" alt="" />
-                <button onClick={() => setIsAvatarOpen(!isAvatarOpen)} className="text-xs flex items-center gap-x-1 transition-all duration-300 ease-out">
+                <button onClick={() => setIsAvatarOpen(!isAvatarOpen)} className="text-xs flex items-center gap-x-1 transition-all duration-300 ease-out py-2">
                   Xin chào, Admin
                   <svg className={`ml-1 font-bold transition-all ease-out duration-300 ${isAvatarOpen ? "rotate-90" : ""}`} xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 5l6 7l-6 7"/></svg>
                 </button>

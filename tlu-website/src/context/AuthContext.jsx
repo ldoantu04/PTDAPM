@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -23,6 +23,7 @@ function AuthProvider({ children }) {
   };
 
   return (
+    // Content bọc trong Provider sẽ sử dụng được user, login và logout
     <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
