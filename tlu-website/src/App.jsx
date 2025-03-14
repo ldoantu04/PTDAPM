@@ -20,6 +20,10 @@ import ScientificResearchTopic from "./components/user/research/ScientificResear
 import ResearchGroups from "./components/user/research/ResearchGroups";
 import ApplicationDeployment from "./components/user/research/ApplicationDeployment";
 import ReseachStudent from "./components/user/research/ReseachStudent";
+import SoftwareEngineer from "./components/user/training/university/SoftwareEngineer";
+import InformationSystem from "./components/user/training/university/InformationSystem";
+import ArtificialIntelligence from "./components/user/training/university/ArtificialIntelligence";
+import NetworkSecurity from "./components/user/training/university/NetworkSecurity";
 
 function App() {
   return (
@@ -48,6 +52,10 @@ function App() {
         <Route path="/tuyen-dung/tuyen-dung-giang-vien" element={<LecturerRecruitment />} />
 
         <Route path="/dao-tao/dao-tao-dai-hoc/nganh-cong-nghe-thong-tin" element={<InformationTechnology />} />
+        <Route path="/dao-tao/dao-tao-dai-hoc/nganh-ky-thuat-phan-mem" element={<SoftwareEngineer />} />
+        <Route path="/dao-tao/dao-tao-dai-hoc/nganh-he-thong-thong-tin" element={<InformationSystem />} />
+        <Route path="/dao-tao/dao-tao-dai-hoc/nganh-tri-tue-nhan-tao" element={<ArtificialIntelligence />} />
+        <Route path="/dao-tao/dao-tao-dai-hoc/nganh-an-ninh-mang" element={<NetworkSecurity />} />
 
         <Route path="/nghien-cuu/cong-bo-khoa-hoc" element={<ResearchPublication />} />
         <Route path="/nghien-cuu/de-tai-nckh" element={<ScientificResearchTopic />} />
