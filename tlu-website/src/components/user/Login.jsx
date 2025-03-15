@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../context/AuthContext"; // Import AuthContext
+import axios from 'axios';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -9,15 +10,25 @@ function Login() {
   const navigate = useNavigate();
   const { login } = useAuth(); // Lấy hàm login từ AuthContext
 
-  const handleLogin = () => {
-    if (username === 'admin' && password === '1') {
-      login('admin');
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    // Kiểm tra nếu username hoặc password để trống
+    if (!username) {
+      setError('Vui lòng nhập tên đăng nhập!');
+      return;
+    } else if (!password) {
+      setError('Vui lòng nhập mật khẩu!');
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:4000/api/login', { username, password });
+      const { role } = response.data;
+      login(role);
       navigate('/'); // Điều hướng đến trang Dashboard hoặc trang chính
-    } else if (username === 'trolykhoa' && password === '1') {
-      login('trolykhoa');
-      navigate('/'); // Điều hướng đến trang Dashboard hoặc trang chính
-    } else {
-      setError('Tài khoản hoặc mật khẩu không hợp lệ!');
+    } catch (error) {
+      setError('Tên đăng nhập hoặc mật khẩu không chính xác!');
     }
   };
 
@@ -46,7 +57,7 @@ function Login() {
 
         <button 
           onClick={handleLogin} 
-          className="w-[800px] bg-red-500 text-white py-2 mt-4 hover:bg-red-600 transition-all ease-out duration-300">
+          className="w-[800px] bg-red-500 text-white py-2 mt-4 hover:bg-red-700 transition-all ease-out duration-500">
           Đăng nhập
         </button>
       </div>
