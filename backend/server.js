@@ -3,6 +3,7 @@ import cors from 'cors';
 import 'dotenv/config'
 import connectDB from './config/mongodb.js';
 import connectCloudinary from './config/cloudinary.js';
+import accountController from './controllers/accountController.js';
 
 // App Config
 const app = express();
@@ -17,5 +18,7 @@ app.use(cors());
 app.get('/', (req, res) => {
     res.send("API Working")
 })
+
+app.post('/api/login', accountController.login);
 
 app.listen(port, ()=> console.log('Server started on port ' + port))
