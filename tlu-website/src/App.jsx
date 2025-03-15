@@ -26,7 +26,9 @@ import ArtificialIntelligence from "./components/user/training/university/Artifi
 import NetworkSecurity from "./components/user/training/university/NetworkSecurity";
 import AdminOverview from "./components/admin/AdminOverview";
 import PostManager from "./components/trolykhoa/PostManager";
-import AccountManager from "./components/admin/AccountManger"; 
+import AccountManager from "./components/admin/AccountManager"; 
+import DisplayEmployee from './components/admin/EmployeeManager/DisplayEmployee';
+import AddEmployee from './components/admin/EmployeeManager/AddEmployee';
 
 function App() {
   return (
@@ -70,6 +72,8 @@ function App() {
         <Route path="/trolykhoa/quan-ly-bai-viet" element={<PostManager />} />
 
         <Route path="/admin/tai-khoan" element={<AccountManager />} />
+        <Route path="/admin/nhan-su" element={<DisplayEmployee />} />
+        <Route path="/admin/nhan-su/them" element={<AddEmployee />} />
       </Routes>
     </Router>
   );

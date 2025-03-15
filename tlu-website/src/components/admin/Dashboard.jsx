@@ -34,12 +34,12 @@ const Dashboard = () => {
           </div>
 
           <div>
-            <a href="/admin/nhan-su">
+            <Link to="/admin/nhan-su">
               <div className="text-2xl mb-2 text-blue-600">
                 <i className="fas fa-users"></i>
               </div>
               <div className="font-bold">Nhân sự</div>
-            </a>
+            </Link>
           </div>
           <div>
             <Link to="/admin/tai-khoan">
