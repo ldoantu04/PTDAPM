@@ -7,7 +7,7 @@ const Dashboard = () => {
       <div className="flex flex-col items-center bg-[#192E58] p-5">
         <div className="flex justify-between w-full max-w-5xl text-white">
           <div>
-            <a href="/admin/overview">
+            <a href="/admin/tong-quan">
               <div className="text-2xl mb-2 text-blue-600">
                 <i className="fas fa-chart-bar"></i>
               </div>

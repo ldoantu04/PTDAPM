@@ -74,14 +74,94 @@ const addStaff = async (req, res) => {
 
 // Cập nhật nhân sự
 const updateStaff = async (req, res) => {
-    // Implement later
-    res.status(200).json({ message: 'Update staff functionality will be implemented later' });
+    const { id } = req.params;
+    const { name, degree, status, department, position, email, phone, bio } = req.body;
+    
+    // Validate input
+    if (!name || !degree || !status || !department || !position || !email) {
+        return res.status(400).json({ message: 'Vui lòng cung cấp đầy đủ thông tin bắt buộc' });
+    }
+
+    try {
+        const dbName = 'cse_tlu_website';
+        const db = mongoose.connection.useDb(dbName);
+        const Staff = db.model('staffs', staffModel.schema);
+        
+        // Kiểm tra nhân sự có tồn tại không
+        const staff = await Staff.findById(id);
+        if (!staff) {
+            return res.status(404).json({ message: 'Không tìm thấy nhân sự' });
+        }
+        
+        // Nếu email thay đổi, kiểm tra email mới đã tồn tại chưa
+        if (email !== staff.email) {
+            const existingStaff = await Staff.findOne({ email, _id: { $ne: id } });
+            if (existingStaff) {
+                return res.status(400).json({ message: 'Email đã tồn tại trong hệ thống' });
+            }
+        }
+        
+        // Xử lý upload ảnh mới nếu có
+        let thumbnailUrl = staff.thumbnail || '';
+        if (req.file) {
+            try {
+                // Nếu đã có ảnh cũ và có public_id, xóa ảnh cũ trên cloudinary
+                if (staff.thumbnail && staff.public_id) {
+                    await cloudinary.uploader.destroy(staff.public_id);
+                }
+                
+                // Upload ảnh mới
+                const result = await cloudinary.uploader.upload(req.file.path, {
+                    resource_type: 'image',
+                    folder: 'staff_thumbnails'
+                });
+                thumbnailUrl = result.secure_url;
+                staff.public_id = result.public_id;
+            } catch (uploadError) {
+                console.error("Upload error:", uploadError);
+                return res.status(400).json({ message: 'Lỗi khi tải ảnh lên: ' + uploadError.message });
+            }
+        }
+        
+        // Cập nhật thông tin
+        staff.name = name;
+        staff.degree = degree;
+        staff.status = status;
+        staff.department = department;
+        staff.position = position;
+        staff.email = email;
+        staff.phone = phone;
+        staff.bio = bio;
+        if (thumbnailUrl) {
+            staff.thumbnail = thumbnailUrl;
+        }
+        
+        await staff.save();
+        res.status(200).json({ message: 'Cập nhật thông tin nhân sự thành công', staff });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
-// Lấy thông tin chi tiết nhân sự
+// Also implement the getStaffById function
 const getStaffById = async (req, res) => {
-    // Implement later
-    res.status(200).json({ message: 'Get staff by ID functionality will be implemented later' });
+    const { id } = req.params;
+    
+    try {
+        const dbName = 'cse_tlu_website';
+        const db = mongoose.connection.useDb(dbName);
+        const Staff = db.model('staffs', staffModel.schema);
+        
+        const staff = await Staff.findById(id);
+        if (!staff) {
+            return res.status(404).json({ message: 'Không tìm thấy nhân sự' });
+        }
+        
+        res.status(200).json(staff);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
+
 
 export { getStaffs, addStaff, updateStaff, getStaffById };

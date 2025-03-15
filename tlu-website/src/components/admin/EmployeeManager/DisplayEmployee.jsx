@@ -99,7 +99,7 @@ const DisplayEmployee = () => {
                       <td>
                         <div className="flex space-x-2">
                           <Link 
-                            to={`/admin/nhan-su/${staff._id}`}
+                            to={`/admin/nhan-su/chi-tiet/${staff._id}`}
                             className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-1 px-2 rounded text-sm"
                           >
                             Xem

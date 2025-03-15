@@ -29,7 +29,8 @@ import PostManager from "./components/trolykhoa/PostManager";
 import AccountManager from "./components/admin/AccountManager"; 
 import DisplayEmployee from './components/admin/EmployeeManager/DisplayEmployee';
 import AddEmployee from './components/admin/EmployeeManager/AddEmployee';
-
+import EditEmployee from './components/admin/EmployeeManager/EditEmployee';
+import DetailEmployee from './components/admin/EmployeeManager/DetailEmployee';
 function App() {
   return (
     <Router>
@@ -74,6 +75,8 @@ function App() {
         <Route path="/admin/tai-khoan" element={<AccountManager />} />
         <Route path="/admin/nhan-su" element={<DisplayEmployee />} />
         <Route path="/admin/nhan-su/them" element={<AddEmployee />} />
+        <Route path="/admin/nhan-su/sua/:id" element={<EditEmployee />} />
+        <Route path="/admin/nhan-su/chi-tiet/:id" element={<DetailEmployee />} />
       </Routes>
     </Router>
   );

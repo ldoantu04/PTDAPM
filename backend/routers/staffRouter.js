@@ -7,7 +7,7 @@ const staffRouter = express.Router();
 // Route quản lý nhân sự
 staffRouter.get('/staff', getStaffs);
 staffRouter.post('/staff', upload.single('thumbnail'), addStaff);
-staffRouter.put('/staff/:id', upload.single('thumbnail'), updateStaff);
 staffRouter.get('/staff/:id', getStaffById);
+staffRouter.put('/staff/:id', upload.single('thumbnail'), updateStaff);
 
 export default staffRouter;
