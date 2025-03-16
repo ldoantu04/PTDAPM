@@ -163,5 +163,39 @@ const getStaffById = async (req, res) => {
     }
 };
 
+// Xóa nhân sự
+const deleteStaff = async (req, res) => {
+    const { id } = req.params;
+    
+    try {
+        const dbName = 'cse_tlu_website';
+        const db = mongoose.connection.useDb(dbName);
+        const Staff = db.model('staffs', staffModel.schema);
+        
+        // Tìm nhân sự để lấy thông tin thumbnail
+        const staff = await Staff.findById(id);
+        
+        if (!staff) {
+            return res.status(404).json({ message: 'Không tìm thấy nhân sự' });
+        }
+        
+        // Nếu có ảnh trên cloudinary, xóa ảnh
+        if (staff.public_id) {
+            try {
+                await cloudinary.uploader.destroy(staff.public_id);
+            } catch (cloudinaryError) {
+                console.error("Error deleting image from Cloudinary:", cloudinaryError);
+                // Vẫn tiếp tục xóa nhân sự trong DB ngay cả khi không xóa được ảnh
+            }
+        }
+        
+        // Xóa nhân sự từ database
+        await Staff.findByIdAndDelete(id);
+        
+        res.status(200).json({ message: 'Xóa nhân sự thành công' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
-export { getStaffs, addStaff, updateStaff, getStaffById };
+export { getStaffs, addStaff, updateStaff, getStaffById, deleteStaff };

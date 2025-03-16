@@ -110,4 +110,28 @@ const updateAccount = async (req, res) => {
     }
 };
 
-export {login,getAccounts,addAccount,updateAccount};
+// Xóa tài khoản
+const deleteAccount = async (req, res) => {
+    const { id } = req.params;
+    
+    try {
+        const dbName = 'cse_tlu_website';
+        const db = mongoose.connection.useDb(dbName);
+        const Account = db.model('accounts', accountModel.schema);
+        
+        // Kiểm tra tài khoản có tồn tại không
+        const account = await Account.findById(id);
+        if (!account) {
+            return res.status(404).json({ message: 'Không tìm thấy tài khoản' });
+        }
+        
+        // Xóa tài khoản từ database
+        await Account.findByIdAndDelete(id);
+        
+        res.status(200).json({ message: 'Xóa tài khoản thành công' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export {login,getAccounts,addAccount,updateAccount, deleteAccount};

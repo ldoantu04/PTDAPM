@@ -8,6 +8,9 @@ import Dashboard from '../Dashboard'
 const DisplayEmployee = () => {
   const [staffs, setStaffs] = useState([])
   const [error, setError] = useState('')
+  const [successMessage, setSuccessMessage] = useState('')
+  const [staffToDelete, setStaffToDelete] = useState(null)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
 
   // Fetch staffs when component mounts
   useEffect(() => {
@@ -22,6 +25,43 @@ const DisplayEmployee = () => {
     } catch (err) {
       setError('Không thể tải danh sách nhân sự')
       console.error('Error fetching staffs:', err)
+    }
+  }
+
+  // Mở modal xác nhận xóa nhân sự
+  const handleDeleteClick = (staff) => {
+    setStaffToDelete(staff)
+    setShowDeleteModal(true)
+  }
+
+  // Đóng modal xác nhận
+  const closeDeleteModal = () => {
+    setStaffToDelete(null)
+    setShowDeleteModal(false)
+  }
+
+  // Xử lý xóa nhân sự
+  const handleDeleteConfirm = async () => {
+    if (!staffToDelete) return
+    
+    try {
+      await axios.delete(`http://localhost:4000/api/staff/${staffToDelete._id}`)
+      
+      // Cập nhật danh sách nhân sự sau khi xóa
+      setStaffs(staffs.filter(staff => staff._id !== staffToDelete._id))
+      setSuccessMessage('Xóa nhân sự thành công')
+      
+      // Ẩn thông báo thành công sau 3 giây
+      setTimeout(() => {
+        setSuccessMessage('')
+      }, 3000)
+      
+      // Đóng modal xác nhận
+      closeDeleteModal()
+    } catch (err) {
+      setError('Lỗi khi xóa nhân sự')
+      console.error('Error deleting staff:', err)
+      closeDeleteModal()
     }
   }
 
@@ -45,6 +85,13 @@ const DisplayEmployee = () => {
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
               {error}
+            </div>
+          )}
+
+          {/* Display success message if any */}
+          {successMessage && (
+            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+              {successMessage}
             </div>
           )}
 
@@ -110,6 +157,12 @@ const DisplayEmployee = () => {
                           >
                             Sửa
                           </Link>
+                          <button 
+                            onClick={() => handleDeleteClick(staff)}
+                            className="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-2 rounded text-sm"
+                          >
+                            Xóa
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -120,6 +173,41 @@ const DisplayEmployee = () => {
           </div>
         </div>
       </div>
+      
+      {/* Modal xác nhận xóa */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Xác nhận xóa</h2>
+            </div>
+            
+            <p className="mb-6">
+              Bạn có chắc chắn muốn xóa nhân sự <span className="font-bold">{staffToDelete?.name}</span>?
+              <br />
+              Hành động này không thể hoàn tác.
+            </p>
+            
+            <div className="flex items-center justify-end space-x-3">
+              <button
+                type="button"
+                onClick={closeDeleteModal}
+                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Hủy
+              </button>
+              <button
+                type="button"
+                onClick={handleDeleteConfirm}
+                className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Xóa
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      
       <Footer />
     </div>
   )

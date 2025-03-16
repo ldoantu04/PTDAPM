@@ -1,5 +1,5 @@
 import express from 'express';
-import {login,getAccounts,addAccount,updateAccount} from '../controllers/accountController.js';
+import {login,getAccounts,addAccount,updateAccount, deleteAccount} from '../controllers/accountController.js';
 
 const accountRouter = express.Router();
 
@@ -10,5 +10,5 @@ accountRouter.post('/login', login);
 accountRouter.get('/account', getAccounts);
 accountRouter.post('/account', addAccount);
 accountRouter.put('/account/:id', updateAccount);
-
+accountRouter.delete('/account/:id', deleteAccount);
 export default accountRouter;

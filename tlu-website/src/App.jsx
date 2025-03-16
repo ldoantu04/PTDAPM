@@ -31,9 +31,11 @@ import DisplayEmployee from './components/admin/EmployeeManager/DisplayEmployee'
 import AddEmployee from './components/admin/EmployeeManager/AddEmployee';
 import EditEmployee from './components/admin/EmployeeManager/EditEmployee';
 import DetailEmployee from './components/admin/EmployeeManager/DetailEmployee';
+import { ToastContainer, toast } from 'react-toastify';
 function App() {
   return (
     <Router>
+      <ToastContainer /> 
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
