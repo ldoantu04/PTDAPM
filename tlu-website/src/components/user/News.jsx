@@ -22,11 +22,11 @@ function News() {
   };
   
   return (
-    <div>
+    <>
       <NavBar />
 
-      <div>
-        <div className="px-55 mx-auto mb-10 mt-30">
+      <main>
+        <div className="px-55 mx-auto mb-10">
             <SmallNavBar navigationLinks={ sampleData.navigationLinks } />
 
             <div className="flex gap-x-30">
@@ -48,10 +48,10 @@ function News() {
 
             </div>
         </div>
-      </div>
+      </main>
 
       <Footer />
-    </div>
+    </>
   );
 }
 

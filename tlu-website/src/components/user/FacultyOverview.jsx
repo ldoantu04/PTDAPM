@@ -16,7 +16,7 @@ function FacultyOverview() {
     <div className='w-full relative'>
         <NavBar />
 
-        <div className='mt-[120px]'>
+        <main>
             <div className='mx-44'>
                 <SmallNavBar navigationLinks={ sampleData.navigationLinks } />
             </div>
@@ -182,7 +182,7 @@ function FacultyOverview() {
                     </a>
                 </div>
             </div>
-        </div>
+        </main>
 
         <Footer />
     </div>
