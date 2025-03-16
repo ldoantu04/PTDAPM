@@ -20,6 +20,11 @@ import ScientificResearchTopic from "./components/user/research/ScientificResear
 import ResearchGroups from "./components/user/research/ResearchGroups";
 import ApplicationDeployment from "./components/user/research/ApplicationDeployment";
 import ReseachStudent from "./components/user/research/ReseachStudent";
+import Test from "./components/Test";
+import Overview from "./components/admin/Overview";
+import PostList from "./components/admin/PostList";
+import PostForm from "./components/admin/PostForm";
+import PostDetail from "./components/admin/PostDetail";
 
 function App() {
   return (
@@ -55,6 +60,13 @@ function App() {
         <Route path="/nghien-cuu/trien-khai-ung-dung" element={<ApplicationDeployment />} />
         <Route path="/nghien-cuu/sinh-vien-nckh" element={<ReseachStudent />} />
         
+        <Route path="/test" element={<Test />} />
+        <Route path="/admin/tong-quan" element={<Overview />} />
+        <Route path="/admin/bai-viet" element={<PostList />} />
+        <Route path="/admin/bai-viet/them-moi" element={<PostForm />} />
+        <Route path="/admin/bai-viet/chinh-sua/:id" element={<PostForm isEditing={true} />} />
+        <Route path="/admin/bai-viet/chi-tiet/:id" element={<PostDetail />} />
+
       </Routes>
     </Router>
   );
