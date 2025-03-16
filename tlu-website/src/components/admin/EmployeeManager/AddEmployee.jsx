@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
-import Dashboard from "../Dashboard";
 import { toast } from "react-toastify";
+import Toolbar from "../../layouts/Toolbar";
 
 const AddEmployee = () => {
   const navigate = useNavigate();
@@ -150,7 +150,7 @@ const AddEmployee = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar />
-      <Dashboard />
+      <Toolbar />
       <div className="container mx-auto px-4 py-8 mt-20">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">

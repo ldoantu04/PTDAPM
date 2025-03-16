@@ -26,7 +26,7 @@ function Login() {
       const response = await axios.post('http://localhost:4000/api/login', { username, password });
       const { role } = response.data;
       login(role);
-      navigate('/'); // Điều hướng đến trang Dashboard hoặc trang chính
+      navigate('/'); 
     } catch (error) {
       setError('Tên đăng nhập hoặc mật khẩu không chính xác!');
     }

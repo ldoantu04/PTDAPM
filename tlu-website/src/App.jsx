@@ -31,7 +31,6 @@ import SoftwareEngineer from "./components/user/training/university/SoftwareEngi
 import InformationSystem from "./components/user/training/university/InformationSystem";
 import ArtificialIntelligence from "./components/user/training/university/ArtificialIntelligence";
 import NetworkSecurity from "./components/user/training/university/NetworkSecurity";
-import AdminOverview from "./components/admin/AdminOverview";
 import PostManager from "./components/trolykhoa/PostManager";
 import AccountManager from "./components/admin/AccountManager"; 
 import DisplayEmployee from './components/admin/EmployeeManager/DisplayEmployee';
@@ -88,7 +87,6 @@ function App() {
 
 
 
-        {/* <Route path="/admin/tong-quan" element={<AdminOverview />} /> */}
         <Route path="/trolykhoa/quan-ly-bai-viet" element={<PostManager />} />
 
         <Route path="/admin/tai-khoan" element={<AccountManager />} />

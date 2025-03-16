@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
-import Dashboard from "../Dashboard";
+import Toolbar from "../../layouts/Toolbar";
 
 const DetailEmployee = () => {
   const { id } = useParams();
@@ -35,7 +35,7 @@ const DetailEmployee = () => {
     return (
       <div className="min-h-screen flex flex-col">
         <NavBar />
-        <Dashboard />
+        <Toolbar />
         <div className="container mx-auto px-4 py-8 mt-20 flex justify-center items-center">
           <p>Đang tải thông tin...</p>
         </div>
@@ -48,7 +48,7 @@ const DetailEmployee = () => {
     return (
       <div className="min-h-screen flex flex-col">
         <NavBar />
-        <Dashboard />
+        <Toolbar />
         <div className="container mx-auto px-4 py-8 mt-20 flex flex-col items-center">
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 w-full max-w-3xl">
             {error || "Không tìm thấy thông tin nhân sự"}
@@ -68,7 +68,7 @@ const DetailEmployee = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar />
-      <Dashboard />
+      <Toolbar />
       <div className="container mx-auto px-4 py-8 mt-20">
         <div className="mb-6 flex justify-between items-center">
           <h1 className="text-4xl font-bold text-[#192F59]">
