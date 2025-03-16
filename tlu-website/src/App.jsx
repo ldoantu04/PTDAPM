@@ -20,15 +20,30 @@ import ScientificResearchTopic from "./components/user/research/ScientificResear
 import ResearchGroups from "./components/user/research/ResearchGroups";
 import ApplicationDeployment from "./components/user/research/ApplicationDeployment";
 import ReseachStudent from "./components/user/research/ReseachStudent";
-import Test from "./components/Test";
+
 import Overview from "./components/admin/Overview";
 import PostList from "./components/admin/PostList";
 import PostForm from "./components/admin/PostForm";
 import PostDetail from "./components/admin/PostDetail";
 
+
+import SoftwareEngineer from "./components/user/training/university/SoftwareEngineer";
+import InformationSystem from "./components/user/training/university/InformationSystem";
+import ArtificialIntelligence from "./components/user/training/university/ArtificialIntelligence";
+import NetworkSecurity from "./components/user/training/university/NetworkSecurity";
+import AdminOverview from "./components/admin/AdminOverview";
+import PostManager from "./components/trolykhoa/PostManager";
+import AccountManager from "./components/admin/AccountManager"; 
+import DisplayEmployee from './components/admin/EmployeeManager/DisplayEmployee';
+import AddEmployee from './components/admin/EmployeeManager/AddEmployee';
+import EditEmployee from './components/admin/EmployeeManager/EditEmployee';
+import DetailEmployee from './components/admin/EmployeeManager/DetailEmployee';
+import { ToastContainer, toast } from 'react-toastify';
+
 function App() {
   return (
     <Router>
+      <ToastContainer /> 
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
@@ -53,12 +68,17 @@ function App() {
         <Route path="/tuyen-dung/tuyen-dung-giang-vien" element={<LecturerRecruitment />} />
 
         <Route path="/dao-tao/dao-tao-dai-hoc/nganh-cong-nghe-thong-tin" element={<InformationTechnology />} />
+        <Route path="/dao-tao/dao-tao-dai-hoc/nganh-ky-thuat-phan-mem" element={<SoftwareEngineer />} />
+        <Route path="/dao-tao/dao-tao-dai-hoc/nganh-he-thong-thong-tin" element={<InformationSystem />} />
+        <Route path="/dao-tao/dao-tao-dai-hoc/nganh-tri-tue-nhan-tao" element={<ArtificialIntelligence />} />
+        <Route path="/dao-tao/dao-tao-dai-hoc/nganh-an-ninh-mang" element={<NetworkSecurity />} />
 
         <Route path="/nghien-cuu/cong-bo-khoa-hoc" element={<ResearchPublication />} />
         <Route path="/nghien-cuu/de-tai-nckh" element={<ScientificResearchTopic />} />
         <Route path="/nghien-cuu/cac-nhom-nghien-cuu" element={<ResearchGroups />} />
         <Route path="/nghien-cuu/trien-khai-ung-dung" element={<ApplicationDeployment />} />
         <Route path="/nghien-cuu/sinh-vien-nckh" element={<ReseachStudent />} />
+
         
         <Route path="/test" element={<Test />} />
         <Route path="/admin/tong-quan" element={<Overview />} />
@@ -66,6 +86,17 @@ function App() {
         <Route path="/admin/bai-viet/them-moi" element={<PostForm />} />
         <Route path="/admin/bai-viet/chinh-sua/:id" element={<PostForm isEditing={true} />} />
         <Route path="/admin/bai-viet/chi-tiet/:id" element={<PostDetail />} />
+
+
+
+        <Route path="/admin/tong-quan" element={<AdminOverview />} />
+        <Route path="/trolykhoa/quan-ly-bai-viet" element={<PostManager />} />
+
+        <Route path="/admin/tai-khoan" element={<AccountManager />} />
+        <Route path="/admin/nhan-su" element={<DisplayEmployee />} />
+        <Route path="/admin/nhan-su/them" element={<AddEmployee />} />
+        <Route path="/admin/nhan-su/sua/:id" element={<EditEmployee />} />
+        <Route path="/admin/nhan-su/chi-tiet/:id" element={<DetailEmployee />} />
 
       </Routes>
     </Router>
