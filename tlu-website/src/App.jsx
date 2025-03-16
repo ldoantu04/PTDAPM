@@ -80,7 +80,6 @@ function App() {
         <Route path="/nghien-cuu/sinh-vien-nckh" element={<ReseachStudent />} />
 
         
-        <Route path="/test" element={<Test />} />
         <Route path="/admin/tong-quan" element={<Overview />} />
         <Route path="/admin/bai-viet" element={<PostList />} />
         <Route path="/admin/bai-viet/them-moi" element={<PostForm />} />
@@ -89,7 +88,7 @@ function App() {
 
 
 
-        <Route path="/admin/tong-quan" element={<AdminOverview />} />
+        {/* <Route path="/admin/tong-quan" element={<AdminOverview />} /> */}
         <Route path="/trolykhoa/quan-ly-bai-viet" element={<PostManager />} />
 
         <Route path="/admin/tai-khoan" element={<AccountManager />} />
