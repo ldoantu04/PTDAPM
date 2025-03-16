@@ -33,7 +33,7 @@ function Login() {
   };
 
   return (
-    <div className="w-full h-screen bg-[url('/assets/login_background.webp')] bg-cover bg-center flex flex-col items-center justify-center">
+    <div className="w-full h-screen bg-[url('/assets/login_background.webp')] bg-cover bg-center flex flex-col items-center justify-center fixed top-0">
       <div style={{ backgroundColor: "rgba(255, 255, 255, 0.85)" }} className='w-[1000px] h-auto flex flex-col items-center justify-center p-6'>
         <p className='font-bold text-lg mb-4'>Khoa Công nghệ thông tin - TLU</p>
 
