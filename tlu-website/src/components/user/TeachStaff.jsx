@@ -17,7 +17,7 @@ function TeachStaff() {
     <div className="w-full relative">
       <NavBar />
 
-      <div className='mt-[120px]'>
+      <main>
         <div className='mx-50'>
           <SmallNavBar navigationLinks={sampleData.navigationLinks} />
         </div>
@@ -105,7 +105,7 @@ function TeachStaff() {
 
           </div>
         </div>
-      </div>
+      </main>
       
       <Footer />
     </div>

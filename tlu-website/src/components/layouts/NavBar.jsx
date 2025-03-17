@@ -22,7 +22,7 @@ function NavBar() {
   };
   console.log("User in NavBar:", user);
   return (
-    <div className="w-full flex items-center justify-between px-60 py-4 bg-white shadow-lg fixed top-0 z-10">
+    <div className="w-full h-[105px] flex items-center justify-between px-60 py-4 bg-white shadow-lg fixed top-0 z-10">
       {/* Logo */}
       <div>
         <a href="/">
@@ -51,10 +51,10 @@ function NavBar() {
               </div>
 
               <div className={`absolute left-0 mt-2 w-60 px-5 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-300 ease-out ${isAvatarOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-                <a href="" className="flex flex-row items-center text-[#192E58] hover:text-[#1677FF] text-left transition-all duration-500 ease-out gap-x-2 font-bold text-xs py-4"> 
+                <Link to="/trolykhoa/quan-ly-bai-viet" onClick={() => setIsAvatarOpen(false)} className="flex flex-row items-center text-[#192E58] hover:text-[#1677FF] text-left transition-all duration-500 ease-out gap-x-2 font-bold text-xs py-4"> 
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M22 10.5V12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2h1.5"/><path d="m16.652 3.455l.649-.649A2.753 2.753 0 0 1 21.194 6.7l-.65.649m-3.892-3.893s.081 1.379 1.298 2.595c1.216 1.217 2.595 1.298 2.595 1.298m-3.893-3.893L10.687 9.42c-.404.404-.606.606-.78.829q-.308.395-.524.848c-.121.255-.211.526-.392 1.068L8.412 13.9m12.133-6.552l-5.965 5.965c-.404.404-.606.606-.829.78a4.6 4.6 0 0 1-.848.524c-.255.121-.526.211-1.068.392l-1.735.579m0 0l-1.123.374a.742.742 0 0 1-.939-.94l.374-1.122m1.688 1.688L8.412 13.9"/></g></svg>
                   Quản lý bài viết 
-                </a>
+                </Link>
 
                 <div className="border-t-2 border-gray-200"></div>
 
@@ -75,10 +75,10 @@ function NavBar() {
               </div>
 
               <div className={`absolute left-0 mt-2 w-60 px-5 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-300 ease-out ${isAvatarOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-                <a href="" className="flex flex-row items-center text-[#192E58] hover:text-[#1677FF] text-left transition-all duration-300 ease-out gap-x-2 font-bold text-xs py-4"> 
+                <Link to="/admin/tong-quan" onClick={() => setIsAvatarOpen(false)} className="flex flex-row items-center text-[#192E58] hover:text-[#1677FF] text-left transition-all duration-300 ease-out gap-x-2 font-bold text-xs py-4"> 
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M22 10.5V12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2h1.5"/><path d="m16.652 3.455l.649-.649A2.753 2.753 0 0 1 21.194 6.7l-.65.649m-3.892-3.893s.081 1.379 1.298 2.595c1.216 1.217 2.595 1.298 2.595 1.298m-3.893-3.893L10.687 9.42c-.404.404-.606.606-.78.829q-.308.395-.524.848c-.121.255-.211.526-.392 1.068L8.412 13.9m12.133-6.552l-5.965 5.965c-.404.404-.606.606-.829.78a4.6 4.6 0 0 1-.848.524c-.255.121-.526.211-1.068.392l-1.735.579m0 0l-1.123.374a.742.742 0 0 1-.939-.94l.374-1.122m1.688 1.688L8.412 13.9"/></g></svg>
                   Chế độ quản lý
-                </a>
+                </Link>
 
                 <div className="border-t-2 border-gray-200"></div>
 
