@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, message, Tag, Tooltip, Space, Popconfirm } from "antd";
 import {
   DeleteOutlined,
@@ -18,7 +18,6 @@ import CustomTable from "../layouts/CustomTable";
 const API_BASE_URL = "https://67d464bed2c7857431ed88c2.mockapi.io";
 
 function PostList() {
-  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState({});
   const [parentCategories, setParentCategories] = useState({});
@@ -50,7 +49,16 @@ function PostList() {
 
       // Lấy danh sách bài viết
       const postsResponse = await axios.get(`${API_BASE_URL}/posts`);
-      setPosts(postsResponse.data);
+
+      // Sắp xếp bài viết theo thứ tự mới nhất trước (dựa vào createdAt)
+      const sortedPosts = [...postsResponse.data].sort((a, b) => {
+        // Ưu tiên sử dụng updatedAt nếu có, nếu không thì dùng createdAt
+        const dateA = new Date(a.updatedAt || a.createdAt);
+        const dateB = new Date(b.updatedAt || b.createdAt);
+        return dateB - dateA; // Sắp xếp giảm dần (mới nhất trước)
+      });
+      
+      setPosts(sortedPosts);
     } catch (error) {
       console.error("Lỗi khi tải dữ liệu:", error);
       message.error("Không thể tải dữ liệu bài viết!");
@@ -113,11 +121,6 @@ function PostList() {
       console.error("Lỗi khi cập nhật trạng thái nổi bật:", error);
       message.error("Không thể cập nhật trạng thái bài viết!");
     }
-  };
-
-  // Chuyển đến trang chi tiết bài viết
-  const viewPostDetail = (id) => {
-    navigate(`/admin/bai-viet/chi-tiet/${id}`);
   };
 
   // Định dạng ngày tháng

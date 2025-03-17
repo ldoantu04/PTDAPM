@@ -34,6 +34,14 @@ main {
   @apply text-2xl opacity-100 hover:opacity-60 transition-all duration-200 ease-out;
 }
 
+.toolbar {
+  @apply  w-full h-16 bg-blue1 text-white font-medium flex justify-center text-sm fixed z-5;
+}
+
+.toolbar > a {
+  @apply flex gap-2.5 items-center px-10 hover:bg-[#26488B] transition-all duration-300 ease-out;
+}
+
 .ant-form-item-label > label, h3 {
   @apply text-sm font-medium;
 }
