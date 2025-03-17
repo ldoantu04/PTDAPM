@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "../layouts/NavBar";
 import Toolbar from "../layouts/Toolbar";
+import Footer from "../layouts/Footer";
 import { Button } from "antd";
 
 function Overview() {
@@ -8,6 +9,7 @@ function Overview() {
     <>
       <NavBar></NavBar>
       <Toolbar></Toolbar>
+
       <main className="admin-main gap-y-10 h-[3000px]">
         <div className="flex justify-between h-11">
           <h1 className="text-4xl font-bold text-blue1">Tổng quan</h1>
@@ -25,8 +27,11 @@ function Overview() {
             </svg>
             Thêm 
           </Button> */}
+
         </div>
       </main>
+
+      <Footer></Footer>
     </>
   );
 }
