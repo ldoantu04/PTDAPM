@@ -15,7 +15,7 @@ import Footer from "../../layouts/Footer";
 
 const API_BASE_URL = "https://67d464bed2c7857431ed88c2.mockapi.io";
 
-function PostDetail() {
+function SupPostDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
@@ -319,4 +319,4 @@ function PostDetail() {
   );
 }
 
-export default PostDetail;
+export default SupPostDetail;

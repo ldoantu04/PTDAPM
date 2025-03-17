@@ -19,7 +19,7 @@ import SimpleSelect from "../../layouts/SimpleSelect";
 const { TextArea } = Input;
 const API_BASE_URL = "https://67d464bed2c7857431ed88c2.mockapi.io";
 
-function PostForm({ isEditing = false }) {
+function SupPostForm({ isEditing = false }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -505,4 +505,4 @@ function PostForm({ isEditing = false }) {
   );
 }
 
-export default PostForm;
+export default SupPostForm;

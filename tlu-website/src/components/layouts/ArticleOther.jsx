@@ -1,41 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import { formatDate } from "../../utils/formatUtils"; // Giả sử bạn có utility function này
 
-function ArticleOther({ link }) {
+function ArticleOther({ title, imageUrl, date, excerpt, link }) {
+  // Format ngày tháng từ timestamp (nếu cần)
+  const formattedDate = date
+    ? formatDate(new Date(date), "dd/MM/yyyy | HH:mm:ss")
+    : "";
+
   return (
-    <div className="flex flex-row space-x-10 gap-y-3">
-      <div className="overflow-hidden">
-        <Link to={link}>
+    <div className="flex flex-row gap-10 h-52">
+      <div className="overflow-hidden w-1/3 h-full flex-shrink-0">
+        <Link to={link || "#"}>
           <img
-            src="/assets/article_image_sample.png"
-            alt="Article"
-            className="object-cover transition-transform duration-300 ease-out hover:scale-125 hover:opacity-70"
+            src={imageUrl || "/assets/article_image_sample.png"}
+            alt={title || "Article"}
+            className="w-full h-full object-cover transition-transform duration-300 ease-out hover:scale-110 hover:opacity-80"
           />
         </Link>
       </div>
 
-      <div className='flex flex-col space-y-3'>
+      <div className="flex flex-col gap-y-2.5 w-2/3">
         <div>
-          <Link to={link}>
-            <p className="font-semibold text-[#192F59] text-xl hover:underline transition-all duration-500 ease-out">
-              Anh nói hơi bị nhiều so với một người không có bảo hiểm y tế đấy
-            </p>
+          <Link to={link || "#"}>
+            <h3 className="font-semibold text-blue1 text-xl hover:underline transition-all duration-300 ease-out line-clamp-2">
+              {title || "Tiêu đề bài viết"}
+            </h3>
           </Link>
         </div>
 
-        <div className="flex flex-row space-x-2 items-center text-sm opacity-60">
-          <div className='border-b-2 border-[#D9D9D9] flex flex-row space-x-2 pb-1'>
-            <p>01/01/2025</p>
-            <p>|</p>
-            <p>09:25:01AM</p>
-          </div>
-        </div>
+        {date && (
+          <span className="w-fit text-xs text-gray3 border-b border-gray2 pb-2">
+            {formattedDate}
+          </span>
+        )}
 
-        <div>
-          <p className="text-[#192F59] text-base">
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-          </p>
-        </div>
+        {excerpt && (
+          <div>
+            <p className="text-blue1 text-sm line-clamp-4">
+              {excerpt}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

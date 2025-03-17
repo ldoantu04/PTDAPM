@@ -69,7 +69,7 @@ function CustomTable({
   };
   
   return (
-    <div>
+    <>
       {/* Thanh công cụ */}
       <div className="flex justify-between items-center mb-4">
         <div className="flex flex-wrap items-center gap-2">
@@ -141,7 +141,7 @@ function CustomTable({
         pagination={pagination}
         locale={{ emptyText }}
       />
-    </div>
+    </>
   );
 }
 

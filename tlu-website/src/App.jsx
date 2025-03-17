@@ -26,18 +26,19 @@ import PostList from "./components/admin/Posts/PostList";
 import PostForm from "./components/admin/Posts/PostForm";
 import PostDetail from "./components/admin/Posts/PostDetail";
 
-
 import SoftwareEngineer from "./components/user/training/university/SoftwareEngineer";
 import InformationSystem from "./components/user/training/university/InformationSystem";
 import ArtificialIntelligence from "./components/user/training/university/ArtificialIntelligence";
 import NetworkSecurity from "./components/user/training/university/NetworkSecurity";
-import PostManager from "./components/trolykhoa/PostManager";
 import AccountManager from "./components/admin/AccountManager"; 
-import DisplayEmployee from './components/admin/EmployeeManager/DisplayEmployee';
-import AddEmployee from './components/admin/EmployeeManager/AddEmployee';
-import EditEmployee from './components/admin/EmployeeManager/EditEmployee';
-import DetailEmployee from './components/admin/EmployeeManager/DetailEmployee';
+import DisplayEmployee from './components/admin/Employees/DisplayEmployee';
+import AddEmployee from './components/admin/Employees/AddEmployee';
+import EditEmployee from './components/admin/Employees/EditEmployee';
+import DetailEmployee from './components/admin/Employees/DetailEmployee';
 import { ToastContainer, toast } from 'react-toastify';
+import SupPostList from "./components/trolykhoa/Posts/SupPostList";
+import SupPostForm from "./components/trolykhoa/Posts/SupPostForm";
+import SupPostDetail from "./components/trolykhoa/Posts/SupPostDetail";
 
 function App() {
   return (
@@ -51,6 +52,9 @@ function App() {
         <Route path="/gioi-thieu/doi-ngu-nhan-su" element={<TeachStaff />} />
 
         <Route path="/tuyen-sinh" element={<AdmissionMain />} />
+        <Route path="/tuyen-sinh/dai-hoc" element={<AdmissionMain />} />
+        <Route path="/tuyen-sinh/thac-si" element={<AdmissionMain />} />
+        <Route path="/tuyen-sinh/tien-si" element={<AdmissionMain />} />
         <Route path="/tuyen-sinh/chi-tiet-bai-viet" element={<AdmissionPost />} />
 
         <Route path="/tin-tuc" element={<News />} />
@@ -85,12 +89,15 @@ function App() {
         <Route path="/admin/bai-viet/chinh-sua/:id" element={<PostForm isEditing={true} />} />
         <Route path="/admin/bai-viet/chi-tiet/:id" element={<PostDetail />} />
 
-        <Route path="/trolykhoa/quan-ly-bai-viet" element={<PostManager />} />
+        <Route path="/tro-ly-khoa/bai-viet" element={<SupPostList />} />
+        <Route path="/tro-ly-khoa/bai-viet/them-moi" element={<SupPostForm />} />
+        <Route path="/tro-ly-khoa/bai-viet/chinh-sua/:id" element={<SupPostForm isEditing={true} />} />
+        <Route path="/tro-ly-khoa/bai-viet/chi-tiet/:id" element={<SupPostDetail />} />
 
         <Route path="/admin/tai-khoan" element={<AccountManager />} />
         <Route path="/admin/nhan-su" element={<DisplayEmployee />} />
-        <Route path="/admin/nhan-su/them" element={<AddEmployee />} />
-        <Route path="/admin/nhan-su/sua/:id" element={<EditEmployee />} />
+        <Route path="/admin/nhan-su/them-moi" element={<AddEmployee />} />
+        <Route path="/admin/nhan-su/chinh-sua/:id" element={<EditEmployee />} />
         <Route path="/admin/nhan-su/chi-tiet/:id" element={<DetailEmployee />} />
 
       </Routes>

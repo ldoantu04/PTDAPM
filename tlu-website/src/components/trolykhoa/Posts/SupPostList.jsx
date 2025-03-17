@@ -15,7 +15,7 @@ import Footer from "../../layouts/Footer";
 
 const API_BASE_URL = "https://67d464bed2c7857431ed88c2.mockapi.io";
 
-function PostList() {
+function SupPostList() {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState({});
   const [parentCategories, setParentCategories] = useState({});
@@ -284,4 +284,4 @@ function PostList() {
   );
 }
 
-export default PostList;
+export default SupPostList;
