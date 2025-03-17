@@ -9,12 +9,12 @@ import Toolbar from "../../layouts/Toolbar";
 const AddEmployee = () => {
   const navigate = useNavigate();
 
-  // Form fields
+  // Form fields - Initialize with empty strings for select fields
   const [name, setName] = useState("");
-  const [degree, setDegree] = useState("Tiến sĩ");
-  const [status, setStatus] = useState("Đang làm việc");
-  const [department, setDepartment] = useState("Bộ môn Công nghệ phần mềm");
-  const [position, setPosition] = useState("Giảng viên");
+  const [degree, setDegree] = useState(""); // Changed from default value to empty string
+  const [status, setStatus] = useState(""); // Changed from default value to empty string
+  const [department, setDepartment] = useState(""); // Changed from default value to empty string
+  const [position, setPosition] = useState(""); // Changed from default value to empty string
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [bio, setBio] = useState("");
@@ -26,6 +26,10 @@ const AddEmployee = () => {
     name: "",
     email: "",
     phone: "",
+    degree: "", // Add error state for degree
+    status: "", // Add error state for status
+    department: "", // Add error state for department
+    position: "", // Add error state for position
   });
 
   // Handle image selection
@@ -55,16 +59,78 @@ const AddEmployee = () => {
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
-    if (value.trim()) {
-      setErrors((prev) => ({ ...prev, email: "" }));
+    
+    if (!value.trim()) {
+      setErrors((prev) => ({ ...prev, email: "Email không được để trống" }));
+    } else {
+      // Email format validation using regex
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(value)) {
+        setErrors((prev) => ({ ...prev, email: "Email không đúng định dạng" }));
+      } else {
+        setErrors((prev) => ({ ...prev, email: "" }));
+      }
     }
   };
 
   const handlePhoneChange = (e) => {
     const value = e.target.value;
     setPhone(value);
+    
     if (value.trim()) {
-      setErrors((prev) => ({ ...prev, phone: "" }));
+      // Phone number must be exactly 10 digits and start with 0
+      const phoneRegex = /^0\d{9}$/;
+      if (!phoneRegex.test(value)) {
+        setErrors((prev) => ({ 
+          ...prev, 
+          phone: "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0" 
+        }));
+      } else {
+        setErrors((prev) => ({ ...prev, phone: "" }));
+      }
+    } else {
+      setErrors((prev) => ({ ...prev, phone: "" })); // Clear error if empty (since phone is optional)
+    }
+  };
+
+  // Handle select field changes with validation
+  const handleDegreeChange = (e) => {
+    const value = e.target.value;
+    setDegree(value);
+    if (value) {
+      setErrors((prev) => ({ ...prev, degree: "" }));
+    } else {
+      setErrors((prev) => ({ ...prev, degree: "Học vị không được để trống" }));
+    }
+  };
+
+  const handleStatusChange = (e) => {
+    const value = e.target.value;
+    setStatus(value);
+    if (value) {
+      setErrors((prev) => ({ ...prev, status: "" }));
+    } else {
+      setErrors((prev) => ({ ...prev, status: "Trạng thái không được để trống" }));
+    }
+  };
+
+  const handleDepartmentChange = (e) => {
+    const value = e.target.value;
+    setDepartment(value);
+    if (value) {
+      setErrors((prev) => ({ ...prev, department: "" }));
+    } else {
+      setErrors((prev) => ({ ...prev, department: "Phòng ban không được để trống" }));
+    }
+  };
+
+  const handlePositionChange = (e) => {
+    const value = e.target.value;
+    setPosition(value);
+    if (value) {
+      setErrors((prev) => ({ ...prev, position: "" }));
+    } else {
+      setErrors((prev) => ({ ...prev, position: "Chức vụ không được để trống" }));
     }
   };
 
@@ -73,13 +139,53 @@ const AddEmployee = () => {
     const newErrors = {};
     let isValid = true;
 
+    // Name validation
     if (!name.trim()) {
       newErrors.name = "Tên nhân sự không được để trống";
       isValid = false;
     }
 
+    // Email validation
     if (!email.trim()) {
       newErrors.email = "Email không được để trống";
+      isValid = false;
+    } else {
+      // Email format validation using regex
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(email)) {
+        newErrors.email = "Email không đúng định dạng";
+        isValid = false;
+      }
+    }
+
+    // Phone validation - optional field but if provided must be valid
+    if (phone.trim()) {
+      // Phone number must be exactly 10 digits and start with 0
+      const phoneRegex = /^0\d{9}$/;
+      if (!phoneRegex.test(phone)) {
+        newErrors.phone = "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0";
+        isValid = false;
+      }
+    }
+
+    // Select fields validation
+    if (!degree) {
+      newErrors.degree = "Học vị không được để trống";
+      isValid = false;
+    }
+
+    if (!status) {
+      newErrors.status = "Trạng thái không được để trống";
+      isValid = false;
+    }
+
+    if (!department) {
+      newErrors.department = "Phòng ban không được để trống";
+      isValid = false;
+    }
+
+    if (!position) {
+      newErrors.position = "Chức vụ không được để trống";
       isValid = false;
     }
 
@@ -164,15 +270,17 @@ const AddEmployee = () => {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                className="w-6 h-6 fill-current "
+                className="w-5 h-5 mr-2 group-hover:text-[#E82323] transition-colors duration-150"
               >
                 <path
-                  fillRule="evenodd"
-                  d="M11.707 4.293a1 1 0 010 1.414L6.414 11H20a1 1 0 110 2H6.414l5.293 5.293a1 1 0 01-1.414 1.414l-7-7a1 1 0 010-1.414l7-7a1 1 0 011.414 0z"
-                  clipRule="evenodd"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"
                 />
               </svg>
-
               <span className="ml-2">Quay lại</span>
             </div>
           </div>
@@ -265,15 +373,23 @@ const AddEmployee = () => {
                         <select
                           id="degree"
                           value={degree}
-                          onChange={(e) => setDegree(e.target.value)}
-                          className="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          onChange={handleDegreeChange}
+                          className={`border ${
+                            errors.degree ? "border-red-500" : "border-gray-300"
+                          } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                         >
+                          <option value="">Chọn học vị</option>
                           <option value="Tiến sĩ">Tiến sĩ</option>
                           <option value="Thạc sĩ">Thạc sĩ</option>
                           <option value="Phó giáo sư">Phó giáo sư</option>
                           <option value="Giáo sư">Giáo sư</option>
                           <option value="Cử nhân">Cử nhân</option>
                         </select>
+                        {errors.degree && (
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.degree}
+                          </p>
+                        )}
                       </div>
 
                       <div>
@@ -286,12 +402,21 @@ const AddEmployee = () => {
                         <select
                           id="status"
                           value={status}
-                          onChange={(e) => setStatus(e.target.value)}
-                          className="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          onChange={handleStatusChange}
+                          className={`border ${
+                            errors.status ? "border-red-500" : "border-gray-300"
+                          } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                         >
+                          <option value="">Chọn trạng thái</option>
                           <option value="Đang làm việc">Đang làm việc</option>
                           <option value="Đã nghỉ">Đã nghỉ hưu</option>
+                          <option value="Đang học tập">Đang học tập</option>
                         </select>
+                        {errors.status && (
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.status}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -307,9 +432,12 @@ const AddEmployee = () => {
                         <select
                           id="department"
                           value={department}
-                          onChange={(e) => setDepartment(e.target.value)}
-                          className="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          onChange={handleDepartmentChange}
+                          className={`border ${
+                            errors.department ? "border-red-500" : "border-gray-300"
+                          } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                         >
+                          <option value="">Chọn phòng ban</option>
                           <option value="Bộ môn Công nghệ phần mềm">
                             Bộ môn Công nghệ phần mềm
                           </option>
@@ -324,6 +452,11 @@ const AddEmployee = () => {
                           </option>
                           <option value="Văn phòng khoa">Văn phòng khoa</option>
                         </select>
+                        {errors.department && (
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.department}
+                          </p>
+                        )}
                       </div>
 
                       <div>
@@ -336,12 +469,26 @@ const AddEmployee = () => {
                         <select
                           id="position"
                           value={position}
-                          onChange={(e) => setPosition(e.target.value)}
-                          className="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          onChange={handlePositionChange}
+                          className={`border ${
+                            errors.position ? "border-red-500" : "border-gray-300"
+                          } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                         >
+                          <option value="">Chọn chức vụ</option>
                           <option value="Giảng viên">Giảng viên</option>
+                          <option value="Trưởng khoa">Trưởng khoa</option>
+                          <option value="Phó trưởng khoa">
+                            Phó trưởng khoa
+                          </option>
+                          <option value="Trưởng bộ môn">Trưởng bộ môn</option>
+                          <option value="Phó bộ môn">Phó bộ môn</option>
                           <option value="Trợ lý khoa">Trợ lý khoa</option>
                         </select>
+                        {errors.position && (
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.position}
+                          </p>
+                        )}
                       </div>
                     </div>
 
