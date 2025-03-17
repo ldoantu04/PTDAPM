@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import Toolbar from "../../layouts/Toolbar";
+import { message } from 'antd';
 
 const AddEmployee = () => {
   const navigate = useNavigate();
@@ -256,11 +257,11 @@ const AddEmployee = () => {
       });
 
       // Redirect to display page after successful submission
-      toast.success("Thêm nhân sự thành công");
+      message.success("Thêm nhân sự thành công");
       navigate("/admin/nhan-su");
     } catch (err) {
       if (err.response && err.response.data) {
-        toast.error(err.response.data.message || "Lỗi khi thêm nhân sự");
+        message.error(err.response.data.message || "Lỗi khi thêm nhân sự");
 
         // Handle specific error messages from server
         if (err.response.data.message.includes("Email đã tồn tại")) {
@@ -278,7 +279,7 @@ const AddEmployee = () => {
           }));
         }
       } else {
-        toast.error("Lỗi kết nối đến máy chủ");
+        message.error("Lỗi kết nối đến máy chủ");
       }
       console.error("Error adding staff:", err);
     }

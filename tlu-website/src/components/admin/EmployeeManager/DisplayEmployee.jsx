@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import Toolbar from "../../layouts/Toolbar";
-
+import { message, Popconfirm } from 'antd';
 const DisplayEmployee = () => {
   const [staffs, setStaffs] = useState([]);
   const [staffToDelete, setStaffToDelete] = useState(null);
@@ -22,7 +22,7 @@ const DisplayEmployee = () => {
       const response = await axios.get("http://localhost:4000/api/staff");
       setStaffs(response.data);
     } catch (err) {
-      toast.error("Không thể tải danh sách nhân sự");
+      message.error("Không thể tải danh sách nhân sự");
       console.error("Error fetching staffs:", err);
     }
   };
@@ -30,34 +30,25 @@ const DisplayEmployee = () => {
   // Mở modal xác nhận xóa nhân sự
   const handleDeleteClick = (staff) => {
     setStaffToDelete(staff);
-    setShowDeleteModal(true);
   };
 
   // Đóng modal xác nhận
   const closeDeleteModal = () => {
     setStaffToDelete(null);
-    setShowDeleteModal(false);
+
   };
 
   // Xử lý xóa nhân sự
-  const handleDeleteConfirm = async () => {
-    if (!staffToDelete) return;
-
+  const handleDeleteConfirm = async (staffId) => {
     try {
-      await axios.delete(
-        `http://localhost:4000/api/staff/${staffToDelete._id}`
-      );
-
+      await axios.delete(`http://localhost:4000/api/staff/${staffId}`);
+  
       // Cập nhật danh sách nhân sự sau khi xóa
-      setStaffs(staffs.filter((staff) => staff._id !== staffToDelete._id));
-      toast.success("Xóa nhân sự thành công");
-
-      // Đóng modal xác nhận
-      closeDeleteModal();
+      setStaffs(staffs.filter((staff) => staff._id !== staffId));
+      message.success("Xóa nhân sự thành công");
     } catch (err) {
-      toast.error("Lỗi khi xóa nhân sự");
+      message.error("Lỗi khi xóa nhân sự");
       console.error("Error deleting staff:", err);
-      closeDeleteModal();
     }
   };
 
@@ -155,12 +146,18 @@ const DisplayEmployee = () => {
                           >
                             <img src="/assets/icon_edit.png" alt="" />
                           </Link>
-                          <button
-                            onClick={() => handleDeleteClick(staff)}
-                            className="cursor-pointer"
+                          <Popconfirm
+                            title="Xóa nhân sự"
+                            description="Bạn có chắc chắn muốn xóa nhân sự này không?"
+                            onConfirm={() => handleDeleteConfirm(staff._id)}
+                            okText="Xóa"
+                            cancelText="Hủy"
+                            okButtonProps={{ danger: true }}
                           >
-                            <img src="/assets/icon_xoa.png" alt="" />
-                          </button>
+                            <button className="cursor-pointer">
+                              <img src="/assets/icon_xoa.png" alt="Xóa" />
+                            </button>
+                          </Popconfirm>
                         </div>
                       </td>
                     </tr>
@@ -173,42 +170,7 @@ const DisplayEmployee = () => {
       </div>
 
       {/* Modal xác nhận xóa */}
-      {showDeleteModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div onClick={closeDeleteModal}></div>
-          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md z-10">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Xóa nhân sự</h2>
-            </div>
 
-            <p className="mb-6">
-              Bạn có chắc chắn muốn xóa nhân sự này?
-            </p>
-
-            <div className="flex items-center justify-end space-x-3">
-              <button
-                type="button"
-                onClick={closeDeleteModal}
-                className="hover:text-[#E82323] text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Hủy bỏ
-              </button>
-              <button
-                type="button"
-                onClick={handleDeleteConfirm}
-                className="bg-[#E82323] hover:bg-red-600 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center space-x-2"
-              >
-                <img
-                  src="/assets/icon_xoa.png"
-                  alt=""
-                  className="w-5 h-5 filter brightness-0 invert"
-                />
-                <span>Xóa</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       <Footer />
     </div>

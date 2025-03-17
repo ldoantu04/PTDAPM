@@ -3,9 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import Toolbar from "../../layouts/Toolbar";
-
+import { message } from 'antd';
 const EditEmployee = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -304,11 +304,11 @@ const EditEmployee = () => {
       });
 
       // Redirect to display page after successful update
-      toast.success("Cập nhật thông tin nhân sự thành công");
+      message.success("Cập nhật thông tin nhân sự thành công");
       navigate("/admin/nhan-su");
     } catch (err) {
       if (err.response && err.response.data) {
-        toast.error(
+        message.error(
           err.response.data.message || "Lỗi khi cập nhật thông tin nhân sự"
         );
 
@@ -328,7 +328,7 @@ const EditEmployee = () => {
           }));
         }
       } else {
-        toast.error("Lỗi kết nối đến máy chủ");
+        message.error("Lỗi kết nối đến máy chủ");
       }
       console.error("Error updating staff:", err);
     }
