@@ -4,6 +4,7 @@ import Footer from "../layouts/Footer";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Toolbar from "../layouts/Toolbar";
+import { message } from "antd";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
@@ -70,9 +71,9 @@ const Categories = () => {
 
       resetForm();
       fetchCategories();
-      toast.success("Thêm danh mục thành công");
+      message.success("Danh mục dã được tạo thành công");
     } catch (err) {
-      toast.error("Lỗi khi thêm danh mục");
+      message.error("Lỗi khi thêm danh mục");
       console.error("Error adding category:", err);
     }
   };
@@ -100,9 +101,9 @@ const Categories = () => {
 
       resetForm();
       fetchCategories();
-      toast.success("Cập nhật danh mục thành công");
+      message.success("Cập nhật thông tin danh mục thành công!");
     } catch (err) {
-      toast.error("Lỗi khi cập nhật danh mục");
+      message.error("Lỗi khi cập nhật danh mục");
       console.error("Error updating category:", err);
     }
   };
@@ -144,10 +145,10 @@ const Categories = () => {
     try {
       await axios.delete(`http://localhost:4000/api/categories/${currentCategory._id}`);
       setCategories(categories.filter((category) => category._id !== currentCategory._id));
-      toast.success("Xóa danh mục thành công");
+      message.success("Danh mục đã được xóa thành công!");
       closeDeleteModal();
     } catch (error) {
-      toast.error("Lỗi khi xóa danh mục");
+      message.error("Lỗi khi xóa danh mục");
       console.error("Lỗi khi xóa danh mục:", error);
       closeDeleteModal();
     }
