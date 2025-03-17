@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button, Card, Form, Input, message, Spin, Switch } from "antd";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import ImageUpload from "../layouts/ImageUpload";
-import TinyEditor from "../layouts/TinyEditor";
-import SimpleSelect from "../layouts/SimpleSelect";
-import NavBar from "../layouts/NavBar";
-import Toolbar from "../layouts/Toolbar";
+import ImageUpload from "../../layouts/ImageUpload";
+import TinyEditor from "../../layouts/TinyEditor";
+import SimpleSelect from "../../layouts/SimpleSelect";
+import NavBar from "../../layouts/NavBar";
+import Toolbar from "../../layouts/Toolbar";
 
 const { TextArea } = Input;
 

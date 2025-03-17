@@ -22,9 +22,9 @@ import ApplicationDeployment from "./components/user/research/ApplicationDeploym
 import ReseachStudent from "./components/user/research/ReseachStudent";
 
 import Overview from "./components/admin/Overview";
-import PostList from "./components/admin/PostList";
-import PostForm from "./components/admin/PostForm";
-import PostDetail from "./components/admin/PostDetail";
+import PostList from "./components/admin/Posts/PostList";
+import PostForm from "./components/admin/Posts/PostForm";
+import PostDetail from "./components/admin/Posts/PostDetail";
 
 
 import SoftwareEngineer from "./components/user/training/university/SoftwareEngineer";

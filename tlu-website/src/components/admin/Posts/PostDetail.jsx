@@ -9,8 +9,8 @@ import {
   ArrowLeftOutlined,
 } from "@ant-design/icons";
 import axios from "axios";
-import NavBar from "../layouts/NavBar";
-import Toolbar from "../layouts/Toolbar";
+import NavBar from "../../layouts/NavBar";
+import Toolbar from "../../layouts/Toolbar";
 
 const API_BASE_URL = "https://67d464bed2c7857431ed88c2.mockapi.io";
 

@@ -11,9 +11,9 @@ import {
   DeleteFilled,
 } from "@ant-design/icons";
 import axios from "axios";
-import NavBar from "../layouts/NavBar";
-import Toolbar from "../layouts/Toolbar";
-import CustomTable from "../layouts/CustomTable";
+import NavBar from "../../layouts/NavBar";
+import Toolbar from "../../layouts/Toolbar";
+import CustomTable from "../../layouts/CustomTable";
 
 const API_BASE_URL = "https://67d464bed2c7857431ed88c2.mockapi.io";
 
