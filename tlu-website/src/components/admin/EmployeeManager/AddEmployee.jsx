@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../../layouts/NavBar";
@@ -20,6 +20,7 @@ const AddEmployee = () => {
   const [bio, setBio] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
+  const [allStaff, setAllStaff] = useState([]);
 
   // Validation errors
   const [errors, setErrors] = useState({
@@ -51,8 +52,17 @@ const AddEmployee = () => {
   const handleNameChange = (e) => {
     const value = e.target.value;
     setName(value);
-    if (value.trim()) {
-      setErrors((prev) => ({ ...prev, name: "" }));
+    
+    if (!value.trim()) {
+      setErrors((prev) => ({ ...prev, name: "Tên nhân sự không được để trống" }));
+    } else {
+      // Check for special characters
+      const specialCharsRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+      if (specialCharsRegex.test(value)) {
+        setErrors((prev) => ({ ...prev, name: "Tên không được chứa ký tự đặc biệt" }));
+      } else {
+        setErrors((prev) => ({ ...prev, name: "" }));
+      }
     }
   };
 
@@ -143,6 +153,13 @@ const AddEmployee = () => {
     if (!name.trim()) {
       newErrors.name = "Tên nhân sự không được để trống";
       isValid = false;
+    }else {
+      // Check for special characters
+      const specialCharsRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+      if (specialCharsRegex.test(name)) {
+        newErrors.name = "Tên không được chứa ký tự đặc biệt";
+        isValid = false;
+      }
     }
 
     // Email validation
@@ -155,6 +172,13 @@ const AddEmployee = () => {
       if (!emailRegex.test(email)) {
         newErrors.email = "Email không đúng định dạng";
         isValid = false;
+      }else {
+        // Check if email already exists
+        const emailExists = allStaff.some(staff => staff.email === email.trim());
+        if (emailExists) {
+          newErrors.email = "Email đã tồn tại, vui lòng sử dụng email khác";
+          isValid = false;
+        }
       }
     }
 
@@ -165,6 +189,13 @@ const AddEmployee = () => {
       if (!phoneRegex.test(phone)) {
         newErrors.phone = "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0";
         isValid = false;
+      }else {
+        // Check if phone number already exists
+        const phoneExists = allStaff.some(staff => staff.phone === phone.trim());
+        if (phoneExists) {
+          newErrors.phone = "Số điện thoại đã tồn tại, vui lòng sử dụng số điện thoại khác";
+          isValid = false;
+        }
       }
     }
 
@@ -252,6 +283,19 @@ const AddEmployee = () => {
       console.error("Error adding staff:", err);
     }
   };
+
+  useEffect(() => {
+    const fetchAllStaff = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/api/staff");
+        setAllStaff(response.data);
+      } catch (error) {
+        console.error("Error fetching staff data:", error);
+      }
+    };
+    
+    fetchAllStaff();
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">

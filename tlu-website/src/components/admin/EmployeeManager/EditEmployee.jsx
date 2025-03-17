@@ -11,6 +11,7 @@ const EditEmployee = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [allStaff, setAllStaff] = useState([]);
 
   // Form fields
   const [name, setName] = useState("");
@@ -35,6 +36,18 @@ const EditEmployee = () => {
     position: ""    // Added error state for position
   });
 
+  useEffect(() => {
+    const fetchAllStaff = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/api/staff");
+        setAllStaff(response.data);
+      } catch (error) {
+        console.error("Error fetching all staff data:", error);
+      }
+    };
+    
+    fetchAllStaff();
+  }, []);
   // Load staff data when component mounts
   useEffect(() => {
     const fetchStaffData = async () => {
@@ -83,10 +96,17 @@ const EditEmployee = () => {
   const handleNameChange = (e) => {
     const value = e.target.value;
     setName(value);
-    if (value.trim()) {
-      setErrors((prev) => ({ ...prev, name: "" }));
-    } else {
+    
+    if (!value.trim()) {
       setErrors((prev) => ({ ...prev, name: "Tên nhân sự không được để trống" }));
+    } else {
+      // Check for special characters
+      const specialCharsRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+      if (specialCharsRegex.test(value)) {
+        setErrors((prev) => ({ ...prev, name: "Tên không được chứa ký tự đặc biệt" }));
+      } else {
+        setErrors((prev) => ({ ...prev, name: "" }));
+      }
     }
   };
 
@@ -177,6 +197,13 @@ const EditEmployee = () => {
     if (!name.trim()) {
       newErrors.name = "Tên nhân sự không được để trống";
       isValid = false;
+    }else {
+      // Check for special characters
+      const specialCharsRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+      if (specialCharsRegex.test(name)) {
+        newErrors.name = "Tên không được chứa ký tự đặc biệt";
+        isValid = false;
+      }
     }
   
     // Email validation
@@ -189,6 +216,15 @@ const EditEmployee = () => {
       if (!emailRegex.test(email)) {
         newErrors.email = "Email không đúng định dạng";
         isValid = false;
+      } else {
+        // Check if email already exists, excluding current staff
+        const emailExists = allStaff.some(staff => 
+          staff.email === email.trim() && staff._id !== id
+        );
+        if (emailExists) {
+          newErrors.email = "Email đã tồn tại, vui lòng sử dụng email khác";
+          isValid = false;
+        }
       }
     }
   
@@ -199,6 +235,15 @@ const EditEmployee = () => {
       if (!phoneRegex.test(phone)) {
         newErrors.phone = "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0";
         isValid = false;
+      } else {
+        // Check if phone already exists, excluding current staff
+        const phoneExists = allStaff.some(staff => 
+          staff.phone === phone.trim() && staff._id !== id
+        );
+        if (phoneExists) {
+          newErrors.phone = "Số điện thoại đã tồn tại, vui lòng sử dụng số điện thoại khác";
+          isValid = false;
+        }
       }
     }
 
@@ -301,6 +346,8 @@ const EditEmployee = () => {
       </div>
     );
   }
+
+
 
   return (
     <div className="min-h-screen flex flex-col">
