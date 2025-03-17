@@ -6,10 +6,13 @@ const categorieSchema = new mongoose.Schema({
         required: true,
     },
     parent_id: {
-        type: String,
-        required: false,
+        type: mongoose.Schema.Types.ObjectId, // Dùng ObjectId thay vì String
+        ref: "categories", // Tham chiếu đến bảng categories
+        default: null, // Mặc định là null nếu không có danh mục cha
     }
 });
 
-const categorieModel = mongoose.models.categorie || mongoose.model("categories", categorieSchema);
-export default categorieModel
+// Đảm bảo tên model và collection thống nhất
+const categorieModel = mongoose.models.categories || mongoose.model("categories", categorieSchema);
+
+export default categorieModel;

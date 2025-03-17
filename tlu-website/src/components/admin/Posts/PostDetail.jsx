@@ -40,8 +40,8 @@ function PostDetail() {
 
       categoriesResponse.data.forEach((cat) => {
         catMap[cat.id] = cat.name;
-        if (cat.parentID) {
-          parentCatsMap[cat.id] = cat.parentID;
+        if (cat.parentId) {
+          parentCatsMap[cat.id] = cat.parentId;
         }
       });
 

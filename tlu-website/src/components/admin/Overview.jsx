@@ -6,34 +6,22 @@ import { Button } from "antd";
 
 function Overview() {
   return (
-    <>
-      <NavBar></NavBar>
-      <Toolbar></Toolbar>
-
-      <main className="admin-main gap-y-10 h-[3000px]">
-        <div className="flex justify-between h-11">
-          <h1 className="text-4xl font-bold text-blue1">Tổng quan</h1>
-          {/* <Button color="green" variant="solid" className="!h-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 512 512"
-            >
-              <path
-                fill="white"
-                d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208s208-93.31 208-208S370.69 48 256 48m80 224h-64v64a16 16 0 0 1-32 0v-64h-64a16 16 0 0 1 0-32h64v-64a16 16 0 0 1 32 0v64h64a16 16 0 0 1 0 32"
-              />
-            </svg>
-            Thêm 
-          </Button> */}
-
+    <div className="min-h-screen flex flex-col">
+      <NavBar />
+      <Toolbar />
+      <div className="flex-grow flex items-center justify-center mt-24 mb-10 px-4">
+        <div className="bg-white p-8 rounded-lg shadow-md max-w-2xl w-full text-center">
+          <h1 className="text-2xl font-bold text-[#192E58] mb-6">Chế độ quản lý</h1>
+          <p className="text-lg text-gray-700">
+            Tính năng không biết có được phát triển hay không, 
+            vui lòng đợi thêm vài năm nữa :D
+          </p>
         </div>
-      </main>
+      </div>
 
-      <Footer></Footer>
-    </>
-  );
+      <Footer />
+    </div>
+  )
 }
 
 export default Overview;

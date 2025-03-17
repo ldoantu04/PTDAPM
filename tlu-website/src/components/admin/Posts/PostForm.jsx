@@ -95,17 +95,17 @@ function PostForm({ isEditing = false }) {
       const categoriesData = response.data;
 
       // Phân loại danh mục
-      const parents = categoriesData.filter((cat) => !cat.parentId); // Đã sửa từ parentID thành parentId
+      const parents = categoriesData.filter((cat) => !cat.parentId); // Đã sửa từ parentId thành parentId
 
       // Xây dựng map danh mục cha -> danh mục con
       const childrenMap = {};
       categoriesData
-        .filter((cat) => cat.parentId) // Đã sửa từ parentID thành parentId
+        .filter((cat) => cat.parentId) // Đã sửa từ parentId thành parentId
         .forEach((cat) => {
-          if (!childrenMap[cat.parentId]) { // Đã sửa từ parentID thành parentId
-            childrenMap[cat.parentId] = []; // Đã sửa từ parentID thành parentId
+          if (!childrenMap[cat.parentId]) { // Đã sửa từ parentId thành parentId
+            childrenMap[cat.parentId] = []; // Đã sửa từ parentId thành parentId
           }
-          childrenMap[cat.parentId].push(cat); // Đã sửa từ parentID thành parentId
+          childrenMap[cat.parentId].push(cat); // Đã sửa từ parentId thành parentId
         });
 
       setCategoryData({
@@ -139,17 +139,17 @@ function PostForm({ isEditing = false }) {
         const category = categoryData.all.find((c) => c.id === categoryId);
 
         if (category) {
-          if (category.parentId) { // Đã sửa từ parentID thành parentId
+          if (category.parentId) { // Đã sửa từ parentId thành parentId
             // Danh mục con
             setCategoryData((prev) => ({
               ...prev,
-              selectedParent: category.parentId, // Đã sửa từ parentID thành parentId
+              selectedParent: category.parentId, // Đã sửa từ parentId thành parentId
             }));
 
             // Thiết lập giá trị sau khi state đã cập nhật
             setTimeout(() => {
               form.setFieldsValue({
-                parentCategoryId: category.parentId, // Đã sửa từ parentID thành parentId
+                parentCategoryId: category.parentId, // Đã sửa từ parentId thành parentId
                 categoryId: categoryId,
               });
             }, 0);

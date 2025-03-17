@@ -31,14 +31,15 @@ import InformationSystem from "./components/user/training/university/Information
 import ArtificialIntelligence from "./components/user/training/university/ArtificialIntelligence";
 import NetworkSecurity from "./components/user/training/university/NetworkSecurity";
 import AccountManager from "./components/admin/AccountManager"; 
-import DisplayEmployee from './components/admin/Employees/DisplayEmployee';
-import AddEmployee from './components/admin/Employees/AddEmployee';
-import EditEmployee from './components/admin/Employees/EditEmployee';
-import DetailEmployee from './components/admin/Employees/DetailEmployee';
+import DisplayEmployee from './components/admin/EmployeeManager/DisplayEmployee';
+import AddEmployee from './components/admin/EmployeeManager/AddEmployee';
+import EditEmployee from './components/admin/EmployeeManager/EditEmployee';
+import DetailEmployee from './components/admin/EmployeeManager/DetailEmployee';
 import { ToastContainer, toast } from 'react-toastify';
 import SupPostList from "./components/trolykhoa/Posts/SupPostList";
 import SupPostForm from "./components/trolykhoa/Posts/SupPostForm";
 import SupPostDetail from "./components/trolykhoa/Posts/SupPostDetail";
+import Categories from "./components/admin/Categories";
 
 function App() {
   return (
@@ -97,9 +98,9 @@ function App() {
         <Route path="/admin/tai-khoan" element={<AccountManager />} />
         <Route path="/admin/nhan-su" element={<DisplayEmployee />} />
         <Route path="/admin/nhan-su/them-moi" element={<AddEmployee />} />
-        <Route path="/admin/nhan-su/chinh-sua/:id" element={<EditEmployee />} />
+        <Route path="/admin/nhan-su/sua/:id" element={<EditEmployee />} />
         <Route path="/admin/nhan-su/chi-tiet/:id" element={<DetailEmployee />} />
-
+        <Route path="/admin/danh-muc" element={<Categories />} />
       </Routes>
     </Router>
   );
