@@ -38,6 +38,7 @@ import AddEmployee from './components/admin/EmployeeManager/AddEmployee';
 import EditEmployee from './components/admin/EmployeeManager/EditEmployee';
 import DetailEmployee from './components/admin/EmployeeManager/DetailEmployee';
 import { ToastContainer, toast } from 'react-toastify';
+import Categories from "./components/admin/Categories";
 
 function App() {
   return (
@@ -92,7 +93,7 @@ function App() {
         <Route path="/admin/nhan-su/them" element={<AddEmployee />} />
         <Route path="/admin/nhan-su/sua/:id" element={<EditEmployee />} />
         <Route path="/admin/nhan-su/chi-tiet/:id" element={<DetailEmployee />} />
-
+        <Route path="/admin/danh-muc" element={<Categories />} />
       </Routes>
     </Router>
   );
