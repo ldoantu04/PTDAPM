@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../layouts/NavBar";
 import Footer from "../layouts/Footer";
-import Dashboard from "./Dashboard";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Toolbar from "../layouts/Toolbar";
 
 const AccountManager = () => {
   const [accounts, setAccounts] = useState([]);
@@ -235,7 +235,7 @@ const AccountManager = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar />
-      <Dashboard />
+      <Toolbar />
       <div className="container mx-auto px-4 py-8 mt-20">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import NavBar from '../../layouts/NavBar'
 import Footer from '../../layouts/Footer'
-import Dashboard from '../Dashboard'
+import Toolbar from '../../layouts/Toolbar'
 
 const DisplayEmployee = () => {
   const [staffs, setStaffs] = useState([])
@@ -68,7 +68,7 @@ const DisplayEmployee = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar />
-      <Dashboard />
+      <Toolbar />
       <div className="container mx-auto px-4 py-8 mt-20">
         <div className="bg-white shadow-md rounded-lg p-6">
           <div className="flex justify-between items-center mb-6">

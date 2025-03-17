@@ -2,6 +2,7 @@ import React from 'react'
 import NavBar from '../layouts/NavBar'
 import Footer from '../layouts/Footer'
 import Dashboard from './Dashboard'
+
 const AdminOverview = () => {
   return (
     <div className="min-h-screen flex flex-col">

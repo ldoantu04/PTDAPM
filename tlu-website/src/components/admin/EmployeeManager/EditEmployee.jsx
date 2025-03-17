@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import NavBar from '../../layouts/NavBar'
 import Footer from '../../layouts/Footer'
-import Dashboard from '../Dashboard'
+import Toolbar from '../../layouts/Toolbar'
 
 const EditEmployee = () => {
   const { id } = useParams()
@@ -118,7 +118,7 @@ const EditEmployee = () => {
     return (
       <div className="min-h-screen flex flex-col">
         <NavBar />
-        <Dashboard />
+        <Toolbar />
         <div className="container mx-auto px-4 py-8 mt-20 flex justify-center items-center">
           <p>Đang tải thông tin...</p>
         </div>
@@ -130,7 +130,7 @@ const EditEmployee = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar />
-      <Dashboard />
+      <Toolbar />
       <div className="container mx-auto px-4 py-8 mt-20">
         <div className="bg-white shadow-md rounded-lg p-6">
           <div className="flex justify-between items-center mb-6">

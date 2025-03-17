@@ -9,7 +9,7 @@ import axios from "axios";
  */
 const TinyEditor = forwardRef((props, ref) => {
   // Constants - Các hằng số cho định dạng
-  const EDITOR_PADDING = "20px"; // Giảm padding để phù hợp hơn
+  const EDITOR_PADDING = "200px"; // Giảm padding để phù hợp hơn
   const DEFAULT_IMAGE_WIDTH = "600px"; // Chiều rộng cố định cho ảnh ban đầu
   const IMAGE_MARGIN = "16px auto";
   const BASE_FONT = "Montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
