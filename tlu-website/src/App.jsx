@@ -85,9 +85,6 @@ function App() {
         <Route path="/admin/bai-viet/chinh-sua/:id" element={<PostForm isEditing={true} />} />
         <Route path="/admin/bai-viet/chi-tiet/:id" element={<PostDetail />} />
 
-
-
-        {/* <Route path="/admin/tong-quan" element={<AdminOverview />} /> */}
         <Route path="/trolykhoa/quan-ly-bai-viet" element={<PostManager />} />
 
         <Route path="/admin/tai-khoan" element={<AccountManager />} />
