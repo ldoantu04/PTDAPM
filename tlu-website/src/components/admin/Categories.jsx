@@ -193,7 +193,7 @@ const Categories = () => {
                         />
                       </td>
                       <td className="pl-4">{category._id}</td>
-                      <td>{category.name}</td>
+                      <td>{category.parent_id ? `${categories.find(c => c._id === category.parent_id)?.name || ""} >>` : ""} {category.name}</td>
                       <td>
                         {category.parent_id
                           ? categories.find((c) => c._id === category.parent_id)?.name || ""

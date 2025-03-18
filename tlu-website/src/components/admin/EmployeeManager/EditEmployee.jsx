@@ -504,7 +504,6 @@ const EditEmployee = () => {
                           <option value="">Chọn trạng thái</option>
                           <option value="Đang làm việc">Đang làm việc</option>
                           <option value="Đã nghỉ">Đã nghỉ hưu</option>
-                          <option value="Đang học tập">Đang học tập</option>
                         </select>
                         {errors.status && (
                           <p className="text-red-500 text-xs mt-1">
