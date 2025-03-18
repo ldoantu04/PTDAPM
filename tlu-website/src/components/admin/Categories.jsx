@@ -4,13 +4,12 @@ import Footer from "../layouts/Footer";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Toolbar from "../layouts/Toolbar";
-import { message } from "antd";
+import { message, Popconfirm } from "antd"; // Import Ant Design components
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [name, setName] = useState("");
   const [parentCategory, setParentCategory] = useState(""); // Danh mục lớn
   const [currentCategory, setCurrentCategory] = useState(null);
@@ -71,7 +70,7 @@ const Categories = () => {
 
       resetForm();
       fetchCategories();
-      message.success("Danh mục dã được tạo thành công");
+      message.success("Danh mục đã được tạo thành công");
     } catch (err) {
       message.error("Lỗi khi thêm danh mục");
       console.error("Error adding category:", err);
@@ -114,7 +113,6 @@ const Categories = () => {
     setCurrentCategory(null);
     setShowAddForm(false);
     setShowEditForm(false);
-    setShowDeleteModal(false);
     setErrors({ name: "" });
   };
 
@@ -126,31 +124,14 @@ const Categories = () => {
     );
   };
 
-  // Mở modal xác nhận xóa danh mục
-  const handleDeleteClick = (category) => {
-    setCurrentCategory(category);
-    setShowDeleteModal(true);
-  };
-
-  // Đóng modal xác nhận xóa
-  const closeDeleteModal = () => {
-    setCurrentCategory(null);
-    setShowDeleteModal(false);
-  };
-
-  // Xử lý xóa danh mục
-  const handleDeleteConfirm = async () => {
-    if (!currentCategory) return;
-  
+  const handleDeleteConfirm = async (category) => {
     try {
-      await axios.delete(`http://localhost:4000/api/categories/${currentCategory._id}`);
-      setCategories(categories.filter((category) => category._id !== currentCategory._id));
+      await axios.delete(`http://localhost:4000/api/categories/${category._id}`);
+      setCategories(categories.filter((cat) => cat._id !== category._id));
       message.success("Danh mục đã được xóa thành công!");
-      closeDeleteModal();
     } catch (error) {
       message.error("Lỗi khi xóa danh mục");
       console.error("Lỗi khi xóa danh mục:", error);
-      closeDeleteModal();
     }
   };
 
@@ -176,7 +157,7 @@ const Categories = () => {
           {/* Bảng danh sách danh mục */}
           <div
             className={`overflow-x-auto ${
-              showAddForm || showEditForm || showDeleteModal ? "opacity-25" : ""
+              showAddForm || showEditForm ? "opacity-25" : ""
             } bg-white py-16 rounded-lg border border-gray-300`}
           >
             <table className="min-w-full bg-white">
@@ -226,12 +207,17 @@ const Categories = () => {
                           >
                             <img src="/assets/icon_edit.png" alt="" />
                           </button>
-                          <button
-                            onClick={() => handleDeleteClick(category)}
-                            className="cursor-pointer"
+                          <Popconfirm
+                            title="Xóa danh mục"
+                            description="Bạn có chắc chắn muốn xóa danh mục này không?"
+                            onConfirm={() => handleDeleteConfirm(category)}
+                            okText="Xóa"
+                            cancelText="Hủy"
                           >
-                            <img src="/assets/icon_xoa.png" alt="" />
-                          </button>
+                            <button className="cursor-pointer">
+                              <img src="/assets/icon_xoa.png" alt="" />
+                            </button>
+                          </Popconfirm>
                         </div>
                       </td>
                     </tr>
@@ -411,43 +397,6 @@ const Categories = () => {
                     </button>
                   </div>
                 </form>
-              </div>
-            </div>
-          )}
-
-          {/* Modal xác nhận xóa */}
-          {showDeleteModal && (
-            <div className="fixed inset-0 flex items-center justify-center z-50">
-              <div onClick={closeDeleteModal}></div>
-              <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md z-10">
-                <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-bold">Xóa danh mục</h2>
-                </div>
-
-                <p className="mb-6">Bạn có chắc chắn muốn xóa danh mục này?</p>
-
-                <div className="flex items-center justify-end space-x-3">
-                  <button
-                    type="button"
-                    onClick={closeDeleteModal}
-                    className="hover:text-[#E82323] text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  >
-                    Hủy bỏ
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={handleDeleteConfirm}
-                    className="bg-[#E82323] hover:bg-red-600 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center space-x-2"
-                  >
-                    <img
-                      src="/assets/icon_xoa.png"
-                      alt=""
-                      className="w-5 h-5 filter brightness-0 invert"
-                    />
-                    <span>Xóa</span>
-                  </button>
-                </div>
               </div>
             </div>
           )}
