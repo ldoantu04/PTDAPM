@@ -4,7 +4,7 @@ import Footer from "../layouts/Footer";
 import HighlightHeader from "../layouts/HighlightHeader";
 import ArticleOther from "../layouts/ArticleOther";
 import Sidebar from "../layouts/Sidebar";
-import SmallNavBar from "../layouts/SmallNavBar"
+import SmallNavBar from "../layouts/SmallNavBar";
 
 function News() {
   const sidebarData = [
@@ -20,33 +20,30 @@ function News() {
       { label: "Tin tức", href: "" },
     ],
   };
-  
+
   return (
     <>
       <NavBar />
 
       <main>
-        <div className="px-55 mx-auto mb-10">
-            <SmallNavBar navigationLinks={ sampleData.navigationLinks } />
+        <SmallNavBar navigationLinks={sampleData.navigationLinks} />
 
-            <div className="flex gap-x-30">
-              <div >
-                <Sidebar title="Tin tức" items={sidebarData} />
-              </div>
+        <div className="flex gap-x-30">
+          <div className="w-1/4">
+            <Sidebar title="Tin tức" items={sidebarData} />
+          </div>
 
-              <div className="pr-10">
-                <HighlightHeader title="TIN TỨC" />
-                <div className="flex flex-col gap-y-5">
-                  <ArticleOther link="" />
-                  <ArticleOther link="" />
-                  <ArticleOther link="" />
-                  <ArticleOther link="" />
-                  <ArticleOther link="" />
-                  <ArticleOther link="" />
-                </div>
-              </div>
-
+          <div className="w-3/4">
+            <HighlightHeader title="TIN TỨC" />
+            <div className="flex flex-col gap-y-5">
+              <ArticleOther link="" />
+              <ArticleOther link="" />
+              <ArticleOther link="" />
+              <ArticleOther link="" />
+              <ArticleOther link="" />
+              <ArticleOther link="" />
             </div>
+          </div>
         </div>
       </main>
 

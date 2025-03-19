@@ -4,39 +4,35 @@ import Footer from "../layouts/Footer";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Toolbar from "../layouts/Toolbar";
+import { message, Popconfirm } from "antd"; // Import Ant Design components
 
 const AccountManager = () => {
   const [accounts, setAccounts] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [currentAccount, setCurrentAccount] = useState(null);
   const [accountToDelete, setAccountToDelete] = useState(null);
-  // Thêm state để lưu các lỗi validation
   const [errors, setErrors] = useState({
     username: "",
     password: "",
   });
 
-  // Fetch danh sách tài khoản khi component mount
   useEffect(() => {
     fetchAccounts();
   }, []);
 
-  // Lấy danh sách tài khoản
   const fetchAccounts = async () => {
     try {
       const response = await axios.get("http://localhost:4000/api/account");
       setAccounts(response.data);
     } catch (err) {
-      toast.error("Không thể tải danh sách tài khoản");
+      message.error("Không thể tải danh sách tài khoản");
       console.error("Error fetching accounts:", err);
     }
   };
 
-  // Kiểm tra username đã tồn tại chưa
   const checkUsernameExists = (inputUsername, currentId = null) => {
     return accounts.some(
       (account) =>
@@ -44,81 +40,78 @@ const AccountManager = () => {
     );
   };
 
-  // Validate input và cập nhật state errors
   const validateInputs = (isEdit = false, currentId = null) => {
     let tempErrors = { username: "", password: "" };
     let isValid = true;
-
-    // Kiểm tra username
+  
     if (!username.trim()) {
       tempErrors.username = "Username không được để trống";
       isValid = false;
     } else if (checkUsernameExists(username, isEdit ? currentId : null)) {
-      tempErrors.username = "Username không được trùng nhau";
+      tempErrors.username = "Tên tài khoản đã tồn tại";
       isValid = false;
     }
-
-    // Kiểm tra password
+  
     if (!password.trim()) {
       tempErrors.password = "Password không được để trống";
       isValid = false;
     }
-
+  
     setErrors(tempErrors);
-    return isValid;
+    return { isValid, errors: tempErrors };
   };
 
-  // Xử lý thay đổi username
   const handleUsernameChange = (e) => {
     const value = e.target.value;
     setUsername(value);
 
-    // Xóa lỗi khi người dùng bắt đầu nhập
     if (value.trim()) {
       setErrors((prev) => ({ ...prev, username: "" }));
     }
   };
 
-  // Xử lý thay đổi password
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
 
-    // Xóa lỗi khi người dùng bắt đầu nhập
     if (value.trim()) {
       setErrors((prev) => ({ ...prev, password: "" }));
     }
   };
 
-  // Xử lý thêm tài khoản
   const handleAddAccount = async (e) => {
     e.preventDefault();
-
-    if (!validateInputs()) {
+  
+    const { isValid, errors } = validateInputs();
+    if (!isValid) {
+      // Hiển thị thông báo lỗi dựa theo hàm validateInputs
+      if (errors.username) {
+        message.error(errors.username);
+      }
+      if (errors.password) {
+        message.error(errors.password);
+      }
       return;
     }
-
+  
     try {
       await axios.post("http://localhost:4000/api/account", {
-        username,
+        username: username.trim(),
         password,
-        role: "trolykhoa", // Mặc định là trolykhoa
+        role: "trolykhoa",
       });
-
-      // Reset form
+  
       setUsername("");
       setPassword("");
       setErrors({ username: "", password: "" });
       setShowAddForm(false);
-
-      // Tải lại danh sách
+  
       fetchAccounts();
-      toast.success("Thêm tài khoản thành công");
+      message.success("Tài khoản đã được tạo thành công"); // Use Ant Design message
     } catch (err) {
       if (err.response && err.response.data) {
-        toast.error(err.response.data.message || "Lỗi khi thêm tài khoản");
-
-        // Cập nhật lỗi nếu server trả về lỗi username trùng
+        message.error(err.response.data.message || "Lỗi khi thêm tài khoản");
+  
         if (err.response.data.message === "Tên tài khoản đã tồn tại") {
           setErrors((prev) => ({
             ...prev,
@@ -126,13 +119,12 @@ const AccountManager = () => {
           }));
         }
       } else {
-        toast.error("Lỗi kết nối đến máy chủ");
+        message.error("Lỗi kết nối đến máy chủ");
       }
       console.error("Error adding account:", err);
     }
   };
 
-  // Xử lý mở form sửa tài khoản
   const handleEditClick = (account) => {
     setCurrentAccount(account);
     setUsername(account.username);
@@ -141,88 +133,71 @@ const AccountManager = () => {
     setShowEditForm(true);
   };
 
-  // Xử lý cập nhật tài khoản
   const handleUpdateAccount = async (e) => {
     e.preventDefault();
-
-    if (!validateInputs(true, currentAccount._id)) {
+  
+    const { isValid, errors } = validateInputs(true, currentAccount._id);
+    if (!isValid) {
+      // Hiển thị thông báo lỗi dựa theo hàm validateInputs
+      if (errors.username) {
+        message.error(errors.username);
+      }
+      if (errors.password) {
+        message.error(errors.password);
+      }
       return;
     }
-
+  
     try {
-      const updateData = { username, password };
-
+      const updateData = { username: username.trim(), password };
+  
       await axios.put(
         `http://localhost:4000/api/account/${currentAccount._id}`,
         updateData
       );
-
-      // Reset form
+  
       setUsername("");
       setPassword("");
       setErrors({ username: "", password: "" });
       setShowEditForm(false);
       setCurrentAccount(null);
-
-      // Tải lại danh sách
+  
       fetchAccounts();
-      toast.success("Cập nhật tài khoản thành công");
+      message.success("Cập nhật thông tin tài khoản thành công!"); // Use Ant Design message
     } catch (err) {
       if (err.response && err.response.data) {
-        toast.error(err.response.data.message || "Lỗi khi cập nhật tài khoản");
-
-        // Cập nhật lỗi nếu server trả về lỗi username trùng
-        if (err.response.data.message === "Tên tài khoản đã tồn tại") {
+        const errorMessage = err.response.data.message || "Lỗi khi cập nhật tài khoản";
+        
+        // Check for duplicate key error and set a user-friendly message
+        if (errorMessage.includes("E11000 duplicate key error collection")) {
           setErrors((prev) => ({
             ...prev,
-            username: "Username không được trùng nhau",
+            username: "Tên tài khoản đã tồn tại",
           }));
+          message.error("Tên tài khoản đã tồn tại");
+        } else {
+          message.error(errorMessage);
         }
       } else {
-        toast.error("Lỗi khi cập nhật tài khoản");
+        message.error("Lỗi khi cập nhật tài khoản");
       }
       console.error("Error updating account:", err);
     }
   };
 
-  // Mở modal xác nhận xóa tài khoản
-  const handleDeleteClick = (account) => {
-    setAccountToDelete(account);
-    setShowDeleteModal(true);
-  };
-
-  // Đóng modal xác nhận xóa
-  const closeDeleteModal = () => {
-    setAccountToDelete(null);
-    setShowDeleteModal(false);
-  };
-
-  // Xử lý xóa tài khoản
-  const handleDeleteConfirm = async () => {
-    if (!accountToDelete) return;
-
+  const handleDeleteConfirm = async (account) => {
     try {
-      await axios.delete(
-        `http://localhost:4000/api/account/${accountToDelete._id}`
-      );
+      await axios.delete(`http://localhost:4000/api/account/${account._id}`);
 
-      // Cập nhật danh sách tài khoản sau khi xóa
-      setAccounts(
-        accounts.filter((account) => account._id !== accountToDelete._id)
-      );
+      setAccounts(accounts.filter((acc) => acc._id !== account._id));
 
-      toast.success("Xóa tài khoản thành công");
-
-      // Đóng modal xác nhận
-      closeDeleteModal();
+      message.success("Xóa tài khoản thành công!"); // Use Ant Design message
     } catch (err) {
-      toast.error("Lỗi khi xóa tài khoản");
+      message.error("Lỗi khi xóa tài khoản");
       console.error("Error deleting account:", err);
-      closeDeleteModal();
     }
   };
 
-  // Hàm đóng form và xóa dữ liệu form
   const resetForm = () => {
     setUsername("");
     setPassword("");
@@ -251,10 +226,9 @@ const AccountManager = () => {
             </div>
           </div>
 
-          {/* Bảng danh sách tài khoản */}
           <div
             className={`overflow-x-auto ${
-              showAddForm || showEditForm || showDeleteModal ? "opacity-25" : ""
+              showAddForm || showEditForm ? "opacity-25" : ""
             } bg-white py-16 rounded-lg border border-gray-300`}
           >
             <table className="min-w-full bg-white">
@@ -298,12 +272,17 @@ const AccountManager = () => {
                           >
                             <img src="/assets/icon_edit.png" alt="" />
                           </button>
-                          <button
-                            onClick={() => handleDeleteClick(account)}
-                            className="cursor-pointer"
+                          <Popconfirm
+                            title="Xóa tài khoản"
+                            description="Bạn có chắc chắn muốn xóa tài khoản này không?"
+                            onConfirm={() => handleDeleteConfirm(account)}
+                            okText="Xóa"
+                            cancelText="Hủy"
                           >
-                            <img src="/assets/icon_xoa.png" alt="" />
-                          </button>
+                            <button className="cursor-pointer">
+                              <img src="/assets/icon_xoa.png" alt="" />
+                            </button>
+                          </Popconfirm>
                         </div>
                       </td>
                     </tr>
@@ -313,7 +292,6 @@ const AccountManager = () => {
             </table>
           </div>
 
-          {/* Form thêm tài khoản */}
           {showAddForm && (
             <div className="fixed inset-0 flex items-center justify-center z-50">
               <div onClick={resetForm}></div>
@@ -324,7 +302,6 @@ const AccountManager = () => {
 
                 <form onSubmit={handleAddAccount}>
                   <div className="grid grid-cols-2 gap-4 mb-8">
-                    {/* Cột 1: Tài khoản */}
                     <div>
                       <label
                         className="block text-gray-700 text-sm font-bold mb-1"
@@ -347,7 +324,6 @@ const AccountManager = () => {
                       )}
                     </div>
 
-                    {/* Cột 2: Mật khẩu */}
                     <div>
                       <label
                         className="block text-gray-700 text-sm font-bold mb-1"
@@ -397,7 +373,6 @@ const AccountManager = () => {
             </div>
           )}
 
-          {/* Form sửa tài khoản */}
           {showEditForm && (
             <div className="fixed inset-0 flex items-center justify-center z-50">
               <div onClick={resetForm}></div>
@@ -408,7 +383,6 @@ const AccountManager = () => {
 
                 <form onSubmit={handleUpdateAccount}>
                   <div className="grid grid-cols-2 gap-4 mb-8">
-                    {/* Cột 1: Tài khoản */}
                     <div>
                       <label
                         className="block text-gray-700 text-sm font-bold mb-1"
@@ -430,7 +404,6 @@ const AccountManager = () => {
                       )}
                     </div>
 
-                    {/* Cột 2: Mật khẩu */}
                     <div>
                       <label
                         className="block text-gray-700 text-sm font-bold mb-1"
@@ -476,42 +449,6 @@ const AccountManager = () => {
                     </button>
                   </div>
                 </form>
-              </div>
-            </div>
-          )}
-          {/* Modal xác nhận xóa */}
-          {showDeleteModal && (
-            <div className="fixed inset-0 flex items-center justify-center z-50">
-              <div onClick={closeDeleteModal}></div>
-              <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md z-10">
-                <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-bold">Xóa tài khoản</h2>
-                </div>
-
-                <p className="mb-6">Bạn có chắc chắn muốn xóa tài khoản này?</p>
-
-                <div className="flex items-center justify-end space-x-3">
-                  <button
-                    type="button"
-                    onClick={closeDeleteModal}
-                    className="hover:text-[#E82323] text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  >
-                    Hủy bỏ
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={handleDeleteConfirm}
-                    className="bg-[#E82323] hover:bg-red-600 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center space-x-2"
-                  >
-                    <img
-                      src="/assets/icon_xoa.png"
-                      alt=""
-                      className="w-5 h-5 filter brightness-0 invert"
-                    />
-                    <span>Xóa</span>
-                  </button>
-                </div>
               </div>
             </div>
           )}

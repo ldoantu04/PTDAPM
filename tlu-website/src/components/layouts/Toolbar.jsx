@@ -2,8 +2,8 @@ import React from "react";
 
 function Toolbar() {
   return (
-    <div className="w-full h-16 bg-blue1 text-white font-medium flex justify-center text-sm fixed z-5">
-      <a href="/admin/tong-quan" className="flex gap-2.5 items-center px-10 hover:bg-[#26488B] transition-all duration-300 ease-out">
+    <div className="toolbar">
+      <a href="/admin/tong-quan">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -17,7 +17,7 @@ function Toolbar() {
         </svg>
         Tổng quan
       </a>
-      <a href="/admin/bai-viet" className="flex gap-2.5 items-center px-10 hover:bg-[#26488B] transition-all duration-300 ease-out">
+      <a href="/admin/bai-viet">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -35,7 +35,7 @@ function Toolbar() {
         </svg>
         Bài viết
       </a>
-      <a href="" className="flex gap-2.5 items-center px-10 hover:bg-[#26488B] transition-all duration-300 ease-out">
+      <a href="/admin/danh-muc">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -49,7 +49,7 @@ function Toolbar() {
         </svg>
         Danh mục
       </a>
-      <a href="/admin/nhan-su" className="flex gap-2.5 items-center px-10 hover:bg-[#26488B] transition-all duration-300 ease-out">
+      <a href="/admin/nhan-su">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -63,7 +63,7 @@ function Toolbar() {
         </svg>
         Nhân sự
       </a>
-      <a href="/admin/tai-khoan" className="flex gap-2.5 items-center px-10 hover:bg-[#26488B] transition-all duration-300 ease-out">
+      <a href="/admin/tai-khoan">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

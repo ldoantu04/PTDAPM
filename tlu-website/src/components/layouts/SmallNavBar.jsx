@@ -2,8 +2,8 @@ import React from "react";
 
 function SmallNavBar({ navigationLinks }) {
   return (
-    <div className="mx-auto p-6">
-      <div className="text-base mb-4 flex items-center space-x-5">
+    <div className="mx-auto">
+      <div className="text-base flex items-center space-x-5">
         {navigationLinks.map((link, index) => (
           <React.Fragment key={index}>
             {index > 0 && <span className="text-[#AB9B9B]">&gt;</span>}

@@ -14,26 +14,50 @@
   --color-orange1: #fe6a00;
 }
 
+.main-width {
+  @apply w-370;
+}
+
 * {
   font-family: "Montserrat", sans-serif;
 }
 
 body {
-  @apply pt-[105px];
+  @apply pt-[105px] min-h-screen;
+}
+
+#root {
+  @apply flex flex-col min-h-screen; /* Sửa đổi từ min-h-full thành min-h-screen và thêm flex, flex-col */
 }
 
 main {
-  @apply w-[92.5rem] py-14 mx-auto;
+  @apply w-370 py-14 mx-auto space-y-15;
 }
 
 .admin-main {
   @apply pt-28;
 }
 
-.btn-icon {
-  @apply text-2xl opacity-100 hover:opacity-60 transition-all duration-200 ease-out;
+.btn {
+  @apply text-white text-sm h-11 px-3.5 rounded-md hover:opacity-80 transition-all duration-200 ease-out;
 }
 
-.ant-form-item-label > label, h3 {
-  @apply text-sm font-medium;
+.btn-icon {
+  @apply text-2xl hover:opacity-60 transition-all duration-200 ease-out;
+}
+
+.toolbar {
+  @apply  w-full h-16 bg-blue1 text-white font-medium flex justify-center text-sm fixed z-5;
+}
+
+.toolbar > a {
+  @apply flex gap-2.5 items-center px-10 hover:bg-[#26488B] transition-all duration-300 ease-out;
+}
+
+.ant-form-item-label > label, h4 {
+  @apply text-base font-medium;
+}
+
+h4 {
+  @apply mb-2.5;
 }

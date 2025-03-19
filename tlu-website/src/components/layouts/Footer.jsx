@@ -3,7 +3,7 @@ import { FaFacebookF, FaYoutube } from "react-icons/fa";
 
 function Footer() {
   return (
-    <footer className="bg-[#122A58] text-white py-10 px-4">
+    <footer className="bg-blue1 text-white py-10 px-4 mt-auto">
       <div className="mx-50 gap-8">
         {/* Thông tin bên trái */}
         <div>

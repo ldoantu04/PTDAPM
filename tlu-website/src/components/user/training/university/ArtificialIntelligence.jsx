@@ -1,17 +1,34 @@
-import React from 'react'
-import NavBar from '../../../layouts/NavBar'
-import Footer from '../../../layouts/Footer'
-import SmallNavBar from '../../../layouts/SmallNavBar'
-import Sidebar from '../../../layouts/Sidebar';
+import React from "react";
+import NavBar from "../../../layouts/NavBar";
+import Footer from "../../../layouts/Footer";
+import SmallNavBar from "../../../layouts/SmallNavBar";
+import Sidebar from "../../../layouts/Sidebar";
 
 function ArtificialIntelligence() {
   const sidebarData1 = [
-    { label: "Ngành Công nghệ thông tin", link: "/dao-tao/dao-tao-dai-hoc/nganh-cong-nghe-thong-tin" },
-    { label: "Ngành Kỹ thuật phần mềm", link: "/dao-tao/dao-tao-dai-hoc/nganh-ky-thuat-phan-mem"},
-    { label: "Ngành Hệ thống thông tin", link: "/dao-tao/dao-tao-dai-hoc/nganh-he-thong-thong-tin" },
-    { label: "Ngành Trí tuệ nhân tạo", link: "/dao-tao/dao-tao-dai-hoc/nganh-tri-tue-nhan-tao", marker: true },
-    { label: "Ngành An ninh mạng", link: "/dao-tao/dao-tao-dai-hoc/nganh-an-ninh-mang" },
+    {
+      label: "Ngành Công nghệ thông tin",
+      link: "/dao-tao/dao-tao-dai-hoc/nganh-cong-nghe-thong-tin",
+    },
+    {
+      label: "Ngành Kỹ thuật phần mềm",
+      link: "/dao-tao/dao-tao-dai-hoc/nganh-ky-thuat-phan-mem",
+    },
+    {
+      label: "Ngành Hệ thống thông tin",
+      link: "/dao-tao/dao-tao-dai-hoc/nganh-he-thong-thong-tin",
+    },
+    {
+      label: "Ngành Trí tuệ nhân tạo",
+      link: "/dao-tao/dao-tao-dai-hoc/nganh-tri-tue-nhan-tao",
+      marker: true,
+    },
+    {
+      label: "Ngành An ninh mạng",
+      link: "/dao-tao/dao-tao-dai-hoc/nganh-an-ninh-mang",
+    },
   ];
+  
   const sidebarData2 = [
     { label: "Chương trình Thạc sĩ", link: "" },
     { label: "Chương trình Tiến sĩ", link: "" },
@@ -25,51 +42,99 @@ function ArtificialIntelligence() {
       { label: "Ngành Trí tuệ nhân tạo", href: "" },
     ],
   };
+  
   return (
-    <div>
+    <>
       <NavBar />
-      <div>
-        <div className='w-[92.5rem] px-5 mx-auto mb-10 mt-30'>
-          <SmallNavBar navigationLinks={sampleData.navigationLinks} />
-          <div className='grid grid-cols-12 gap-6'>
-            <div className='col-span-4'>
-              <Sidebar title='Đào tạo Đại học' items={sidebarData1} />
-              <Sidebar title='Đào tạo Sau đại học' items={sidebarData2} />
-            </div>
-            <div className='col-span-6'>
-              <h2 className="text-4xl font-bold text-[#060A52] mb-9">Ngành Trí tuệ nhân tạo</h2>
-              <p className='my-4'>Trí tuệ nhân tạo là ngành đào tạo cử nhân có phẩm chất chính trị, tư tưởng và thái độ sống đúng mực; có nền tảng kiến thức chuyên môn vững vàng về trí tuệ nhân t và các lĩnh vực liên quan, cùng các kỹ năng cần thiết trong bối cảnh chuyển đổi số và cuộc cách mạng công nghiệp 4.0.</p>
-              <p>Cử nhân Trí tuệ nhân tạo có khả năng phân tích, thiết kế, triển khai và quản lý các hệ thống trí tuệ nhân tạo trong doanh nghiệp và tổ chức. Họ có thể thực hiện các công việc như phân tích và xử lý dữ liệu; khai phá dữ liệu; trực quan hóa dữ liệu; phân tích và dự báo xu hướng dựa vào dữ liệu phân tích; áp dụng và phát triển các mô hình học máy tại các cơ sở đào tạo và viện nghiên cứu.</p>
-              <p className='my-4 font-bold'>MỤC TIÊU ĐÀO TẠO </p>
-              <ul className='my-4'>
-                <p className='pb-2'>Sau khi tốt nghiệp ngành Trí tuệ nhân tạo, sinh viên sẽ đạt được những yêu cầu sau:</p>
-                <li>&bull;  <span className='font-semibold'>Kiến thức: </span>Có kiến thức cơ sở và chuyên môn sâu rộng, vững chắc; có khả năng phân tích, giải quyết vấn đề, nghiên cứu, thiết kế, sáng tạo trong lĩnh vực trí tuệ nhân tạo.</li>
-                <li>&bull;  <span className='font-semibold'>Kỹ năng: </span>Sử dụng thành thạo một số ngôn ngữ lập trình và các công cụ phần mềm hỗ trợ; có kỹ năng quản lý dự án, xác định và cụ thể hóa các giải pháp kỹ thuật, triển khai các quy trình phát triển hệ thống trí tuệ nhân tạo; có kỹ năng kiểm thử, bảo trì phần mềm, đánh giá chất lượng phần mềm, định giá các sản phẩm phần mềm.</li>
-                <li>&bull;  <span className='font-semibold'>Phẩm chất đạo đức: </span>Có phẩm chất chính trị, đạo đức; kỹ năng giao tiếp, làm việc độc lập và theo nhóm đáp ứng yêu cầu của xã hội và hội nhập quốc tế.</li>
-              </ul>
-              <p className='my-4 font-bold'>SỰ NGHIỆP TƯƠNG LAI </p>
-              <ul className='my-4'>
-                <p className='pb-2'>Cử nhân tốt nghiệp ngành Trí tuệ nhân tạo có thể làm các công việc:</p>
-                <li>&bull;  Phân tích, thiết kế, lập trình, kiểm thử, vận hành và bảo trì các hệ thống trí tuệ nhân tạo cho doanh nghiệp và xã hội.</li>
-                <li>&bull;  Quản lý dự án trí tuệ nhân tạo, đảm bảo chất lượng và hiệu quả của sản phẩm.</li>
-                <li>&bull;  Phát triển và chuyển giao công nghệ, áp dụng các thuật toán thông minh để xây dựng hệ thống trí tuệ nhân tạo.</li>
-                <li>&bull;  Nghiên cứu, giảng dạy trong lĩnh vực trí tuệ nhân tạo tại các cơ sở đào tạo và viện nghiên cứu.</li>
-              </ul>
-              <a href="https://cse.tlu.edu.vn/Uploads/Images/DaoTao/B%E1%BA%A3n%20m%C3%B4%20t%E1%BA%A3%20CTDT%20ng%C3%A0nh%20HTTT-2023.pdf" className='text-[#C10629] font-bold hover:underline' target="_blank" rel="noopener noreferrer">Chi tiết xem tại đây 👈</a>
-            </div>
+      <main>
+        <SmallNavBar navigationLinks={sampleData.navigationLinks} />
+        <div className="flex gap-20">
+          <div className="w-1/4 space-y-10">
+            <Sidebar title="Đào tạo Đại học" items={sidebarData1} />
+            <Sidebar title="Đào tạo Sau đại học" items={sidebarData2} />
+          </div>
+          <div className="w-2/4">
+            <h2 className="text-4xl font-bold text-[#060A52] mb-9">
+              Ngành Trí tuệ nhân tạo
+            </h2>
+            <p className="my-4">
+              Trí tuệ nhân tạo (AI) là ngành học về việc phát triển các hệ thống và 
+              phần mềm có khả năng thực hiện các nhiệm vụ thường đòi hỏi trí tuệ của con người, 
+              như nhận dạng hình ảnh, xử lý ngôn ngữ tự nhiên, học máy và ra quyết định.
+            </p>
+            <p>
+              Chương trình đào tạo ngành Trí tuệ nhân tạo cung cấp cho sinh viên kiến thức 
+              nền tảng về khoa học máy tính cùng với các kiến thức chuyên sâu về AI, 
+              giúp họ phát triển các giải pháp thông minh cho nhiều lĩnh vực khác nhau.
+            </p>
+            
+            <p className="my-4 font-bold">MỤC TIÊU ĐÀO TẠO</p>
+            <ul className="my-4">
+              <p className="pb-2">
+                Sau khi tốt nghiệp ngành Trí tuệ nhân tạo, sinh viên sẽ đạt được:
+              </p>
+              <li>
+                &bull; <span className="font-semibold">Kiến thức: </span>
+                Có kiến thức vững về toán học cho AI, học máy, học sâu, xử lý ngôn ngữ tự nhiên,
+                thị giác máy tính và các kỹ thuật AI hiện đại.
+              </li>
+              <li>
+                &bull; <span className="font-semibold">Kỹ năng: </span>
+                Có khả năng thiết kế, phát triển và triển khai các hệ thống AI; phân tích và 
+                xử lý dữ liệu lớn; nghiên cứu và áp dụng các thuật toán AI mới.
+              </li>
+              <li>
+                &bull; <span className="font-semibold">Phẩm chất đạo đức: </span>
+                Có đạo đức nghề nghiệp cao, hiểu biết về các vấn đề đạo đức và xã hội 
+                liên quan đến AI, có khả năng làm việc độc lập và theo nhóm.
+              </li>
+            </ul>
+            
+            <p className="my-4 font-bold">SỰ NGHIỆP TƯƠNG LAI</p>
+            <ul className="my-4">
+              <p className="pb-2">
+                Cử nhân tốt nghiệp ngành Trí tuệ nhân tạo có thể làm các công việc:
+              </p>
+              <li>
+                &bull; Kỹ sư AI, kỹ sư học máy tại các công ty công nghệ.
+              </li>
+              <li>
+                &bull; Chuyên viên phát triển các giải pháp AI cho y tế, tài chính, sản xuất...
+              </li>
+              <li>
+                &bull; Chuyên viên phân tích dữ liệu, khai phá dữ liệu.
+              </li>
+              <li>
+                &bull; Nghiên cứu viên AI tại các viện nghiên cứu, trường đại học.
+              </li>
+            </ul>
+            <a
+              href="https://cse.tlu.edu.vn/Uploads/Images/DaoTao/B%E1%BA%A3n%20m%C3%B4%20t%E1%BA%A3%20CTDT-2022-AI.pdf"
+              className="text-[#C10629] font-bold hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Chi tiết xem tại đây 👈
+            </a>
+          </div>
 
-            <div className='col-span-2 text-right text-[#192E58]'>
-              <p class="font-bold border-b pb-2 mb-2 text-[14px]">Mã ngành: <span class="font-bold text-[#C10629] text-2xl">7480107</span></p>
-              <p className='font-bold my-5 text-[14px]'>Thời gian học: <span class="font-extrabold">4 năm</span></p>
-              <p className='font-bold text-[14px]'>Tổ hợp môn thi: A00, A01, <p>D01, D07</p></p>
-            </div>
+          <div className="w-1/5 text-right text-[#192E58]">
+            <p className="font-bold border-b pb-2 mb-2 text-[14px]">
+              Mã ngành:{" "}
+              <span className="font-bold text-[#C10629] text-2xl">7480207</span>
+            </p>
+            <p className="font-bold my-5 text-[14px]">
+              Thời gian học: <span className="font-extrabold">4 năm</span>
+            </p>
+            <p className="font-bold text-[14px]">
+              Tổ hợp môn thi: A00, A01, <p>D01, D07</p>
+            </p>
           </div>
         </div>
-      </div>
+      </main>
       <Footer />
-      
-    </div>
-  )
+    </>
+  );
 }
 
-export default ArtificialIntelligence
+export default ArtificialIntelligence;

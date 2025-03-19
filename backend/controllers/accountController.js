@@ -10,7 +10,7 @@ const login = async (req, res) => {
         const db = mongoose.connection.useDb(dbName);
         const Account = db.model('accounts', accountModel.schema);
 
-        const account = await Account.findOne({ username: username });
+        const account = await Account.findOne({ username: username.trim() });
 
         if (account && account.password === password) {
             res.status(200).json({ role: account.role, message: 'Login successful' });
@@ -61,8 +61,8 @@ const addAccount = async (req, res) => {
         
         // Tạo tài khoản mới
         const newAccount = new Account({
-            username,
-            password, // hoặc hashedPassword nếu dùng bcrypt
+            username: username.trim(),
+            password: password.trim(), // hoặc hashedPassword nếu dùng bcrypt
             role
         });
         
