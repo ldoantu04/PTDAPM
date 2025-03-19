@@ -109,7 +109,7 @@ function ArtificialIntelligence() {
               </li>
             </ul>
             <a
-              href="https://cse.tlu.edu.vn/Uploads/Images/DaoTao/B%E1%BA%A3n%20m%C3%B4%20t%E1%BA%A3%20CTDT-2022-AI.pdf"
+              href="https://cse.tlu.edu.vn/Uploads/Images/DaoTao/02_B%E1%BA%A3n%20m%C3%B4%20t%E1%BA%A3%20CT%C4%90T%20TTNT-KHDL%20v1(1).pdf"
               className="text-[#C10629] font-bold hover:underline"
               target="_blank"
               rel="noopener noreferrer"
