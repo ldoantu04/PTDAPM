@@ -9,7 +9,7 @@ const sampleData = {
   navigationLinks: [
     { label: "Trang chủ", link: "/" },
     { label: "Giới thiệu", link: "#" },
-    { label: "Đội ngũ giảng dạy", link: "/doi-ngu-giang-day", active: true },
+    { label: "Đội ngũ nhân sự", link: "" },
   ],
 };
 

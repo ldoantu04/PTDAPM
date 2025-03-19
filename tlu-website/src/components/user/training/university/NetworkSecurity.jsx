@@ -119,7 +119,7 @@ function CyberSecurity() {
               </li>
             </ul>
             <a
-              href="https://cse.tlu.edu.vn/Uploads/Images/DaoTao/B%E1%BA%A3n%20m%C3%B4%20t%E1%BA%A3%20CTDT-2022-ANM.pdf"
+              href="https://cse.tlu.edu.vn/Uploads/Images/DaoTao/B%E1%BA%A3n%20m%C3%B4%20t%E1%BA%A3%20CTDT%20ng%C3%A0nh%20ANM-2022.pdf"
               className="text-[#C10629] font-bold hover:underline"
               target="_blank"
               rel="noopener noreferrer"

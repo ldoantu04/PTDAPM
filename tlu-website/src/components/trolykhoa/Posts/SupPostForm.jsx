@@ -12,7 +12,6 @@ import axios from "axios";
 import TinyEditor from "../../layouts/TinyEditor";
 import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
-import Toolbar from "../../layouts/Toolbar";
 import ImageUpload from "../../layouts/ImageUpload";
 import SimpleSelect from "../../layouts/SimpleSelect";
 
@@ -335,7 +334,7 @@ function SupPostForm({ isEditing = false }) {
       }
 
       // Chuyển hướng về trang danh sách bài viết
-      navigate("/admin/bai-viet");
+      navigate("/tro-ly-khoa/bai-viet");
     } catch (error) {
       console.error("Lỗi khi lưu bài viết:", error);
       message.error("Không thể lưu bài viết!");
@@ -347,13 +346,12 @@ function SupPostForm({ isEditing = false }) {
   return (
     <>
       <NavBar />
-      <Toolbar />
-      <main className="admin-main space-y-6">
+      <main className="space-y-6">
         <div className="flex justify-between items-center h-11">
           <h1 className="text-4xl font-bold text-blue1">
             {isEditing ? "Chỉnh sửa bài viết" : "Thêm bài viết mới"}
           </h1>
-          <Link to="/admin/bai-viet">
+          <Link to="/tro-ly-khoa/bai-viet">
             <Button type="default" className="flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

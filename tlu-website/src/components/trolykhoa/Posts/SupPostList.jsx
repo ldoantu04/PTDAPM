@@ -9,7 +9,6 @@ import {
 } from "@ant-design/icons";
 import axios from "axios";
 import NavBar from "../../layouts/NavBar";
-import Toolbar from "../../layouts/Toolbar";
 import CustomTable from "../../layouts/CustomTable";
 import Footer from "../../layouts/Footer";
 
@@ -216,13 +215,13 @@ function SupPostList() {
       render: (_, record) => (
         <Space size="middle" className="px-5">
           <Tooltip title="Chi tiết">
-            <Link to={`/admin/bai-viet/chi-tiet/${record.id}`}>
+            <Link to={`/tro-ly-khoa/bai-viet/chi-tiet/${record.id}`}>
               <EyeFilled className="btn-icon !text-blue1 " />
             </Link>
           </Tooltip>
 
           <Tooltip title="Chỉnh sửa">
-            <Link to={`/admin/bai-viet/chinh-sua/${record.id}`}>
+            <Link to={`/tro-ly-khoa/bai-viet/chinh-sua/${record.id}`}>
               <EditFilled className="btn-icon !text-orange1" />
             </Link>
           </Tooltip>
@@ -247,11 +246,10 @@ function SupPostList() {
   return (
     <>
       <NavBar />
-      <Toolbar />
-      <main className="admin-main space-y-13">
+      <main className="space-y-13">
         <div className="flex justify-between items-center">
           <h1 className="text-4xl font-bold text-blue1">Danh sách bài viết</h1>
-          <Link to="/admin/bai-viet/them-moi">
+          <Link to="/tro-ly-khoa/bai-viet/them-moi">
             <button className="btn bg-green1">
               <PlusOutlined className="mr-2" />
               Thêm bài viết mới
