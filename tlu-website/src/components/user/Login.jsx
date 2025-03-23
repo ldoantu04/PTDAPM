@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext"; // Import AuthContext
-import axios from 'axios';
-
+import axios from "axios";
 function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { login } = useAuth(); // Lấy hàm login từ AuthContext
 
@@ -15,27 +14,33 @@ function Login() {
 
     // Kiểm tra nếu username hoặc password để trống
     if (!username) {
-      setError('Vui lòng nhập tên đăng nhập!');
+      setError("Vui lòng nhập tên đăng nhập!");
       return;
     } else if (!password) {
-      setError('Vui lòng nhập mật khẩu!');
+      setError("Vui lòng nhập mật khẩu!");
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:4000/api/login', { username, password });
+      const response = await axios.post("http://localhost:4000/api/login", {
+        username,
+        password,
+      });
       const { role } = response.data;
       login(role);
-      navigate('/'); 
+      navigate("/");
     } catch (error) {
-      setError('Tên đăng nhập hoặc mật khẩu không chính xác!');
+      setError("Tên đăng nhập hoặc mật khẩu không chính xác!");
     }
   };
 
   return (
     <div className="w-full h-screen bg-[url('/assets/login_background.webp')] bg-cover bg-center flex flex-col items-center justify-center fixed top-0">
-      <div style={{ backgroundColor: "rgba(255, 255, 255, 0.85)" }} className='w-[1000px] h-auto flex flex-col items-center justify-center p-6'>
-        <p className='font-bold text-lg mb-4'>Khoa Công nghệ thông tin - TLU</p>
+      <div
+        style={{ backgroundColor: "rgba(255, 255, 255, 0.85)" }}
+        className="w-[1000px] h-auto flex flex-col items-center justify-center p-6"
+      >
+        <p className="font-bold text-lg mb-4">Khoa Công nghệ thông tin - TLU</p>
 
         {error && <p className="text-red-500 mb-3">{error}</p>}
 
@@ -55,9 +60,10 @@ function Login() {
           className="w-full p-2 mb-3 border-b-2 border-gray-400 focus:border-green-500 outline-none transition-colors"
         />
 
-        <button 
-          onClick={handleLogin} 
-          className="w-[800px] bg-red-500 text-white py-2 mt-4 hover:bg-red-700 transition-all ease-out duration-500">
+        <button
+          onClick={handleLogin}
+          className="w-[800px] bg-red-500 text-white py-2 mt-4 hover:bg-red-700 transition-all ease-out duration-500"
+        >
           Đăng nhập
         </button>
       </div>

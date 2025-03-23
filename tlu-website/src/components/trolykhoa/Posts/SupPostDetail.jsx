@@ -11,10 +11,10 @@ import {
 import axios from "axios";
 import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
+// Thay đổi API_BASE_URL để sử dụng MongoDB
+const API_BASE_URL = "http://localhost:4000/api";
 
-const API_BASE_URL = "https://67d464bed2c7857431ed88c2.mockapi.io";
-
-function SupPostDetail() {
+function PostDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
@@ -38,9 +38,9 @@ function SupPostDetail() {
       const parentCatsMap = {};
 
       categoriesResponse.data.forEach((cat) => {
-        catMap[cat.id] = cat.name;
-        if (cat.parentId) {
-          parentCatsMap[cat.id] = cat.parentId;
+        catMap[cat._id] = cat.name;
+        if (cat.parent_id) {
+          parentCatsMap[cat._id] = cat.parent_id;
         }
       });
 
@@ -112,7 +112,7 @@ function SupPostDetail() {
     return (
       <>
         <NavBar />
-        <main className="">
+        <main className="admin-main">
           <div className="flex justify-center items-center h-64">
             <Spin size="large" tip="Đang tải dữ liệu..." />
           </div>
@@ -125,13 +125,13 @@ function SupPostDetail() {
     return (
       <>
         <NavBar />
-        <main className="">
+        <main className="admin-main">
           <div className="text-center py-10">
             <h2 className="text-xl font-medium text-red-500 mb-2">
               Không tìm thấy bài viết
             </h2>
             <p className="mb-4">Bài viết không tồn tại hoặc đã bị xóa</p>
-            <Link to="/admin/bai-viet">
+            <Link to="/tro-ly-khoa/bai-viet">
               <Button type="primary">Quay lại danh sách</Button>
             </Link>
           </div>
@@ -143,7 +143,7 @@ function SupPostDetail() {
   return (
     <>
       <NavBar />
-      <main className="space-y-13">
+      <main className="admin-main space-y-13">
         <div className="flex justify-between items-center h-11">
           <h1 className="text-4xl font-bold text-blue1">Chi tiết bài viết</h1>
           <Link to="/tro-ly-khoa/bai-viet">
@@ -188,7 +188,7 @@ function SupPostDetail() {
                 <div>
                   <h4>Danh mục</h4>
                   {(() => {
-                    const categoryId = post.categoryId;
+                    const categoryId = post.category_id;
                     const isChild = parentCategories[categoryId];
 
                     if (isChild && categories[parentCategories[categoryId]]) {
@@ -214,14 +214,14 @@ function SupPostDetail() {
                 {/* Thời gian */}
                 <div>
                   <h4>Ngày tạo</h4>
-                  <p className="text-gray-600">{formatDate(post.createdAt)}</p>
+                  <p className="text-gray-600">{formatDate(post.created_at)}</p>
                 </div>
 
                 <div>
                   <h4>Cập nhật lần cuối</h4>
-                  {post.updatedAt && post.updatedAt !== post.createdAt ? (
+                  {post.updated_at && post.updated_at !== post.created_at ? (
                     <p className="text-gray-600">
-                      {formatDate(post.updatedAt)}
+                      {formatDate(post.updated_at)}
                     </p>
                   ) : (
                     <p className="text-gray-400">Chưa chỉnh sửa</p>
@@ -272,7 +272,11 @@ function SupPostDetail() {
                     </Button>
                   </Popconfirm>
                   <Link to="/tro-ly-khoa/bai-viet" className="block">
-                    <Button type="default" className="flex items-center gap-2" block>
+                    <Button
+                      type="default"
+                      className="flex items-center gap-2"
+                      block
+                    >
                       <ArrowLeftOutlined />
                       <span>Quay lại</span>
                     </Button>
@@ -291,10 +295,10 @@ function SupPostDetail() {
 
               {/* Thêm thông tin thời gian cập nhật dưới tiêu đề */}
               <div className="text-sm text-gray3 flex items-center gap-1">
-                {post.updatedAt && post.updatedAt !== post.createdAt ? (
-                  <span>{formatDate(post.updatedAt)}</span>
+                {post.updated_at && post.updated_at !== post.created_at ? (
+                  <span>{formatDate(post.updated_at)}</span>
                 ) : (
-                  <span>{formatDate(post.createdAt)}</span>
+                  <span>{formatDate(post.created_at)}</span>
                 )}
               </div>
             </div>
@@ -302,7 +306,7 @@ function SupPostDetail() {
             <div>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: post.content || "<p>Không có nội dung</p>",
+                  __html: post.detail || "<p>Không có nội dung</p>",
                 }}
                 className="prose max-w-none"
               />
@@ -315,4 +319,4 @@ function SupPostDetail() {
   );
 }
 
-export default SupPostDetail;
+export default PostDetail;

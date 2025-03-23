@@ -18,11 +18,11 @@ const postSchema = new mongoose.Schema({
         required: false
     },
     category_id: {
-        type: String,
+        type: String, // Để là String cho đơn giản khi test
         required: true
     },
     account_id: {
-        type: String,
+        type: String, // Để là String cho đơn giản khi test
         required: true
     },
     created_at: {
@@ -35,5 +35,6 @@ const postSchema = new mongoose.Schema({
     }
 });
 
-const postModel = mongoose.models.post || mongoose.model("posts", postSchema);
-export default postModel
+// Thay đổi tên collection từ "posts" thành "post2"
+const postModel = mongoose.models.post2 || mongoose.model("posts2", postSchema);
+export default postModel;

@@ -5,7 +5,7 @@ import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
 // import { toast } from "react-toastify";
 import Toolbar from "../../layouts/Toolbar";
-import { message } from 'antd';
+import { message } from "antd";
 const EditEmployee = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -15,10 +15,10 @@ const EditEmployee = () => {
 
   // Form fields
   const [name, setName] = useState("");
-  const [degree, setDegree] = useState("");  // Changed from default value to empty string
-  const [status, setStatus] = useState("");   // Changed from default value to empty string
-  const [department, setDepartment] = useState("");  // Changed from default value to empty string
-  const [position, setPosition] = useState("");  // Changed from default value to empty string
+  const [degree, setDegree] = useState(""); // Changed from default value to empty string
+  const [status, setStatus] = useState(""); // Changed from default value to empty string
+  const [department, setDepartment] = useState(""); // Changed from default value to empty string
+  const [position, setPosition] = useState(""); // Changed from default value to empty string
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [bio, setBio] = useState("");
@@ -30,10 +30,10 @@ const EditEmployee = () => {
     name: "",
     email: "",
     phone: "",
-    degree: "",     // Added error state for degree
-    status: "",     // Added error state for status
+    degree: "", // Added error state for degree
+    status: "", // Added error state for status
     department: "", // Added error state for department
-    position: ""    // Added error state for position
+    position: "", // Added error state for position
   });
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const EditEmployee = () => {
         console.error("Error fetching all staff data:", error);
       }
     };
-    
+
     fetchAllStaff();
   }, []);
   // Load staff data when component mounts
@@ -96,14 +96,20 @@ const EditEmployee = () => {
   const handleNameChange = (e) => {
     const value = e.target.value;
     setName(value);
-    
+
     if (!value.trim()) {
-      setErrors((prev) => ({ ...prev, name: "Tên nhân sự không được để trống" }));
+      setErrors((prev) => ({
+        ...prev,
+        name: "Tên nhân sự không được để trống",
+      }));
     } else {
       // Check for special characters
       const specialCharsRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
       if (specialCharsRegex.test(value)) {
-        setErrors((prev) => ({ ...prev, name: "Tên không được chứa ký tự đặc biệt" }));
+        setErrors((prev) => ({
+          ...prev,
+          name: "Tên không được chứa ký tự đặc biệt",
+        }));
       } else {
         setErrors((prev) => ({ ...prev, name: "" }));
       }
@@ -113,7 +119,7 @@ const EditEmployee = () => {
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
-    
+
     if (!value.trim()) {
       setErrors((prev) => ({ ...prev, email: "Email không được để trống" }));
     } else {
@@ -126,18 +132,18 @@ const EditEmployee = () => {
       }
     }
   };
-  
+
   const handlePhoneChange = (e) => {
     const value = e.target.value;
     setPhone(value);
-    
+
     if (value.trim()) {
       // Phone number must be exactly 10 digits and start with 0
       const phoneRegex = /^0\d{9}$/;
       if (!phoneRegex.test(value)) {
-        setErrors((prev) => ({ 
-          ...prev, 
-          phone: "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0" 
+        setErrors((prev) => ({
+          ...prev,
+          phone: "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0",
         }));
       } else {
         setErrors((prev) => ({ ...prev, phone: "" }));
@@ -164,7 +170,10 @@ const EditEmployee = () => {
     if (value) {
       setErrors((prev) => ({ ...prev, status: "" }));
     } else {
-      setErrors((prev) => ({ ...prev, status: "Trạng thái không được để trống" }));
+      setErrors((prev) => ({
+        ...prev,
+        status: "Trạng thái không được để trống",
+      }));
     }
   };
 
@@ -174,7 +183,10 @@ const EditEmployee = () => {
     if (value) {
       setErrors((prev) => ({ ...prev, department: "" }));
     } else {
-      setErrors((prev) => ({ ...prev, department: "Phòng ban không được để trống" }));
+      setErrors((prev) => ({
+        ...prev,
+        department: "Phòng ban không được để trống",
+      }));
     }
   };
 
@@ -184,20 +196,23 @@ const EditEmployee = () => {
     if (value) {
       setErrors((prev) => ({ ...prev, position: "" }));
     } else {
-      setErrors((prev) => ({ ...prev, position: "Chức vụ không được để trống" }));
+      setErrors((prev) => ({
+        ...prev,
+        position: "Chức vụ không được để trống",
+      }));
     }
   };
-  
+
   // Update the validateForm function as well
   const validateForm = () => {
     const newErrors = {};
     let isValid = true;
-  
+
     // Name validation
     if (!name.trim()) {
       newErrors.name = "Tên nhân sự không được để trống";
       isValid = false;
-    }else {
+    } else {
       // Check for special characters
       const specialCharsRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
       if (specialCharsRegex.test(name)) {
@@ -205,7 +220,7 @@ const EditEmployee = () => {
         isValid = false;
       }
     }
-  
+
     // Email validation
     if (!email.trim()) {
       newErrors.email = "Email không được để trống";
@@ -218,8 +233,8 @@ const EditEmployee = () => {
         isValid = false;
       } else {
         // Check if email already exists, excluding current staff
-        const emailExists = allStaff.some(staff => 
-          staff.email === email.trim() && staff._id !== id
+        const emailExists = allStaff.some(
+          (staff) => staff.email === email.trim() && staff._id !== id
         );
         if (emailExists) {
           newErrors.email = "Email đã tồn tại, vui lòng sử dụng email khác";
@@ -227,21 +242,23 @@ const EditEmployee = () => {
         }
       }
     }
-  
+
     // Phone validation - optional field but if provided must be valid
     if (phone.trim()) {
       // Phone number must be exactly 10 digits and start with 0
       const phoneRegex = /^0\d{9}$/;
       if (!phoneRegex.test(phone)) {
-        newErrors.phone = "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0";
+        newErrors.phone =
+          "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0";
         isValid = false;
       } else {
         // Check if phone already exists, excluding current staff
-        const phoneExists = allStaff.some(staff => 
-          staff.phone === phone.trim() && staff._id !== id
+        const phoneExists = allStaff.some(
+          (staff) => staff.phone === phone.trim() && staff._id !== id
         );
         if (phoneExists) {
-          newErrors.phone = "Số điện thoại đã tồn tại, vui lòng sử dụng số điện thoại khác";
+          newErrors.phone =
+            "Số điện thoại đã tồn tại, vui lòng sử dụng số điện thoại khác";
           isValid = false;
         }
       }
@@ -267,7 +284,7 @@ const EditEmployee = () => {
       newErrors.position = "Chức vụ không được để trống";
       isValid = false;
     }
-  
+
     setErrors(newErrors);
     return isValid;
   };
@@ -346,8 +363,6 @@ const EditEmployee = () => {
       </div>
     );
   }
-
-
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -527,7 +542,9 @@ const EditEmployee = () => {
                           value={department}
                           onChange={handleDepartmentChange}
                           className={`border ${
-                            errors.department ? "border-red-500" : "border-gray-300"
+                            errors.department
+                              ? "border-red-500"
+                              : "border-gray-300"
                           } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                         >
                           <option value="">Chọn phòng ban</option>
@@ -564,7 +581,9 @@ const EditEmployee = () => {
                           value={position}
                           onChange={handlePositionChange}
                           className={`border ${
-                            errors.position ? "border-red-500" : "border-gray-300"
+                            errors.position
+                              ? "border-red-500"
+                              : "border-gray-300"
                           } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                         >
                           <option value="">Chọn chức vụ</option>
@@ -667,7 +686,7 @@ const EditEmployee = () => {
             </button>
             <button
               type="button"
-              onClick={handleSubmit} 
+              onClick={handleSubmit}
               className="bg-[#1677FF] hover:bg-blue-600 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center space-x-2"
             >
               <img src="/assets/icon_luu.png" alt="" className="w-5 h-5" />

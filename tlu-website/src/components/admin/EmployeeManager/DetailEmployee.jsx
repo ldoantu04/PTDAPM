@@ -4,7 +4,6 @@ import axios from "axios";
 import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
 import Toolbar from "../../layouts/Toolbar";
-
 const DetailEmployee = () => {
   const { id } = useParams();
   const navigate = useNavigate();

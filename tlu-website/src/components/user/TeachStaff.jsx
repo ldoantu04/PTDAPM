@@ -4,7 +4,6 @@ import Footer from "../layouts/Footer";
 import SmallNavBar from "../layouts/SmallNavBar";
 import HighlightHeader from "../layouts/HighlightHeader";
 import axios from "axios";
-
 const sampleData = {
   navigationLinks: [
     { label: "Trang chủ", link: "/" },

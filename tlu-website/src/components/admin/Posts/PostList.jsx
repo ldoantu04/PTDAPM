@@ -12,8 +12,8 @@ import NavBar from "../../layouts/NavBar";
 import Toolbar from "../../layouts/Toolbar";
 import CustomTable from "../../layouts/CustomTable";
 import Footer from "../../layouts/Footer";
-
-const API_BASE_URL = "https://67d464bed2c7857431ed88c2.mockapi.io";
+// Thay đổi API_BASE_URL để sử dụng MongoDB
+const API_BASE_URL = "http://localhost:4000/api";
 
 function PostList() {
   const [posts, setPosts] = useState([]);
@@ -37,9 +37,10 @@ function PostList() {
       const catMap = {};
       const parentCatsMap = {};
 
-      categoriesResponse.data.forEach(({ id, name, parentId }) => {
-        catMap[id] = name;
-        if (parentId) parentCatsMap[id] = parentId;
+      // Lưu ý: Đã thay đổi id thành _id, parentId thành parent_id để phù hợp với MongoDB
+      categoriesResponse.data.forEach(({ _id, name, parent_id }) => {
+        catMap[_id] = name;
+        if (parent_id) parentCatsMap[_id] = parent_id;
       });
 
       setCategories(catMap);
@@ -48,11 +49,11 @@ function PostList() {
       // Lấy danh sách bài viết
       const postsResponse = await axios.get(`${API_BASE_URL}/posts`);
 
-      // Sắp xếp bài viết theo thứ tự mới nhất trước (dựa vào createdAt)
+      // Sắp xếp bài viết theo thứ tự mới nhất trước (dựa vào created_at)
       const sortedPosts = [...postsResponse.data].sort((a, b) => {
-        // Ưu tiên sử dụng updatedAt nếu có, nếu không thì dùng createdAt
-        const dateA = new Date(a.updatedAt || a.createdAt);
-        const dateB = new Date(b.updatedAt || b.createdAt);
+        // Ưu tiên sử dụng updated_at nếu có, nếu không thì dùng created_at
+        const dateA = new Date(a.updated_at || a.created_at);
+        const dateB = new Date(b.updated_at || b.created_at);
         return dateB - dateA; // Sắp xếp giảm dần (mới nhất trước)
       });
 
@@ -166,44 +167,46 @@ function PostList() {
     },
     {
       title: "Danh mục",
-      dataIndex: "categoryId",
-      key: "categoryId",
-      render: (categoryId) => {
+      dataIndex: "category_id", // Thay đổi từ categoryId thành category_id
+      key: "category_id",
+      render: (category_id) => {
         // Kiểm tra xem danh mục có phải là con không
-        const isChild = parentCategories[categoryId];
+        const isChild = parentCategories[category_id];
 
-        if (isChild && categories[parentCategories[categoryId]]) {
+        if (isChild && categories[parentCategories[category_id]]) {
           // Nếu là danh mục con, hiển thị cả danh mục cha và con
           return (
             <div className="flex items-center flex-wrap gap-1">
-              <Tag color="blue">{categories[parentCategories[categoryId]]}</Tag>
+              <Tag color="blue">
+                {categories[parentCategories[category_id]]}
+              </Tag>
               <span className="mx-1">›</span>
-              <Tag color="cyan">{categories[categoryId]}</Tag>
+              <Tag color="cyan">{categories[category_id]}</Tag>
             </div>
           );
         }
 
         // Danh mục không có cha hoặc không xác định
         return (
-          <Tag color="blue">{categories[categoryId] || "Không xác định"}</Tag>
+          <Tag color="blue">{categories[category_id] || "Không xác định"}</Tag>
         );
       },
     },
     {
       title: "Ngày tạo",
-      dataIndex: "createdAt",
-      key: "createdAt",
+      dataIndex: "created_at", // Thay đổi từ createdAt thành created_at
+      key: "created_at",
       width: 150,
       render: (date) => formatDate(date),
     },
     {
       title: "Cập nhật",
-      dataIndex: "updatedAt",
-      key: "updatedAt",
+      dataIndex: "updated_at", // Thay đổi từ updatedAt thành updated_at
+      key: "updated_at",
       width: 150,
       render: (date, record) => {
         // Nếu ngày cập nhật giống ngày tạo, hiển thị "Chưa chỉnh sửa"
-        if (!date || date === record.createdAt) {
+        if (!date || date === record.created_at) {
           return <span className="text-gray-400">Chưa chỉnh sửa</span>;
         }
         return formatDate(date);
@@ -216,13 +219,17 @@ function PostList() {
       render: (_, record) => (
         <Space size="middle" className="px-5">
           <Tooltip title="Chi tiết">
-            <Link to={`/admin/bai-viet/chi-tiet/${record.id}`}>
+            <Link to={`/admin/bai-viet/chi-tiet/${record._id}`}>
+              {" "}
+              {/* Thay đổi từ id thành _id */}
               <EyeFilled className="btn-icon !text-blue1 " />
             </Link>
           </Tooltip>
 
           <Tooltip title="Chỉnh sửa">
-            <Link to={`/admin/bai-viet/chinh-sua/${record.id}`}>
+            <Link to={`/admin/bai-viet/chinh-sua/${record._id}`}>
+              {" "}
+              {/* Thay đổi từ id thành _id */}
               <EditFilled className="btn-icon !text-orange1" />
             </Link>
           </Tooltip>
@@ -231,7 +238,7 @@ function PostList() {
             <Popconfirm
               title="Xóa bài viết"
               description="Bạn có chắc chắn muốn xóa bài viết này không?"
-              onConfirm={() => handleDelete(record.id)}
+              onConfirm={() => handleDelete(record._id)} // Thay đổi từ id thành _id
               okText="Xóa"
               cancelText="Hủy"
               okButtonProps={{ danger: true }}
@@ -265,7 +272,7 @@ function PostList() {
             columns={columns}
             data={posts}
             loading={loading}
-            rowKey="id"
+            rowKey="_id"
             pagination={{
               pageSize: 10,
               showTotal: (total) => `Tổng số: ${total} bài viết`,

@@ -1,13 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import {
-  Form,
-  Input,
-  Button,
-  message,
-  Card,
-  Switch,
-} from "antd";
+import { Form, Input, Button, message, Card, Switch } from "antd";
 import axios from "axios";
 import TinyEditor from "../../layouts/TinyEditor";
 import NavBar from "../../layouts/NavBar";
@@ -15,9 +8,9 @@ import Footer from "../../layouts/Footer";
 import Toolbar from "../../layouts/Toolbar";
 import ImageUpload from "../../layouts/ImageUpload";
 import SimpleSelect from "../../layouts/SimpleSelect";
-
 const { TextArea } = Input;
-const API_BASE_URL = "https://67d464bed2c7857431ed88c2.mockapi.io";
+// Thay đổi API_BASE_URL từ mockapi thành MongoDB
+const API_BASE_URL = "http://localhost:4000/api";
 
 function PostForm({ isEditing = false }) {
   const { id } = useParams();
@@ -67,16 +60,18 @@ function PostForm({ isEditing = false }) {
   const fetchPostData = async (postId) => {
     try {
       setLoading((prev) => ({ ...prev, post: true }));
-      
+
+      // Thay đổi để sử dụng MongoDB API
       const response = await axios.get(`${API_BASE_URL}/posts/${postId}`);
       const postData = response.data;
-      
+
       // Cập nhật state với dữ liệu bài viết
       setFormData((prev) => ({
         ...prev,
         postData: postData,
         imagePreview: postData.thumbnail || null,
-        editorContent: postData.content || "",
+        // Thay đổi từ content thành detail để phù hợp với MongoDB schema
+        editorContent: postData.detail || "",
       }));
     } catch (error) {
       console.error("Lỗi khi tải dữ liệu bài viết:", error);
@@ -91,21 +86,22 @@ function PostForm({ isEditing = false }) {
     try {
       setLoading((prev) => ({ ...prev, categories: true }));
 
+      // Thay đổi để sử dụng MongoDB API
       const response = await axios.get(`${API_BASE_URL}/categories`);
       const categoriesData = response.data;
 
-      // Phân loại danh mục
-      const parents = categoriesData.filter((cat) => !cat.parentId); // Đã sửa từ parentId thành parentId
+      // Phân loại danh mục - thay đổi parentId thành parent_id để phù hợp với MongoDB schema
+      const parents = categoriesData.filter((cat) => !cat.parent_id);
 
       // Xây dựng map danh mục cha -> danh mục con
       const childrenMap = {};
       categoriesData
-        .filter((cat) => cat.parentId) // Đã sửa từ parentId thành parentId
+        .filter((cat) => cat.parent_id)
         .forEach((cat) => {
-          if (!childrenMap[cat.parentId]) { // Đã sửa từ parentId thành parentId
-            childrenMap[cat.parentId] = []; // Đã sửa từ parentId thành parentId
+          if (!childrenMap[cat.parent_id]) {
+            childrenMap[cat.parent_id] = [];
           }
-          childrenMap[cat.parentId].push(cat); // Đã sửa từ parentId thành parentId
+          childrenMap[cat.parent_id].push(cat);
         });
 
       setCategoryData({
@@ -133,23 +129,24 @@ function PostForm({ isEditing = false }) {
         title: post.title || "",
       });
 
-      // Xử lý danh mục
-      const categoryId = post.categoryId;
+      // Xử lý danh mục - thay đổi categoryId thành category_id để phù hợp với MongoDB schema
+      const categoryId = post.category_id;
       if (categoryId && categoryData.all.length > 0) {
-        const category = categoryData.all.find((c) => c.id === categoryId);
+        // Tìm danh mục theo _id thay vì id
+        const category = categoryData.all.find((c) => c._id === categoryId);
 
         if (category) {
-          if (category.parentId) { // Đã sửa từ parentId thành parentId
+          if (category.parent_id) {
             // Danh mục con
             setCategoryData((prev) => ({
               ...prev,
-              selectedParent: category.parentId, // Đã sửa từ parentId thành parentId
+              selectedParent: category.parent_id,
             }));
 
             // Thiết lập giá trị sau khi state đã cập nhật
             setTimeout(() => {
               form.setFieldsValue({
-                parentCategoryId: category.parentId, // Đã sửa từ parentId thành parentId
+                parentCategoryId: category.parent_id,
                 categoryId: categoryId,
               });
             }, 0);
@@ -157,13 +154,13 @@ function PostForm({ isEditing = false }) {
             // Danh mục cha
             setCategoryData((prev) => ({
               ...prev,
-              selectedParent: category.id,
+              selectedParent: category._id,
             }));
 
             setTimeout(() => {
               form.setFieldsValue({
-                parentCategoryId: category.id,
-                categoryId: category.id,
+                parentCategoryId: category._id,
+                categoryId: category._id,
               });
             }, 0);
           }
@@ -192,7 +189,8 @@ function PostForm({ isEditing = false }) {
 
   // Tạo options cho select danh mục cha
   const parentCategoryOptions = categoryData.parents.map((cat) => ({
-    value: cat.id,
+    // Thay đổi id thành _id để phù hợp với MongoDB
+    value: cat._id,
     label: cat.name,
   }));
 
@@ -206,15 +204,17 @@ function PostForm({ isEditing = false }) {
       !categoryData.children[parentId] ||
       categoryData.children[parentId].length === 0
     ) {
-      const parent = categoryData.all.find((cat) => cat.id === parentId);
+      // Thay đổi id thành _id để phù hợp với MongoDB
+      const parent = categoryData.all.find((cat) => cat._id === parentId);
       return parent
-        ? [{ value: parent.id, label: `Sử dụng "${parent.name}"` }]
+        ? [{ value: parent._id, label: `Sử dụng "${parent.name}"` }]
         : [];
     }
 
     // Trả về danh sách các danh mục con
     return categoryData.children[parentId].map((cat) => ({
-      value: cat.id,
+      // Thay đổi id thành _id để phù hợp với MongoDB
+      value: cat._id,
       label: cat.name,
     }));
   };
@@ -299,21 +299,22 @@ function PostForm({ isEditing = false }) {
       const processedContent = content;
 
       // Lấy thời gian hiện tại
-      const currentDate = new Date().toISOString();
+      const currentDate = new Date();
 
-      // Tạo payload để gửi lên server
+      // Tạo payload để gửi lên server - thay đổi để phù hợp với MongoDB schema
       const postPayload = {
         title: values.title,
-        categoryId: values.categoryId,
-        content: processedContent,
+        category_id: values.categoryId,
+        detail: processedContent, // Thay đổi từ content thành detail
         description: description,
         thumbnail: featureImageUrl,
-        updatedAt: currentDate,
+        updated_at: currentDate, // Thay đổi từ updatedAt thành updated_at
+        account_id: "67d44e69aaa3d0006967b524", // Thêm account_id (có thể lấy từ session hoặc giá trị mặc định)
       };
 
-      // Nếu là bài viết mới, thêm createdAt
+      // Nếu là bài viết mới, thêm created_at
       if (!isEditing) {
-        postPayload.createdAt = currentDate;
+        postPayload.created_at = currentDate; // Thay đổi từ createdAt thành created_at
       }
 
       // Gửi request lên server

@@ -5,8 +5,7 @@ import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
 // import { toast } from "react-toastify";
 import Toolbar from "../../layouts/Toolbar";
-import { message } from 'antd';
-
+import { message } from "antd";
 const AddEmployee = () => {
   const navigate = useNavigate();
 
@@ -53,14 +52,20 @@ const AddEmployee = () => {
   const handleNameChange = (e) => {
     const value = e.target.value;
     setName(value);
-    
+
     if (!value.trim()) {
-      setErrors((prev) => ({ ...prev, name: "Tên nhân sự không được để trống" }));
+      setErrors((prev) => ({
+        ...prev,
+        name: "Tên nhân sự không được để trống",
+      }));
     } else {
       // Check for special characters
       const specialCharsRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
       if (specialCharsRegex.test(value)) {
-        setErrors((prev) => ({ ...prev, name: "Tên không được chứa ký tự đặc biệt" }));
+        setErrors((prev) => ({
+          ...prev,
+          name: "Tên không được chứa ký tự đặc biệt",
+        }));
       } else {
         setErrors((prev) => ({ ...prev, name: "" }));
       }
@@ -70,7 +75,7 @@ const AddEmployee = () => {
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
-    
+
     if (!value.trim()) {
       setErrors((prev) => ({ ...prev, email: "Email không được để trống" }));
     } else {
@@ -87,14 +92,14 @@ const AddEmployee = () => {
   const handlePhoneChange = (e) => {
     const value = e.target.value;
     setPhone(value);
-    
+
     if (value.trim()) {
       // Phone number must be exactly 10 digits and start with 0
       const phoneRegex = /^0\d{9}$/;
       if (!phoneRegex.test(value)) {
-        setErrors((prev) => ({ 
-          ...prev, 
-          phone: "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0" 
+        setErrors((prev) => ({
+          ...prev,
+          phone: "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0",
         }));
       } else {
         setErrors((prev) => ({ ...prev, phone: "" }));
@@ -121,7 +126,10 @@ const AddEmployee = () => {
     if (value) {
       setErrors((prev) => ({ ...prev, status: "" }));
     } else {
-      setErrors((prev) => ({ ...prev, status: "Trạng thái không được để trống" }));
+      setErrors((prev) => ({
+        ...prev,
+        status: "Trạng thái không được để trống",
+      }));
     }
   };
 
@@ -131,7 +139,10 @@ const AddEmployee = () => {
     if (value) {
       setErrors((prev) => ({ ...prev, department: "" }));
     } else {
-      setErrors((prev) => ({ ...prev, department: "Phòng ban không được để trống" }));
+      setErrors((prev) => ({
+        ...prev,
+        department: "Phòng ban không được để trống",
+      }));
     }
   };
 
@@ -141,7 +152,10 @@ const AddEmployee = () => {
     if (value) {
       setErrors((prev) => ({ ...prev, position: "" }));
     } else {
-      setErrors((prev) => ({ ...prev, position: "Chức vụ không được để trống" }));
+      setErrors((prev) => ({
+        ...prev,
+        position: "Chức vụ không được để trống",
+      }));
     }
   };
 
@@ -154,7 +168,7 @@ const AddEmployee = () => {
     if (!name.trim()) {
       newErrors.name = "Tên nhân sự không được để trống";
       isValid = false;
-    }else {
+    } else {
       // Check for special characters
       const specialCharsRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
       if (specialCharsRegex.test(name)) {
@@ -173,9 +187,11 @@ const AddEmployee = () => {
       if (!emailRegex.test(email)) {
         newErrors.email = "Email không đúng định dạng";
         isValid = false;
-      }else {
+      } else {
         // Check if email already exists
-        const emailExists = allStaff.some(staff => staff.email === email.trim());
+        const emailExists = allStaff.some(
+          (staff) => staff.email === email.trim()
+        );
         if (emailExists) {
           newErrors.email = "Email đã tồn tại, vui lòng sử dụng email khác";
           isValid = false;
@@ -188,13 +204,17 @@ const AddEmployee = () => {
       // Phone number must be exactly 10 digits and start with 0
       const phoneRegex = /^0\d{9}$/;
       if (!phoneRegex.test(phone)) {
-        newErrors.phone = "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0";
+        newErrors.phone =
+          "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0";
         isValid = false;
-      }else {
+      } else {
         // Check if phone number already exists
-        const phoneExists = allStaff.some(staff => staff.phone === phone.trim());
+        const phoneExists = allStaff.some(
+          (staff) => staff.phone === phone.trim()
+        );
         if (phoneExists) {
-          newErrors.phone = "Số điện thoại đã tồn tại, vui lòng sử dụng số điện thoại khác";
+          newErrors.phone =
+            "Số điện thoại đã tồn tại, vui lòng sử dụng số điện thoại khác";
           isValid = false;
         }
       }
@@ -294,7 +314,7 @@ const AddEmployee = () => {
         console.error("Error fetching staff data:", error);
       }
     };
-    
+
     fetchAllStaff();
   }, []);
 
@@ -478,7 +498,9 @@ const AddEmployee = () => {
                           value={department}
                           onChange={handleDepartmentChange}
                           className={`border ${
-                            errors.department ? "border-red-500" : "border-gray-300"
+                            errors.department
+                              ? "border-red-500"
+                              : "border-gray-300"
                           } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                         >
                           <option value="">Chọn phòng ban</option>
@@ -515,7 +537,9 @@ const AddEmployee = () => {
                           value={position}
                           onChange={handlePositionChange}
                           className={`border ${
-                            errors.position ? "border-red-500" : "border-gray-300"
+                            errors.position
+                              ? "border-red-500"
+                              : "border-gray-300"
                           } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                         >
                           <option value="">Chọn chức vụ</option>
