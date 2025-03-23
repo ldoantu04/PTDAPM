@@ -13,7 +13,6 @@ import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
 import { backendUrl } from "../../../App";
 // Thay đổi API_BASE_URL để sử dụng MongoDB
-const API_BASE_URL = backendUrl + "/api";
 
 function PostDetail() {
   const { id } = useParams();
@@ -34,7 +33,7 @@ function PostDetail() {
       setLoading(true);
 
       // Lấy danh sách danh mục
-      const categoriesResponse = await axios.get(`${API_BASE_URL}/categories`);
+      const categoriesResponse = await axios.get(backendUrl + `/api/categories`);
       const catMap = {};
       const parentCatsMap = {};
 
@@ -49,7 +48,7 @@ function PostDetail() {
       setParentCategories(parentCatsMap);
 
       // Lấy chi tiết bài viết
-      const response = await axios.get(`${API_BASE_URL}/posts/${id}`);
+      const response = await axios.get(backendUrl + `/api/posts/${id}`);
       setPost(response.data);
     } catch (error) {
       console.error("Lỗi khi tải chi tiết bài viết:", error);
@@ -62,7 +61,7 @@ function PostDetail() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${API_BASE_URL}/posts/${id}`);
+      await axios.delete(backendUrl + `/api/posts/${id}`);
       message.success("Xóa bài viết thành công!");
       navigate("/tro-ly-khoa/bai-viet");
     } catch (error) {

@@ -1,7 +1,5 @@
 import axios from 'axios';
 import { backendUrl } from '../../App';
-const API_URL = backendUrl + '/api';
-
 // Cache để lưu trữ thông tin danh mục
 let categoryCache = null;
 
@@ -19,7 +17,7 @@ const categoryService = {
     }
 
     try {
-      const response = await axios.get(`${API_URL}/categories`);
+      const response = await axios.get(backendUrl + `/api/categories`);
       
       // Tạo đối tượng chứa thông tin danh mục
       const result = {
@@ -116,7 +114,7 @@ const categoryService = {
       };
       
       // Gọi API
-      const response = await axios.get(`${API_URL}/posts`, { params });
+      const response = await axios.get(backendUrl + `/api/posts`, { params });
       
       // Lọc bài viết theo danh mục
       let filteredPosts;

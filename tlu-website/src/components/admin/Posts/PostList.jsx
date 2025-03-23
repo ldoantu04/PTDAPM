@@ -14,7 +14,6 @@ import CustomTable from "../../layouts/CustomTable";
 import Footer from "../../layouts/Footer";
 import { backendUrl } from "../../../App";
 // Thay đổi API_BASE_URL để sử dụng MongoDB
-const API_BASE_URL = backendUrl + "/api";
 
 function PostList() {
   const [posts, setPosts] = useState([]);
@@ -32,7 +31,7 @@ function PostList() {
     setLoading(true);
     try {
       // Lấy danh sách danh mục
-      const categoriesResponse = await axios.get(`${API_BASE_URL}/categories`);
+      const categoriesResponse = await axios.get(backendUrl + `/api/categories`);
 
       // Xử lý danh mục cha-con
       const catMap = {};
@@ -48,7 +47,7 @@ function PostList() {
       setParentCategories(parentCatsMap);
 
       // Lấy danh sách bài viết
-      const postsResponse = await axios.get(`${API_BASE_URL}/posts`);
+      const postsResponse = await axios.get(backendUrl + `/api/posts`);
 
       // Sắp xếp bài viết theo thứ tự mới nhất trước (dựa vào created_at)
       const sortedPosts = [...postsResponse.data].sort((a, b) => {
@@ -70,7 +69,7 @@ function PostList() {
   // Xóa bài viết
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${API_BASE_URL}/posts/${id}`);
+      await axios.delete(backendUrl + `/api/posts/${id}`);
       message.success("Xóa bài viết thành công!");
       fetchData(); // Tải lại dữ liệu
     } catch (error) {
@@ -86,7 +85,7 @@ function PostList() {
 
       // Lặp qua và xóa từng bài viết
       await Promise.all(
-        selectedIds.map((id) => axios.delete(`${API_BASE_URL}/posts/${id}`))
+        selectedIds.map((id) => axios.delete(backendUrl + `/api/posts/${id}`))
       );
 
       message.success({

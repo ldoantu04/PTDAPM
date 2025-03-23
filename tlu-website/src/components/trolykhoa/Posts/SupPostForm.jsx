@@ -10,7 +10,6 @@ import SimpleSelect from "../../layouts/SimpleSelect";
 import { backendUrl } from "../../../App";
 const { TextArea } = Input;
 // Thay đổi API_BASE_URL từ mockapi thành MongoDB
-const API_BASE_URL = backendUrl + "/api";
 
 function PostForm({ isEditing = false }) {
   const { id } = useParams();
@@ -62,7 +61,7 @@ function PostForm({ isEditing = false }) {
       setLoading((prev) => ({ ...prev, post: true }));
 
       // Thay đổi để sử dụng MongoDB API
-      const response = await axios.get(`${API_BASE_URL}/posts/${postId}`);
+      const response = await axios.get(backendUrl + `/api/posts/${postId}`);
       const postData = response.data;
 
       // Cập nhật state với dữ liệu bài viết
@@ -87,7 +86,7 @@ function PostForm({ isEditing = false }) {
       setLoading((prev) => ({ ...prev, categories: true }));
 
       // Thay đổi để sử dụng MongoDB API
-      const response = await axios.get(`${API_BASE_URL}/categories`);
+      const response = await axios.get(backendUrl + `/api/categories`);
       const categoriesData = response.data;
 
       // Phân loại danh mục - thay đổi parentId thành parent_id để phù hợp với MongoDB schema
@@ -320,11 +319,11 @@ function PostForm({ isEditing = false }) {
       // Gửi request lên server
       if (isEditing) {
         // Cập nhật bài viết
-        await axios.put(`${API_BASE_URL}/posts/${id}`, postPayload);
+        await axios.put(backendUrl + `/api/posts/${id}`, postPayload);
         message.success("Cập nhật bài viết thành công!");
       } else {
         // Tạo bài viết mới
-        await axios.post(`${API_BASE_URL}/posts`, postPayload);
+        await axios.post(backendUrl + `/api/posts`, postPayload);
         message.success("Tạo bài viết mới thành công!");
         form.resetFields();
         setFormData({
