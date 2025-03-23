@@ -4,6 +4,7 @@ import Footer from "../layouts/Footer";
 import SmallNavBar from "../layouts/SmallNavBar";
 import HighlightHeader from "../layouts/HighlightHeader";
 import axios from "axios";
+import { backendUrl } from '../../App'
 const sampleData = {
   navigationLinks: [
     { label: "Trang chủ", link: "/" },
@@ -22,7 +23,7 @@ function TeachStaff() {
     const fetchStaffs = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:4000/api/staff");
+        const response = await axios.get(backendUrl +"/api/staff");
         setStaffs(response.data);
         setLoading(false);
       } catch (err) {

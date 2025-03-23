@@ -40,6 +40,7 @@ import SupPostList from "./components/trolykhoa/Posts/SupPostList";
 import SupPostForm from "./components/trolykhoa/Posts/SupPostForm";
 import SupPostDetail from "./components/trolykhoa/Posts/SupPostDetail";
 import Categories from "./components/admin/Categories";
+export const backendUrl = import.meta.env.VITE_BACKEND_URL
 
 function App() {
   return (

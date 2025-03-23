@@ -1,5 +1,6 @@
 import axios from 'axios';
-const API_URL = 'http://localhost:4000/api';
+import { backendUrl } from '../../App';
+const API_URL = backendUrl + '/api';
 
 // Cache để lưu trữ thông tin danh mục
 let categoryCache = null;

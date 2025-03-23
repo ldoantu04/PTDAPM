@@ -11,8 +11,9 @@ import {
 import axios from "axios";
 import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
+import { backendUrl } from "../../../App";
 // Thay đổi API_BASE_URL để sử dụng MongoDB
-const API_BASE_URL = "http://localhost:4000/api";
+const API_BASE_URL = backendUrl + "/api";
 
 function PostDetail() {
   const { id } = useParams();

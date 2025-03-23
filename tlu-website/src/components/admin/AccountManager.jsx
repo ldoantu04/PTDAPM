@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Toolbar from "../layouts/Toolbar";
 import { message, Popconfirm } from "antd"; // Import Ant Design components
+import { backendUrl } from "../../App";
 const AccountManager = () => {
   const [accounts, setAccounts] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -24,7 +25,7 @@ const AccountManager = () => {
 
   const fetchAccounts = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/account");
+      const response = await axios.get(backendUrl + "/api/account");
       setAccounts(response.data);
     } catch (err) {
       message.error("Không thể tải danh sách tài khoản");
@@ -94,7 +95,7 @@ const AccountManager = () => {
     }
 
     try {
-      await axios.post("http://localhost:4000/api/account", {
+      await axios.post(backendUrl + "/api/account", {
         username: username.trim(),
         password,
         role: "trolykhoa",
@@ -151,7 +152,7 @@ const AccountManager = () => {
       const updateData = { username: username.trim(), password };
 
       await axios.put(
-        `http://localhost:4000/api/account/${currentAccount._id}`,
+        backendUrl + `/api/account/${currentAccount._id}`,
         updateData
       );
 
@@ -187,7 +188,7 @@ const AccountManager = () => {
 
   const handleDeleteConfirm = async (account) => {
     try {
-      await axios.delete(`http://localhost:4000/api/account/${account._id}`);
+      await axios.delete(backendUrl + `/api/account/${account._id}`);
 
       setAccounts(accounts.filter((acc) => acc._id !== account._id));
 

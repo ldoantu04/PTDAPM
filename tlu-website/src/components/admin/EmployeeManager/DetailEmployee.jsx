@@ -4,6 +4,7 @@ import axios from "axios";
 import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
 import Toolbar from "../../layouts/Toolbar";
+import { backendUrl } from "../../../App";
 const DetailEmployee = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const DetailEmployee = () => {
     const fetchStaffData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/staff/${id}`
+          backendUrl + `/api/staff/${id}`
         );
         setStaff(response.data);
         setLoading(false);

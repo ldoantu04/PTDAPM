@@ -6,6 +6,7 @@ import Footer from "../../layouts/Footer";
 // import { toast } from "react-toastify";
 import Toolbar from "../../layouts/Toolbar";
 import { message } from "antd";
+import { backendUrl } from "../../../App";
 const EditEmployee = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const EditEmployee = () => {
   useEffect(() => {
     const fetchAllStaff = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/staff");
+        const response = await axios.get(backendUrl + "/api/staff");
         setAllStaff(response.data);
       } catch (error) {
         console.error("Error fetching all staff data:", error);
@@ -53,7 +54,7 @@ const EditEmployee = () => {
     const fetchStaffData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/staff/${id}`
+          backendUrl + `/api/staff/${id}`
         );
 
         const staff = response.data;
@@ -314,7 +315,7 @@ const EditEmployee = () => {
       }
 
       // Submit the form - using PUT for update
-      await axios.put(`http://localhost:4000/api/staff/${id}`, formData, {
+      await axios.put(backendUrl + `/api/staff/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

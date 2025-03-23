@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext"; // Import AuthContext
 import axios from "axios";
+import { backendUrl } from "../../App";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +23,7 @@ function Login() {
     }
 
     try {
-      const response = await axios.post("http://localhost:4000/api/login", {
+      const response = await axios.post(backendUrl + "/api/login", {
         username,
         password,
       });

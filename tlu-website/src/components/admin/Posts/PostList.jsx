@@ -12,8 +12,9 @@ import NavBar from "../../layouts/NavBar";
 import Toolbar from "../../layouts/Toolbar";
 import CustomTable from "../../layouts/CustomTable";
 import Footer from "../../layouts/Footer";
+import { backendUrl } from "../../../App";
 // Thay đổi API_BASE_URL để sử dụng MongoDB
-const API_BASE_URL = "http://localhost:4000/api";
+const API_BASE_URL = backendUrl + "/api";
 
 function PostList() {
   const [posts, setPosts] = useState([]);

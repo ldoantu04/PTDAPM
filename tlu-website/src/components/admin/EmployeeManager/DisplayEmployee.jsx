@@ -6,6 +6,7 @@ import Footer from "../../layouts/Footer";
 // import { toast } from "react-toastify";
 import Toolbar from "../../layouts/Toolbar";
 import { message, Popconfirm } from "antd";
+import { backendUrl } from "../../../App";
 const DisplayEmployee = () => {
   const [staffs, setStaffs] = useState([]);
   const [staffToDelete, setStaffToDelete] = useState(null);
@@ -19,7 +20,7 @@ const DisplayEmployee = () => {
   // Get staff list
   const fetchStaffs = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/staff");
+      const response = await axios.get(backendUrl + "/api/staff");
       setStaffs(response.data);
     } catch (err) {
       message.error("Không thể tải danh sách nhân sự");
@@ -40,7 +41,7 @@ const DisplayEmployee = () => {
   // Xử lý xóa nhân sự
   const handleDeleteConfirm = async (staffId) => {
     try {
-      await axios.delete(`http://localhost:4000/api/staff/${staffId}`);
+      await axios.delete(backendUrl + `/api/staff/${staffId}`);
 
       // Cập nhật danh sách nhân sự sau khi xóa
       setStaffs(staffs.filter((staff) => staff._id !== staffId));

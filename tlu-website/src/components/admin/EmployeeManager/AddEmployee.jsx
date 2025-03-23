@@ -6,6 +6,7 @@ import Footer from "../../layouts/Footer";
 // import { toast } from "react-toastify";
 import Toolbar from "../../layouts/Toolbar";
 import { message } from "antd";
+import { backendUrl } from "../../../App";
 const AddEmployee = () => {
   const navigate = useNavigate();
 
@@ -270,7 +271,7 @@ const AddEmployee = () => {
       }
 
       // Submit the form
-      await axios.post("http://localhost:4000/api/staff", formData, {
+      await axios.post(backendUrl + "/api/staff", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -308,7 +309,7 @@ const AddEmployee = () => {
   useEffect(() => {
     const fetchAllStaff = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/staff");
+        const response = await axios.get(backendUrl + "/api/staff");
         setAllStaff(response.data);
       } catch (error) {
         console.error("Error fetching staff data:", error);

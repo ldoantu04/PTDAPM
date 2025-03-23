@@ -8,9 +8,10 @@ import Footer from "../../layouts/Footer";
 import Toolbar from "../../layouts/Toolbar";
 import ImageUpload from "../../layouts/ImageUpload";
 import SimpleSelect from "../../layouts/SimpleSelect";
+import { backendUrl } from "../../../App";
 const { TextArea } = Input;
 // Thay đổi API_BASE_URL từ mockapi thành MongoDB
-const API_BASE_URL = "http://localhost:4000/api";
+const API_BASE_URL = backendUrl + "/api";
 
 function PostForm({ isEditing = false }) {
   const { id } = useParams();

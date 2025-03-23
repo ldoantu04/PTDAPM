@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Toolbar from "../layouts/Toolbar";
 import { message, Popconfirm } from "antd"; // Import Ant Design components
+import { backendUrl } from "../../App";
 const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -21,7 +22,7 @@ const Categories = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/categories");
+      const response = await axios.get(backendUrl + "/api/categories");
       setCategories(response.data);
       setErrors({ name: "" });
     } catch (err) {
@@ -62,7 +63,7 @@ const Categories = () => {
     }
 
     try {
-      await axios.post("http://localhost:4000/api/categories", {
+      await axios.post(backendUrl + "/api/categories", {
         name,
         parent_id: parentCategory || null, // Gửi parent_id nếu có
       });
@@ -93,7 +94,7 @@ const Categories = () => {
 
     try {
       await axios.put(
-        `http://localhost:4000/api/categories/${currentCategory._id}`,
+        backendUrl + `/api/categories/${currentCategory._id}`,
         {
           name,
           parent_id: parentCategory || null, // Cập nhật danh mục lớn
@@ -129,7 +130,7 @@ const Categories = () => {
   const handleDeleteConfirm = async (category) => {
     try {
       await axios.delete(
-        `http://localhost:4000/api/categories/${category._id}`
+        backendUrl +`/api/categories/${category._id}`
       );
       setCategories(categories.filter((cat) => cat._id !== category._id));
       message.success("Danh mục đã được xóa thành công!");
