@@ -19,9 +19,9 @@ const TinyEditor = forwardRef((props, ref) => {
     value = "",
     onChange,
     height = 500,
-    cloudName = "doquocviet",
-    uploadPreset = "Images",
-    apiKey = "8f59litzpf0jmru0kx3uhorl2kywsf1ed0qpjsf6vby493fw",
+    cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "doquocviet",
+    uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || "Images",
+    apiKey = import.meta.env.VITE_TINYMCE_API_KEY,
     onImageUpload = null, // Thêm callback để thông báo khi có ảnh được upload
     existingImages = []    // Thêm mảng ảnh hiện có
   } = props;
