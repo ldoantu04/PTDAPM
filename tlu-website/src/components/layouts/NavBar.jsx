@@ -20,7 +20,9 @@ function NavBar() {
     logout(); // Xóa thông tin đăng nhập
     navigate("/");
   };
+
   console.log("User in NavBar:", user);
+  
   return (
     <div className="w-full h-[105px] flex items-center justify-between px-60 py-4 bg-white shadow-lg fixed top-0 z-10">
       {/* Logo */}
