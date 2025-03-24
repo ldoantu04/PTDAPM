@@ -518,8 +518,9 @@ function PostForm({ isEditing = false }) {
                 onImageUpload={handleImageUploaded}
                 existingImages={formData.uploadedImages}
                 height={600}
-                cloudName="doquocviet"
-                uploadPreset="Images"
+                cloudName={import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}
+                uploadPreset={import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET}
+                apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
               />
             </div>
 
