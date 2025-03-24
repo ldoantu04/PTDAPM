@@ -10,7 +10,6 @@ import ImageUpload from "../../layouts/ImageUpload";
 import SimpleSelect from "../../layouts/SimpleSelect";
 import { backendUrl } from "../../../App";
 const { TextArea } = Input;
-// Thay đổi API_BASE_URL từ mockapi thành MongoDB
 
 function PostForm({ isEditing = false }) {
   const { id } = useParams();
@@ -24,6 +23,7 @@ function PostForm({ isEditing = false }) {
     editorContent: "",
     imagePreview: null,
     featureImageFile: null,
+    uploadedImages: [] // Mảng lưu URL ảnh đã upload
   });
 
   const [categoryData, setCategoryData] = useState({
@@ -49,6 +49,115 @@ function PostForm({ isEditing = false }) {
     }
   }, [isEditing, id]);
 
+  // Hàm xử lý khi có ảnh được upload từ TinyMCE
+  const handleImageUploaded = (images) => {
+    console.log("Ảnh mới được thêm từ TinyMCE:", images);
+    setFormData(prev => ({
+      ...prev,
+      uploadedImages: [...prev.uploadedImages, ...images]
+    }));
+  };
+
+  // Xử lý khi submit form
+  const handleSubmit = async (values) => {
+    setLoading((prev) => ({ ...prev, submitting: true }));
+    try {
+      // Lấy nội dung từ editor
+      const content = editorRef.current?.getContent();
+      if (!content || content.trim() === "") {
+        message.error("Vui lòng nhập nội dung bài viết!");
+        setLoading((prev) => ({ ...prev, submitting: false }));
+        return;
+      }
+
+      // Xử lý ảnh base64 trong nội dung
+      let processedContent = content;
+      const imagesInContent = await editorRef.current?.processContent();
+      if (imagesInContent) {
+        processedContent = imagesInContent;
+      }
+
+      // Xử lý ảnh đại diện (nếu có)
+      const featureImageUrl = await uploadFeatureImage();
+
+      // Chuẩn bị mô tả (description) từ nội dung
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = processedContent;
+      const plainText = tempDiv.textContent || tempDiv.innerText || "";
+      const description = plainText.substring(0, 200); // Lấy 200 ký tự đầu tiên
+
+      // Lấy danh sách ảnh đã upload
+      const imagesList = editorRef.current?.getUploadedImages() || formData.uploadedImages;
+      console.log("Danh sách ảnh sẽ lưu:", imagesList);
+
+      // Lấy thời gian hiện tại
+      const currentDate = new Date();
+
+      // Tạo payload để gửi lên server
+      const postPayload = {
+        title: values.title,
+        category_id: values.categoryId,
+        detail: processedContent,
+        description: description,
+        thumbnail: featureImageUrl,
+        images: imagesList, // Mảng URL ảnh từ Cloudinary
+        updated_at: currentDate,
+        account_id: "67d44e69aaa3d0006967b524", // ID tài khoản mặc định hoặc từ context auth
+      };
+
+      // Nếu là bài viết mới, thêm created_at
+      if (!isEditing) {
+        postPayload.created_at = currentDate;
+      }
+
+      console.log("Đang gửi dữ liệu:", postPayload);
+
+      // Gửi request lên server
+      if (isEditing) {
+        // Cập nhật bài viết
+        const response = await axios.put(backendUrl + `/api/posts/${id}`, postPayload);
+        console.log("Kết quả cập nhật:", response.data);
+        message.success("Cập nhật bài viết thành công!");
+      } else {
+        // Tạo bài viết mới
+        const response = await axios.post(backendUrl + `/api/posts`, postPayload);
+        console.log("Kết quả tạo mới:", response.data);
+        message.success("Tạo bài viết mới thành công!");
+        form.resetFields();
+        setFormData({
+          postData: null,
+          editorContent: "",
+          imagePreview: null,
+          featureImageFile: null,
+          uploadedImages: [] // Reset mảng ảnh
+        });
+      }
+
+      // Chuyển hướng về trang danh sách bài viết
+      navigate("/admin/bai-viet");
+    } catch (error) {
+      console.error("Chi tiết lỗi:", error);
+      console.error("Response data:", error.response?.data);
+      console.error("Request payload:", error.config?.data);
+      message.error("Không thể lưu bài viết: " + (error.response?.data?.message || error.message));
+    } finally {
+      setLoading((prev) => ({ ...prev, submitting: false }));
+    }
+  };
+
+  // Đối với chức năng chỉnh sửa, cần cập nhật state uploadedImages với dữ liệu hiện có
+  useEffect(() => {
+    if (isEditing && formData.postData) {
+      if (formData.postData.images && Array.isArray(formData.postData.images)) {
+        console.log("Đã tải danh sách ảnh từ DB:", formData.postData.images);
+        setFormData(prev => ({
+          ...prev,
+          uploadedImages: formData.postData.images
+        }));
+      }
+    }
+  }, [isEditing, formData.postData]);
+
   // Cập nhật form khi dữ liệu bài viết và danh mục đã tải xong
   useEffect(() => {
     if (formData.postData && categoryData.all.length > 0) {
@@ -61,16 +170,15 @@ function PostForm({ isEditing = false }) {
     try {
       setLoading((prev) => ({ ...prev, post: true }));
 
-      // Thay đổi để sử dụng MongoDB API
       const response = await axios.get(backendUrl + `/api/posts/${postId}`);
       const postData = response.data;
+      console.log("Dữ liệu bài viết từ server:", postData);
 
       // Cập nhật state với dữ liệu bài viết
       setFormData((prev) => ({
         ...prev,
         postData: postData,
         imagePreview: postData.thumbnail || null,
-        // Thay đổi từ content thành detail để phù hợp với MongoDB schema
         editorContent: postData.detail || "",
       }));
     } catch (error) {
@@ -86,11 +194,10 @@ function PostForm({ isEditing = false }) {
     try {
       setLoading((prev) => ({ ...prev, categories: true }));
 
-      // Thay đổi để sử dụng MongoDB API
       const response = await axios.get(backendUrl + `/api/categories`);
       const categoriesData = response.data;
 
-      // Phân loại danh mục - thay đổi parentId thành parent_id để phù hợp với MongoDB schema
+      // Phân loại danh mục
       const parents = categoriesData.filter((cat) => !cat.parent_id);
 
       // Xây dựng map danh mục cha -> danh mục con
@@ -129,7 +236,7 @@ function PostForm({ isEditing = false }) {
         title: post.title || "",
       });
 
-      // Xử lý danh mục - thay đổi categoryId thành category_id để phù hợp với MongoDB schema
+      // Xử lý danh mục
       const categoryId = post.category_id;
       if (categoryId && categoryData.all.length > 0) {
         // Tìm danh mục theo _id thay vì id
@@ -189,7 +296,6 @@ function PostForm({ isEditing = false }) {
 
   // Tạo options cho select danh mục cha
   const parentCategoryOptions = categoryData.parents.map((cat) => ({
-    // Thay đổi id thành _id để phù hợp với MongoDB
     value: cat._id,
     label: cat.name,
   }));
@@ -204,7 +310,6 @@ function PostForm({ isEditing = false }) {
       !categoryData.children[parentId] ||
       categoryData.children[parentId].length === 0
     ) {
-      // Thay đổi id thành _id để phù hợp với MongoDB
       const parent = categoryData.all.find((cat) => cat._id === parentId);
       return parent
         ? [{ value: parent._id, label: `Sử dụng "${parent.name}"` }]
@@ -213,7 +318,6 @@ function PostForm({ isEditing = false }) {
 
     // Trả về danh sách các danh mục con
     return categoryData.children[parentId].map((cat) => ({
-      // Thay đổi id thành _id để phù hợp với MongoDB
       value: cat._id,
       label: cat.name,
     }));
@@ -266,82 +370,12 @@ function PostForm({ isEditing = false }) {
         formDataObj
       );
 
+      console.log("Kết quả upload ảnh đại diện:", response.data.secure_url);
       return response.data.secure_url;
     } catch (error) {
       console.error("Lỗi khi upload ảnh:", error);
       message.error("Không thể upload ảnh đại diện!");
       return null;
-    }
-  };
-
-  // Xử lý khi submit form
-  const handleSubmit = async (values) => {
-    setLoading((prev) => ({ ...prev, submitting: true }));
-    try {
-      // Lấy nội dung từ editor
-      const content = editorRef.current?.getContent();
-      if (!content || content.trim() === "") {
-        message.error("Vui lòng nhập nội dung bài viết!");
-        setLoading((prev) => ({ ...prev, submitting: false }));
-        return;
-      }
-
-      // Xử lý ảnh đại diện (nếu có)
-      const featureImageUrl = await uploadFeatureImage();
-
-      // Chuẩn bị mô tả (description) từ nội dung
-      const tempDiv = document.createElement("div");
-      tempDiv.innerHTML = content;
-      const plainText = tempDiv.textContent || tempDiv.innerText || "";
-      const description = plainText.substring(0, 200); // Lấy 200 ký tự đầu tiên
-
-      // Tạo clean HTML content để lưu
-      const processedContent = content;
-
-      // Lấy thời gian hiện tại
-      const currentDate = new Date();
-
-      // Tạo payload để gửi lên server - thay đổi để phù hợp với MongoDB schema
-      const postPayload = {
-        title: values.title,
-        category_id: values.categoryId,
-        detail: processedContent, // Thay đổi từ content thành detail
-        description: description,
-        thumbnail: featureImageUrl,
-        updated_at: currentDate, // Thay đổi từ updatedAt thành updated_at
-        account_id: "67d44e69aaa3d0006967b524", // Thêm account_id (có thể lấy từ session hoặc giá trị mặc định)
-      };
-
-      // Nếu là bài viết mới, thêm created_at
-      if (!isEditing) {
-        postPayload.created_at = currentDate; // Thay đổi từ createdAt thành created_at
-      }
-
-      // Gửi request lên server
-      if (isEditing) {
-        // Cập nhật bài viết
-        await axios.put(backendUrl + `/api/posts/${id}`, postPayload);
-        message.success("Cập nhật bài viết thành công!");
-      } else {
-        // Tạo bài viết mới
-        await axios.post(backendUrl + `/api/posts`, postPayload);
-        message.success("Tạo bài viết mới thành công!");
-        form.resetFields();
-        setFormData({
-          postData: null,
-          editorContent: "",
-          imagePreview: null,
-          featureImageFile: null,
-        });
-      }
-
-      // Chuyển hướng về trang danh sách bài viết
-      navigate("/admin/bai-viet");
-    } catch (error) {
-      console.error("Lỗi khi lưu bài viết:", error);
-      message.error("Không thể lưu bài viết!");
-    } finally {
-      setLoading((prev) => ({ ...prev, submitting: false }));
     }
   };
 
@@ -481,6 +515,8 @@ function PostForm({ isEditing = false }) {
                 ref={editorRef}
                 value={formData.editorContent}
                 onChange={handleEditorChange}
+                onImageUpload={handleImageUploaded}
+                existingImages={formData.uploadedImages}
                 height={600}
                 cloudName="doquocviet"
                 uploadPreset="Images"
@@ -506,4 +542,4 @@ function PostForm({ isEditing = false }) {
   );
 }
 
-export default PostForm;
+export default PostForm;  

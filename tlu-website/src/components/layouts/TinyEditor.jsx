@@ -22,17 +22,27 @@ const TinyEditor = forwardRef((props, ref) => {
     cloudName = "doquocviet",
     uploadPreset = "Images",
     apiKey = "8f59litzpf0jmru0kx3uhorl2kywsf1ed0qpjsf6vby493fw",
+    onImageUpload = null, // Thêm callback để thông báo khi có ảnh được upload
+    existingImages = []    // Thêm mảng ảnh hiện có
   } = props;
 
   // Refs và State
   const editorRef = useRef(null);
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [internalValue, setInternalValue] = useState(value);
+  const [uploadedImages, setUploadedImages] = useState(existingImages || []); // Mảng lưu URL ảnh đã upload
 
   // Cập nhật giá trị khi prop thay đổi
   useEffect(() => {
     setInternalValue(value);
   }, [value]);
+
+  // Cập nhật danh sách ảnh hiện có khi prop thay đổi
+  useEffect(() => {
+    if (existingImages && existingImages.length > 0) {
+      setUploadedImages(existingImages);
+    }
+  }, [existingImages]);
 
   // Xử lý khi editor được khởi tạo
   const handleEditorInit = (evt, editor) => {
@@ -138,7 +148,20 @@ const TinyEditor = forwardRef((props, ref) => {
         formData
       );
       
-      return response.data.secure_url;
+      const imageUrl = response.data.secure_url;
+      
+      // Thêm URL mới vào danh sách ảnh đã upload
+      if (imageUrl) {
+        const newUploadedImages = [...uploadedImages, imageUrl];
+        setUploadedImages(newUploadedImages);
+        
+        // Gọi callback để thông báo ảnh mới cho component cha
+        if (onImageUpload) {
+          onImageUpload([imageUrl]);
+        }
+      }
+      
+      return imageUrl;
     } catch (error) {
       console.error("Lỗi upload ảnh:", error);
       return null;
@@ -177,12 +200,16 @@ const TinyEditor = forwardRef((props, ref) => {
       let processedContent = content;
       let uploadedCount = 0;
       let failedCount = 0;
+      let newUploadedImages = [];
 
       for (const img of base64Images) {
         try {
           const cloudinaryUrl = await uploadToCloudinary(img.base64);
           
           if (cloudinaryUrl) {
+            // Lưu URL ảnh mới
+            newUploadedImages.push(cloudinaryUrl);
+            
             // Trích xuất style từ ảnh cũ (nếu có)
             const styleMatch = img.fullTag.match(/style="([^"]*)"/);
             let styleAttr = '';
@@ -212,6 +239,11 @@ const TinyEditor = forwardRef((props, ref) => {
       }
 
       hideLoading();
+      
+      // Thông báo ảnh mới cho component cha
+      if (onImageUpload && newUploadedImages.length > 0) {
+        onImageUpload(newUploadedImages);
+      }
       
       if (uploadedCount > 0) {
         message.success(`Đã tải lên ${uploadedCount} ảnh thành công`);
@@ -264,6 +296,10 @@ const TinyEditor = forwardRef((props, ref) => {
     formatAllImages: () => {
       formatAllImages();
       return editorRef.current?.getContent() || internalValue;
+    },
+    
+    getUploadedImages: () => {
+      return uploadedImages;
     },
     
     getEditor: () => editorRef.current
@@ -374,11 +410,12 @@ const TinyEditor = forwardRef((props, ref) => {
             input.setAttribute('type', 'file');
             input.setAttribute('accept', 'image/*');
             
-            input.onchange = function() {
+            input.onchange = async function() {
               const file = this.files[0];
               const reader = new FileReader();
               
-              reader.onload = function() {
+              reader.onload = async function() {
+                // Callback để hiện ảnh trong editor
                 callback(reader.result, {
                   alt: file.name
                 });
@@ -387,6 +424,30 @@ const TinyEditor = forwardRef((props, ref) => {
                 setTimeout(() => {
                   formatAllImages();
                 }, 100);
+                
+                // Upload ảnh lên Cloudinary
+                try {
+                  const formData = new FormData();
+                  formData.append("file", file);
+                  formData.append("upload_preset", uploadPreset);
+                  
+                  const response = await axios.post(
+                    `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+                    formData
+                  );
+                  
+                  const imageUrl = response.data.secure_url;
+                  
+                  // Gửi URL ảnh mới lên component cha
+                  if (imageUrl && onImageUpload) {
+                    const newImages = [...uploadedImages, imageUrl];
+                    setUploadedImages(newImages);
+                    onImageUpload([imageUrl]);
+                  }
+                } catch (error) {
+                  console.error("Lỗi upload ảnh:", error);
+                  message.error("Không thể tải lên ảnh");
+                }
               };
               
               reader.readAsDataURL(file);

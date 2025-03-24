@@ -11,13 +11,13 @@ function ArticleOther({ title, imageUrl, date, excerpt, link }) {
   return (
     <div className="flex flex-row gap-10 h-52">
       <div className="overflow-hidden w-1/3 h-full flex-shrink-0">
-        <Link to={link || "#"}>
+          <Link to={link || "#"}>
           <img
             src={imageUrl || "/assets/article_image_sample.png"}
             alt={title || "Article"}
             className="w-full h-full object-cover transition-transform duration-300 ease-out hover:scale-110 hover:opacity-80"
           />
-        </Link>
+          </Link>
       </div>
 
       <div className="flex flex-col gap-y-2.5 w-2/3">
@@ -26,10 +26,10 @@ function ArticleOther({ title, imageUrl, date, excerpt, link }) {
             <h3 className="font-semibold text-blue1 text-xl hover:underline transition-all duration-300 ease-out line-clamp-2">
               {title || "Tiêu đề bài viết"}
             </h3>
-          </Link>
+            </Link>
         </div>
 
-        {date && (
+        {/* {date && (
           <span className="w-fit text-xs text-gray3 border-b border-gray2 pb-2">
             {formattedDate}
           </span>
@@ -41,7 +41,7 @@ function ArticleOther({ title, imageUrl, date, excerpt, link }) {
               {excerpt}
             </p>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

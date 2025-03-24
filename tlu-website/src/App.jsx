@@ -54,10 +54,12 @@ function App() {
         <Route path="/gioi-thieu/doi-ngu-nhan-su" element={<TeachStaff />} />
 
         <Route path="/tuyen-sinh" element={<AdmissionMain />} />
-        <Route path="/tuyen-sinh/dai-hoc" element={<AdmissionMain />} />
+        {/* <Route path="/tuyen-sinh/dai-hoc" element={<AdmissionMain />} />
         <Route path="/tuyen-sinh/thac-si" element={<AdmissionMain />} />
-        <Route path="/tuyen-sinh/tien-si" element={<AdmissionMain />} />
-        <Route path="/tuyen-sinh/chi-tiet-bai-viet" element={<AdmissionPost />} />
+        <Route path="/tuyen-sinh/tien-si" element={<AdmissionMain />} /> */}
+        <Route path="/tuyen-sinh/:type" element={<AdmissionMain />} />
+        {/* <Route path="/tuyen-sinh/chi-tiet-bai-viet" element={<AdmissionPost />} /> */}
+        <Route path="/bai-viet/:id" element={<AdmissionPost />} />
 
         <Route path="/tin-tuc" element={<News />} />
 

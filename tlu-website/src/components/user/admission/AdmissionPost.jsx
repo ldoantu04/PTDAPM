@@ -1,101 +1,184 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import axios from "axios";
+import { Spin, message } from "antd";
 import NavBar from "../../layouts/NavBar";
 import Footer from "../../layouts/Footer";
 import SmallNavBar from "../../layouts/SmallNavBar";
 import Sidebar from "../../layouts/Sidebar";
+import { backendUrl } from "../../../App";
 
 function AdmissionPost() {
+  const { id } = useParams(); // Lấy ID bài viết từ URL
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [categories, setCategories] = useState([]);
+
+  // Danh sách menu tuyển sinh
   const menuItems = [
-    { label: "Tuyển sinh Đại học", link: "" },
-    { label: "Tuyển sinh Thạc sĩ", link: "" },
-    { label: "Tuyển sinh Tiến sĩ", link: "" },
+    { label: "Tuyển sinh Đại học", link: "/tuyen-sinh/dai-hoc" },
+    { label: "Tuyển sinh Thạc sĩ", link: "/tuyen-sinh/thac-si" },
+    { label: "Tuyển sinh Tiến sĩ", link: "/tuyen-sinh/tien-si" },
   ];
 
-  const sampleData = {
-    navigationLinks: [
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`${backendUrl}/api/posts/${id}`);
+        setPost(response.data);
+        
+        // Lấy danh sách danh mục để hiển thị breadcrumb
+        const categoriesResponse = await axios.get(`${backendUrl}/api/categories`);
+        setCategories(categoriesResponse.data);
+        
+        setError(null);
+      } catch (err) {
+        console.error("Lỗi khi tải bài viết:", err);
+        setError("Không thể tải bài viết");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchPost();
+    }
+  }, [id]);
+
+  // Tạo breadcrumb dựa trên thông tin bài viết và danh mục
+  const getBreadcrumbLinks = () => {
+    const links = [
       { label: "Trang chủ", href: "/" },
       { label: "Tuyển sinh", href: "/tuyen-sinh" },
-      { label: "Chi tiết bài viết", href: "" },
-    ],
+    ];
+    
+    if (post && categories.length > 0) {
+      // Tìm danh mục của bài viết
+      const category = categories.find(cat => cat._id === post.category_id);
+      if (category) {
+        // Nếu là danh mục con
+        if (category.parent_id) {
+          const parentCategory = categories.find(cat => cat._id === category.parent_id);
+          if (parentCategory) {
+            // Xác định loại tuyển sinh để thêm vào breadcrumb
+            let type = "";
+            if (parentCategory.name.includes("Đại học")) type = "dai-hoc";
+            else if (parentCategory.name.includes("Thạc sĩ")) type = "thac-si";
+            else if (parentCategory.name.includes("Tiến sĩ")) type = "tien-si";
+            
+            links.push({ 
+              label: parentCategory.name, 
+              href: `/tuyen-sinh/${type}`
+            });
+          }
+          
+          links.push({ 
+            label: category.name, 
+            href: `/tuyen-sinh/${category._id}` 
+          });
+        } else {
+          // Nếu là danh mục chính
+          let type = "";
+          if (category.name.includes("Đại học")) type = "dai-hoc";
+          else if (category.name.includes("Thạc sĩ")) type = "thac-si";
+          else if (category.name.includes("Tiến sĩ")) type = "tien-si";
+          
+          links.push({ 
+            label: category.name, 
+            href: `/tuyen-sinh/${type}`
+          });
+        }
+      }
+    }
+    
+    // Thêm tiêu đề bài viết vào breadcrumb
+    if (post) {
+      links.push({ label: post.title, href: "" });
+    }
+    
+    return links;
   };
+
+  // Định dạng ngày tháng
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen">
+        <NavBar />
+        <div className="mt-[120px] flex justify-center items-center min-h-[50vh]">
+          <Spin size="large" tip="Đang tải bài viết..." />
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen">
+        <NavBar />
+        <div className="mt-[120px] flex justify-center items-center flex-col min-h-[50vh]">
+          <p className="text-red-500 text-lg">{error}</p>
+          <Link to="/tuyen-sinh" className="mt-4 text-blue-500 hover:underline">
+            Quay lại trang tuyển sinh
+          </Link>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!post) {
+    return (
+      <div className="min-h-screen">
+        <NavBar />
+        <div className="mt-[120px] flex justify-center items-center flex-col min-h-[50vh]">
+          <p className="text-gray-500 text-lg">Không tìm thấy bài viết</p>
+          <Link to="/tuyen-sinh" className="mt-4 text-blue-500 hover:underline">
+            Quay lại trang tuyển sinh
+          </Link>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div>
       <NavBar />
 
       <main>
-        <SmallNavBar navigationLinks={sampleData.navigationLinks} />
+        <SmallNavBar navigationLinks={getBreadcrumbLinks()} />
 
-        <div className="flex gap-30">
+        <div className="flex gap-x-30">
           <div className="w-1/4">
             <Sidebar title="Tuyển sinh" items={menuItems} />
           </div>
 
           <div className="w-3/4 pb-20">
-            <p className="text-[#192E58] font-bold text-3xl">
-              Sinh viên ngành Công nghệ sinh học – Trường Đại học Thủy Lợi tham
-              quan, thực tập tại Tập đoàn Đức Hạnh Marphavet BMG
+            {/* Tiêu đề bài viết */}
+            <h1 className="text-[#192E58] font-bold text-3xl">
+              {post.title}
+            </h1>
+            
+            {/* Ngày đăng/cập nhật */}
+            <p className="text-[#000000] opacity-60 text-sm pt-3 mb-6">
+              Cập nhật: {formatDate(post.updated_at)}
             </p>
-            <p className="text-[#000000] opacity-60 text-sm pt-3">
-              01/01/2025 | 09:25:01 AM
-            </p>
-            <div className="space-y-10">
-              <p className="text-base pt-10">
-                Nhằm nâng cao kiến thức thực tế và kỹ năng nghề nghiệp cho sinh
-                viên, Khoa Hóa và Môi trường - Trường Đại học Thủy lợi đã tổ
-                chức chương trình tham quan, thực tập chuyên ngành dành cho sinh
-                viên ngành Công nghệ sinh học tại Tập đoàn Đức Hạnh Marphavet
-                BMG từ ngày 22/02/2025.
-              </p>
-              <img
-                src="/assets/admisson_post/image_1.png"
-                alt=""
-                className="mx-auto"
-              />
-              <p className="text-base">
-                Tập đoàn Đức Hạnh Marphavet BMG là một trong những doanh nghiệp
-                hàng đầu tại Việt Nam trong lĩnh vực sản xuất và phân phối thuốc
-                thú y, chế phẩm sinh học và vaccine dùng trong chăn nuôi. Tập
-                đoàn có 12 công ty thành viên, với hệ thống dây chuyền hiện đại
-                đạt tiêu chuẩn GMP-WHO và đội ngũ chuyên gia giàu kinh nghiệm,
-                Tập đoàn Đức Hạnh Marphavet BMG không chỉ tạo ra những sản phẩm
-                chất lượng mà còn là môi trường học tập lý tưởng cho sinh viên
-                ngành Công nghệ sinh học, chăn nuôi, thú y, kinh tế, quản trị
-                kinh doanh.
-              </p>
-              <img
-                src="/assets/admisson_post/image_2.png"
-                alt=""
-                className="mx-auto"
-              />
-              <p className="text-base">
-                Trong chương trình tham quan-thực tập, sinh viên ngành Công nghệ
-                sinh học đã được giới thiệu về quy trình nghiên cứu, sản xuất
-                vaccine, thuốc thú y và chế phẩm sinh học từ khâu nuôi cấy vi
-                sinh vật, chiết tách, tinh chế đến kiểm nghiệm chất lượng sản
-                phẩm. Đặc biệt, các bạn sinh viên đã có cơ hội trực tiếp quan
-                sát các các dây chuyền công nghệ hiện đại trong sản xuất, cũng
-                như tham gia giao lưu, đặt câu hỏi với các chuyên gia đầu ngành.
-                Đồng thời, sinh viên được giám đốc sản xuất, giám đốc kinh doanh
-                và bộ phận nhân sự chia sẻ về cơ hội nghề nghiệp trong lĩnh vực
-                Công nghệ sinh học ứng dụng trong dược phẩm thú y, thông tin về
-                nhu cầu tuyển dụng, các tiêu chí đánh giá ứng viên cũng như các
-                chương trình thực tập và thực tập hưởng lương tại Tập đoàn.
-              </p>
-              <img
-                src="/assets/admisson_post/image_3.png"
-                alt=""
-                className="mx-auto"
-              />
-              <p className="text-base border-b-2 border-[#D9D9D9] pb-10">
-                Đây là một trong những hoạt động thiết thực nhằm gắn kết lý
-                thuyết với thực tiễn, giúp sinh viên có cái nhìn tổng quan và
-                thực tế về vị trí việc làm của ngành công nghệ sinh học sau khi
-                ra trường. Buổi tham quan thực tập không chỉ giúp sinh viên củng
-                cố kiến thức, định hướng nghề nghiệp mà còn truyền động lực,
-                niềm đam mê nghiên cứu và phát triển trong lĩnh vực Công nghệ
-                sinh học, chuẩn bị kinh nghiệm thực tiễn trước khi tốt nghiệp.
-              </p>
+            
+            {/* Nội dung bài viết */}
+            <div className="post-content prose max-w-none">
+              <div dangerouslySetInnerHTML={{ __html: post.detail }} />
             </div>
           </div>
         </div>
