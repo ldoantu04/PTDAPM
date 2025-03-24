@@ -219,7 +219,7 @@ const AccountManager = () => {
               Danh sách tài khoản
             </h1>
             <div
-              className="flex items-center bg-[#28A745] hover:bg-[#7fca8d] text-white font-bold p-4 px-4 rounded-md transition duration-200 cursor-pointer"
+              className="flex items-center bg-[#28A745] hover:opacity-85 space-x-1 text-white font-bold px-4 py-3 rounded-md transition duration-200 cursor-pointer"
               onClick={() => setShowAddForm(true)}
             >
               <img src="/assets/icon_them.png" alt="" className="w-5 h-5" />
@@ -234,7 +234,7 @@ const AccountManager = () => {
           >
             <table className="min-w-full bg-white">
               <thead>
-                <tr className="w-full h-16 border-gray-300 border-y py-8 bg-[#D9D9D9]">
+                <tr className="w-full h-16 border-gray-300 border-y py-8 bg-[#F8F8F8] text-[#737373] text-sm">
                   <th className="text-left pl-4">
                     <input type="checkbox" />
                   </th>
@@ -242,7 +242,7 @@ const AccountManager = () => {
                   <th className="text-left">Tài khoản</th>
                   <th className="text-left">Mật khẩu</th>
                   <th className="text-left">Vai trò</th>
-                  <th className="text-left">Hành động</th>
+                  <th className="">Hành động</th>
                 </tr>
               </thead>
               <tbody>
@@ -256,7 +256,7 @@ const AccountManager = () => {
                   accounts.map((account) => (
                     <tr
                       key={account._id}
-                      className="h-16 border-gray-300 border-b"
+                      className="h-16 border-gray-300 border-b text-sm"
                     >
                       <td className="pl-4">
                         <input type="checkbox" />
@@ -266,10 +266,10 @@ const AccountManager = () => {
                       <td>{account.password}</td>
                       <td>{account.role}</td>
                       <td>
-                        <div className="flex space-x-2">
+                        <div className="flex space-x-5 justify-center">
                           <button
                             onClick={() => handleEditClick(account)}
-                            className="cursor-pointer"
+                            className="cursor-pointer hover:opacity-80 transition ease-out duration-300"
                           >
                             <img src="/assets/icon_edit.png" alt="" />
                           </button>
@@ -279,8 +279,9 @@ const AccountManager = () => {
                             onConfirm={() => handleDeleteConfirm(account)}
                             okText="Xóa"
                             cancelText="Hủy"
+                            okButtonProps={{ danger: true }}
                           >
-                            <button className="cursor-pointer">
+                            <button className="cursor-pointer hover:opacity-80 transition ease-out duration-300">
                               <img src="/assets/icon_xoa.png" alt="" />
                             </button>
                           </Popconfirm>
@@ -305,7 +306,7 @@ const AccountManager = () => {
                   <div className="grid grid-cols-2 gap-4 mb-8">
                     <div>
                       <label
-                        className="block text-gray-700 text-sm font-bold mb-1"
+                        className="block text-black text-sm font-semibold mb-1"
                         htmlFor="username"
                       >
                         Tài khoản <span className="text-red-500">*</span>
@@ -315,7 +316,7 @@ const AccountManager = () => {
                         id="username"
                         value={username}
                         onChange={handleUsernameChange}
-                        className="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Nhập tên tài khoản"
                       />
                       {errors.username && (
@@ -327,7 +328,7 @@ const AccountManager = () => {
 
                     <div>
                       <label
-                        className="block text-gray-700 text-sm font-bold mb-1"
+                        className="block text-black text-sm font-semibold mb-1"
                         htmlFor="password"
                       >
                         Mật khẩu <span className="text-red-500">*</span>
@@ -337,7 +338,7 @@ const AccountManager = () => {
                         id="password"
                         value={password}
                         onChange={handlePasswordChange}
-                        className="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Nhập mật khẩu"
                       />
                       {errors.password && (
@@ -386,7 +387,7 @@ const AccountManager = () => {
                   <div className="grid grid-cols-2 gap-4 mb-8">
                     <div>
                       <label
-                        className="block text-gray-700 text-sm font-bold mb-1"
+                        className="block text-black text-sm font-bold mb-1"
                         htmlFor="edit-username"
                       >
                         Tài khoản <span className="text-red-500">*</span>
@@ -396,7 +397,7 @@ const AccountManager = () => {
                         id="edit-username"
                         value={username}
                         onChange={handleUsernameChange}
-                        className="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       />
                       {errors.username && (
                         <p className="text-red-500 text-xs mt-1">
@@ -407,7 +408,7 @@ const AccountManager = () => {
 
                     <div>
                       <label
-                        className="block text-gray-700 text-sm font-bold mb-1"
+                        className="block text-black text-sm font-bold mb-1"
                         htmlFor="edit-password"
                       >
                         Mật khẩu <span className="text-red-500">*</span>
@@ -417,7 +418,7 @@ const AccountManager = () => {
                         id="edit-password"
                         value={password}
                         onChange={handlePasswordChange}
-                        className="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Nhập mật khẩu mới"
                       />
                       {errors.password && (

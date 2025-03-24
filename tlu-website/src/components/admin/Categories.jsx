@@ -151,7 +151,7 @@ const Categories = () => {
               Danh sách danh mục
             </h1>
             <div
-              className="flex items-center bg-[#28A745] hover:bg-[#7fca8d] text-white font-bold p-4 px-4 rounded-md transition duration-200 cursor-pointer"
+              className="flex items-center bg-[#28A745] hover:opacity-85 space-x-1 text-white font-bold px-4 py-3 rounded-md transition duration-200 cursor-pointer"
               onClick={() => setShowAddForm(true)}
             >
               <img src="/assets/icon_them.png" alt="" className="w-5 h-5" />
@@ -167,14 +167,14 @@ const Categories = () => {
           >
             <table className="min-w-full bg-white">
               <thead>
-                <tr className="w-full h-16 border-gray-300 border-y py-8 bg-[#D9D9D9]">
+                <tr className="w-full h-16 border-gray-300 border-y py-8 bg-[#F8F8F8] text-[#737373] text-sm">
                   <th className="text-left pl-4">
                     <input type="checkbox" />
                   </th>
                   <th className="text-left pl-4">#</th>
                   <th className="text-left">Danh mục</th>
                   <th className="text-left">Danh mục lớn</th>
-                  <th className="text-left">Hành động</th>
+                  <th className="">Hành động</th>
                 </tr>
               </thead>
               <tbody>
@@ -188,7 +188,7 @@ const Categories = () => {
                   categories.map((category) => (
                     <tr
                       key={category._id}
-                      className="h-16 border-gray-300 border-b"
+                      className="h-16 border-gray-300 border-b text-sm"
                     >
                       <td className="pl-4">
                         <input
@@ -215,10 +215,10 @@ const Categories = () => {
                           : ""}
                       </td>
                       <td>
-                        <div className="flex space-x-2">
+                        <div className="flex space-x-5 justify-center ">
                           <button
                             onClick={() => handleEditClick(category)}
-                            className="cursor-pointer"
+                            className="cursor-pointer hover:opacity-80 transition ease-out duration-300"
                           >
                             <img src="/assets/icon_edit.png" alt="" />
                           </button>
@@ -228,8 +228,9 @@ const Categories = () => {
                             onConfirm={() => handleDeleteConfirm(category)}
                             okText="Xóa"
                             cancelText="Hủy"
+                            okButtonProps={{ danger: true }}
                           >
-                            <button className="cursor-pointer">
+                            <button className="cursor-pointer hover:opacity-80 transition ease-out duration-300">
                               <img src="/assets/icon_xoa.png" alt="" />
                             </button>
                           </Popconfirm>

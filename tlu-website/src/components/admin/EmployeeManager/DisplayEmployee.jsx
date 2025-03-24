@@ -64,7 +64,7 @@ const DisplayEmployee = () => {
             </h1>
             <Link
               to="/admin/nhan-su/them-moi"
-              className="flex items-center bg-[#28A745] hover:bg-[#7fca8d] text-white font-bold p-4 px-4 rounded-md transition duration-200 cursor-pointer"
+              className="flex items-center bg-[#28A745] hover:opacity-85 space-x-1 text-white font-bold px-4 py-3 rounded-md transition duration-200 cursor-pointer"
             >
               <img src="/assets/icon_them.png" alt="" className="w-5 h-5" />
               <span className="ml-2">Thêm mới</span>
@@ -79,7 +79,7 @@ const DisplayEmployee = () => {
           >
             <table className="min-w-full bg-white">
               <thead>
-                <tr className="w-full h-16 border-gray-300 border-y py-8 bg-[#D9D9D9]">
+                <tr className="w-full h-16 border-gray-300 border-y py-8 bg-[#F8F8F8] text-[#737373] text-sm">
                   <th className="text-left pl-4">
                     <input type="checkbox" />
                   </th>
@@ -90,7 +90,7 @@ const DisplayEmployee = () => {
                   <th className="text-left">Phòng ban</th>
                   <th className="text-left">Chức vụ</th>
                   <th className="text-left">Trạng thái</th>
-                  <th className="text-left">Hành động</th>
+                  <th className="">Hành động</th>
                 </tr>
               </thead>
               <tbody>
@@ -104,7 +104,7 @@ const DisplayEmployee = () => {
                   staffs.map((staff) => (
                     <tr
                       key={staff._id}
-                      className="h-16 border-gray-300 border-b"
+                      className="h-16 border-gray-300 border-b text-sm"
                     >
                       <td className="pl-4">
                         <input type="checkbox" />
@@ -133,16 +133,16 @@ const DisplayEmployee = () => {
                       <td>{staff.position}</td>
                       <td>{staff.status}</td>
                       <td>
-                        <div className="flex space-x-2">
+                        <div className="flex space-x-5 justify-center items-center">
                           <Link
                             to={`/admin/nhan-su/chi-tiet/${staff._id}`}
-                            className="cursor-pointer"
+                            className="cursor-pointer hover:opacity-80 transition ease-out duration-300"
                           >
                             <img src="/assets/icon_xem.png" alt="" />
                           </Link>
                           <Link
                             to={`/admin/nhan-su/sua/${staff._id}`}
-                            className="cursor-pointer"
+                            className="cursor-pointer hover:opacity-80 transition ease-out duration-300"
                           >
                             <img src="/assets/icon_edit.png" alt="" />
                           </Link>
@@ -154,7 +154,7 @@ const DisplayEmployee = () => {
                             cancelText="Hủy"
                             okButtonProps={{ danger: true }}
                           >
-                            <button className="cursor-pointer">
+                            <button className="cursor-pointer hover:opacity-80 transition ease-out duration-300">
                               <img src="/assets/icon_xoa.png" alt="Xóa" />
                             </button>
                           </Popconfirm>
